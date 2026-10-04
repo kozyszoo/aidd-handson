@@ -37,6 +37,7 @@
             --accent-remotion-gradient: linear-gradient(135deg, #22d3ee, #0891b2);
             --accent-personal-gradient: linear-gradient(135deg, #fb923c, #ea580c);
             --accent-cowork-gradient: linear-gradient(135deg, #e07a4f, #c2410c);
+            --accent-code-beginner-gradient: linear-gradient(135deg, #2dd4bf, #0f766e);
         }
 
         * {
@@ -129,6 +130,7 @@
         .card.gas2::before { background: var(--accent-gas2-gradient); }
         .card.banana::before { background: var(--accent-banana-gradient); }
         .card.cowork::before { background: var(--accent-cowork-gradient); }
+        .card.code-beginner::before { background: var(--accent-code-beginner-gradient); }
         .card.toolkit::before { background: var(--accent-toolkit-gradient); }
         .card.ethics::before { background: var(--accent-ethics-gradient); }
         .card.multiai::before { background: var(--accent-multiai-gradient); }
@@ -405,9 +407,25 @@
                     <span class="badge">プロンプトインジェクション体験</span>
                     <span class="badge">90分進行表つき</span>
                 </div>
-                <p class="card-desc">散らかったダウンロードフォルダの練習用コピーを Claude Desktop の Cowork に渡し、フォルダ分け・写真や PDF からの期限の拾い出し・レシートと明細からの出費集計を任せます。後半は、保存した Web ページに隠れた指示で AI がだまされる場面を試し、渡すフォルダ・承認モード・確かめ方など安全に使う 5 つの約束を確認します（2026-09-27 時点の公式ヘルプで確認）。</p>
+                <p class="card-desc">散らかったダウンロードフォルダの練習用コピーを Claude Desktop の Cowork に渡し、フォルダ分け・写真や PDF からの期限の拾い出し・レシートと明細からの出費集計を任せます。後半は、保存した Web ページに隠れた指示で AI がだまされる場面を試し、渡すフォルダ・承認モード・確かめ方など安全に使う 5 つの約束を確認し、最後に自分の作業を 1 つ選んで頼み方を書きます。各 Step に「うまくいかないとき」の表つき（2026-09-27 時点の公式ヘルプで確認）。</p>
             </div>
             <a href="cowork.html" class="btn">Cowork ハンズオンを開始 ➔</a>
+        </div>
+
+        <!-- Claude Code 入門ハンズオン（非エンジニア向け） -->
+        <div class="card code-beginner">
+            <div class="card-header">
+                <span class="card-icon">🧰</span>
+                <h2 class="card-title">Claude Code 入門ハンズオン <span style="font-size: 0.6em; color: #5eead4; font-weight: 600; vertical-align: middle;">入門</span></h2>
+                <div class="badges">
+                    <span class="badge">非エンジニア向け</span>
+                    <span class="badge">ターミナル不要</span>
+                    <span class="badge">Chat・Cowork との違い</span>
+                    <span class="badge">90分進行表つき</span>
+                </div>
+                <p class="card-desc">Claude Desktop の Code タブで、カード明細（CSV）を選ぶと合計と内訳が出る Web ページを、言葉で頼んで作ります。計画を先に見る・変更を 1 つずつ承認する・9 月と 10 月の 2 つの明細で合計を確かめる、の順に進め、最後に自分の作業から道具にするものを 1 つ選んで頼み方を書きます。Chat・Cowork・Claude Code の違いの比較表つき（2026-10-04 時点の公式ドキュメントで確認）。</p>
+            </div>
+            <a href="claude-code-beginner.html" class="btn">Claude Code 入門を開始 ➔</a>
         </div>
 
         <!-- Nano Banana ハンズオン -->

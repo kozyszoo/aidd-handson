@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code 入門ハンズオン（非エンジニア向け） ｜ カード明細を読み込んで出費が見えるページを作る</title>
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Claude Code 入門編は、Cowork 編（テラコッタ）と見分けがつくよう青緑を基調にする */
+            --primary: #0f766e;
+            --bg-dark: #f3f9f8;
+            --bg-mid: #ffffff;
+            --bg-light: #d9efec;
+            --text: #292524;
+            --muted: #6b625b;
+            --green: #188038;
+            --blue: #1a73e8;
+            --orange: #e8710a;
+            --sidebar: 280px;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar);
+            height: 100vh;
+            background: var(--bg-mid);
+            border-right: 1px solid var(--bg-light);
+            overflow-y: auto;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .sidebar h2 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar a {
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: var(--bg-light);
+            color: var(--primary);
+            padding-left: 14px;
+        }
+
+        /* Main */
+        .main {
+            margin-left: var(--sidebar);
+            padding: 40px;
+            max-width: 1100px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--bg-mid), var(--bg-light));
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid var(--primary);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .section {
+            background: var(--bg-mid);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .section h3 {
+            color: var(--blue);
+            font-size: 1.3rem;
+            margin: 24px 0 12px;
+        }
+
+        .section h4 {
+            color: var(--green);
+            font-size: 1.1rem;
+            margin: 18px 0 8px;
+        }
+
+        .section h3.preparation-heading {
+            color: var(--green);
+            font-size: 1.1rem;
+            margin: 18px 0 8px;
+        }
+
+        .section p {
+            margin-bottom: 12px;
+        }
+
+        .section ul,
+        .section ol {
+            margin-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .section li {
+            margin-bottom: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-light);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: var(--bg-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        code {
+            background: #e6f3f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #b91c1c;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88em;
+        }
+
+        pre {
+            background: #2a211c;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 14px 0;
+            border: 1px solid var(--bg-light);
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: #d9efec;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        blockquote {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary);
+            padding: 12px 18px;
+            margin: 16px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 18px;
+            margin: 12px 0;
+            border: 1px solid var(--primary);
+        }
+
+        .callout {
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .callout-warn {
+            background: #fff4e5;
+            border-left: 4px solid var(--orange);
+            color: #7a4a06;
+        }
+
+        .callout-info {
+            background: #e8f0fe;
+            border-left: 4px solid var(--blue);
+            color: #174ea6;
+        }
+
+        .callout-tip {
+            background: #e6f6f3;
+            border-left: 4px solid var(--primary);
+            color: #0f5f59;
+        }
+
+        /* callout の背景と code の背景がほぼ同色で、囲みの中だと code が沈む。
+           白地に細い枠線を与えて、地の文と区別できるようにする。 */
+        .callout code {
+            background: #ffffff;
+            border: 1px solid rgba(154, 52, 18, 0.25);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .badge-level {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge-time {
+            background: var(--green);
+            color: white;
+        }
+
+        .screenshot {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid var(--bg-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .screenshot-sm {
+            max-width: 640px;
+        }
+
+
+        /* 画面の狭い端末でも横スクロールさせない */
+        .screenshot,
+        .screenshot-sm {
+            max-width: 100%;
+        }
+
+        @media (min-width: 700px) {
+            .screenshot-sm {
+                max-width: 640px;
+            }
+        }
+
+        /* 長い URL などがはみ出さないように折り返す */
+        code {
+            overflow-wrap: anywhere;
+        }
+
+        pre code {
+            overflow-wrap: normal;
+        }
+
+        /* 依頼文は改行を残して表示する（コピーされる文と見た目をそろえる） */
+        .prompt-card .prompt-body {
+            white-space: pre-wrap;
+        }
+
+        /* 囲みの中のコードブロックは、白地の inline code 用スタイルを打ち消す */
+        .callout pre code {
+            background: transparent;
+            border: 0;
+        }
+
+        /* 公式資料の長い URL をスマホ幅で折り返す */
+        .section a {
+            overflow-wrap: anywhere;
+        }
+
+        /* 表は狭い画面では横にスクロールさせ、ページ全体をはみ出させない */
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* プロンプト例カード */
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .prompt-card {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .prompt-card .prompt-title {
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .prompt-card .prompt-body {
+            background: var(--bg-mid);
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 0.88rem;
+            color: var(--muted);
+            border: 1px dashed var(--primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* 折りたたみ（答え合わせ用コード） */
+        .sample-details {
+            margin: 18px 0;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            background: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        .sample-details summary {
+            cursor: pointer;
+            padding: 14px 18px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            background: var(--bg-light);
+            user-select: none;
+        }
+
+        .sample-details summary:hover {
+            filter: brightness(0.98);
+        }
+
+        .sample-details[open] summary {
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .sample-body {
+            padding: 18px;
+        }
+
+        /* 「うまくいかないとき」の折りたたみ。答え合わせと見分けがつくよう、枠と見出しを灰色にする */
+        .trouble-details {
+            border-color: #a8a29e;
+        }
+
+        .trouble-details summary {
+            color: #57534e;
+            background: #f5f5f4;
+        }
+
+        .trouble-details[open] summary {
+            border-bottom-color: #a8a29e;
+        }
+
+        .trouble-details table {
+            margin: 0;
+        }
+
+        .copy-btn {
+            flex-shrink: 0;
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            background: var(--primary);
+            color: var(--bg-mid);
+            padding: 6px 12px;
+            font: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            filter: brightness(0.94);
+        }
+
+        .code-wrap {
+            position: relative;
+        }
+
+        .code-wrap .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 1;
+            background: var(--bg-mid);
+            color: var(--text);
+        }
+
+        .code-wrap pre {
+            padding-top: 52px;
+        }
+
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            box-shadow: 0 4px 12px rgba(194, 65, 12, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1001;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+                padding-top: 60px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+    <style id="page-toolbar-style">
+        /* ページ上部の PDF 保存ボタンと進捗リアクションのお願い */
+        .page-toolbar { display: flex; justify-content: flex-end; margin: 0 0 16px; }
+        .pdf-download-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid #1a73e8; border-radius: 8px; background: #fff; color: #1a73e8; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+        .pdf-download-btn:hover { background: #e8f0fe; }
+        .progress-reaction-note { background: #fff8e1; border-left: 4px solid #f9ab00; border-radius: 8px; padding: 14px 18px; margin: 0 0 32px; color: #3c2f00; font-size: 0.95rem; line-height: 1.7; }
+        @media print {
+            .sidebar, .menu-toggle, .page-toolbar { display: none !important; }
+            .main { margin-left: 0 !important; max-width: none !important; padding: 0 !important; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+    <script>
+        // 印刷（PDF 保存）時は折りたたみを開いて、中身も PDF に入れる
+        window.addEventListener('beforeprint', function () {
+            document.querySelectorAll('details').forEach(function (d) { d.setAttribute('open', ''); });
+        });
+    </script>
+</head>
+
+<body>
+    <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ メニュー</button>
+
+    <aside class="sidebar" id="sidebar">
+        <h2>🧰 Claude Code 入門</h2>
+        <nav>
+            <ul>
+                <li><a href="index.html" style="font-weight: bold; color: var(--muted); border-bottom: 1px solid var(--bg-light); margin-bottom: 10px; padding-bottom: 10px; display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">arrow_back</span>ポータルに戻る</a></li>
+                <li><a href="cowork.html" style="font-weight: bold; color: var(--orange); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">folder_open</span>Cowork 編へ</a></li>
+                <li><a href="#intro">はじめに</a></li>
+                <li><a href="#step0">Step 0: 準備する</a></li>
+                <li><a href="#step1">Step 1: フォルダを開く</a></li>
+                <li><a href="#step2">Step 2: 計画を見る</a></li>
+                <li><a href="#step3">Step 3: 作ってもらう</a></li>
+                <li><a href="#step4">Step 4: 言葉で直す</a></li>
+                <li><a href="#step5">Step 5: 別のデータで試す</a></li>
+                <li><a href="#step6">Step 6: 中身を確かめる</a></li>
+                <li><a href="#step7">Step 7: 自分の道具を考える</a></li>
+                <li><a href="#step8">Step 8: もっと便利な機能</a></li>
+                <li><a href="#checklist">✅ チェックリスト</a></li>
+                <li><a href="#facilitator">講師向け: 進行のめやす</a></li>
+                <li><a href="#deep-dive">📚 公式資料</a></li>
+                <li><a href="#outro">おわりに</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <!-- Hero -->
+        <div class="hero">
+            <span class="badge badge-level">プログラミングをしたことがない人向け</span>
+            <h1>🧰 Claude Code 入門ハンズオン<br>～ カード明細を読み込んで、出費が見える 1 枚のページを作る ～</h1>
+            <p style="margin-top:8px;">Claude Code は、プログラムを書く AI です。この資料では、Claude Desktop アプリの <strong>Code タブ</strong>を使い、<strong>カードの利用明細（CSV）を選ぶと合計と内訳が出る Web ページ</strong>を、言葉で頼んで作ります。黒い画面（ターミナル）は使いません。プログラムを自分で書くこともありません。</p>
+            <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間: 約 90 分 ／ 前提: Claude の有料プラン（Pro・Max・Team・Enterprise）と Claude Desktop アプリ。Node.js やターミナルの準備は要りません ／ Claude の利用は 18 歳以上が対象 ／ 内容は 2026-10-04 時点の公式ドキュメントで確認</p>
+        </div>
+
+        <div class="page-toolbar">
+            <button type="button" class="pdf-download-btn" onclick="window.print()" title="印刷画面の送信先で「PDF に保存」を選んでください">📄 PDF でダウンロード</button>
+        </div>
+        <div class="progress-reaction-note">
+            🙋 みなさんの進捗状況を知りたいので、うまく進んでいる場合も、進んでいない場合も絵文字リアクションを積極的に返してください！進んでないよ、というときも遠慮なく！
+        </div>
+
+        <!-- Intro -->
+        <section class="section" id="intro">
+            <h2>はじめに</h2>
+
+            <h3>Chat・Cowork・Claude Code の違い</h3>
+            <p>Claude Desktop アプリには、Chat・Cowork・Code の 3 つがあります。どれも同じ Claude ですが、<strong>渡すものと、返ってくるもの</strong>が違います。同じカード明細を題材にして比べます。</p>
+            <table>
+                <tr><th></th><th>Chat</th><th>Cowork</th><th>Claude Code（Code タブ）</th></tr>
+                <tr><td><strong>ひとことで言うと</strong></td><td><strong>相談する</strong></td><td><strong>作業をやってもらう</strong></td><td><strong>道具を作ってもらう</strong></td></tr>
+                <tr><td><strong>公式ドキュメントの説明</strong></td><td>ふつうの会話。パソコンのファイルにはふれない</td><td>あなたが他のことをしている間に、任された作業を自分で進めるエージェント</td><td>パソコンのファイルを直接扱う、対話型のコーディングアシスタント</td></tr>
+                <tr><td><strong>渡すもの</strong></td><td>質問の文章。貼り付けた文字や、1 つずつ添付したファイル</td><td>作業に使うフォルダ</td><td>道具を作るためのフォルダ</td></tr>
+                <tr><td><strong>返ってくるもの</strong></td><td>文章の答え。表やファイルを作って返すこともある</td><td>できあがったファイル（Excel・Word など）</td><td>プログラム（この資料では Web ページ）</td></tr>
+                <tr><td><strong>パソコンのファイル</strong></td><td>フォルダにはふれない。読むのは添付されたものだけ</td><td>渡したフォルダの中を読み、作り、書き換える</td><td>選んだフォルダの中を読み、作り、書き換える。コマンドも実行できる</td></tr>
+                <tr><td><strong>プログラムが動く場所</strong></td><td>―</td><td>パソコンとは切り離された環境</td><td>自分のパソコンの上（Local を選んだとき）</td></tr>
+                <tr><td><strong>カード明細で言うと</strong></td><td>明細を 1 つ添付して「合計はいくら？」と聞く</td><td>明細のフォルダを渡して「出費を Excel にまとめて」と頼む</td><td>「明細を選ぶと合計とグラフが出るページを作って」と頼む</td></tr>
+                <tr><td><strong>来月、同じ作業が来たら</strong></td><td>もう一度添付して聞く</td><td>もう一度フォルダを渡して頼む</td><td>新しい明細を道具に入れるだけ。AI には頼まない</td></tr>
+                <tr><td><strong>向いているもの</strong></td><td>相談、文章の下書き、調べもの、ファイル 1 つで済む作業</td><td>1 回きりの作業。ファイルの形がばらばらで、そのつど判断が要る作業</td><td>毎週・毎月、同じ形のデータに同じ処理をする作業</td></tr>
+                <tr><td><strong>自分で確かめること</strong></td><td>答えの内容が正しいか</td><td>できたファイルを、元のファイルと見比べる</td><td>道具を、答えが分かっているデータで試す</td></tr>
+                <tr><td><strong>この資料群で扱うページ</strong></td><td>―</td><td><a href="cowork.html">Claude Cowork 活用ハンズオン</a></td><td><a href="claude-code-beginner.html">Claude Code 入門ハンズオン</a></td></tr>
+            </table>
+            <p>3 つは、同じ Claude Desktop アプリの中にあります。2026 年 9 月から、一部のアカウントでは Chat と Cowork が 1 つの画面にまとまり、同じ入力欄に書くと Claude が必要に応じてファイル作業を始める形になっています（公式ヘルプ「Claude Cowork and chat are one Claude」）。</p>
+
+            <div class="card" style="background: var(--bg-mid); text-align: center;">
+                <div style="font-weight:700; color: var(--primary); margin-bottom: 12px;">🔁 来月、同じ作業が来たとき</div>
+                <svg viewBox="0 0 900 370" style="max-width:100%; height:auto;" role="img">
+                    <title>Chat は明細を添付して質問すると文章で答えが返り、来月はまた添付して聞く。Cowork は明細のフォルダを渡すと集計した Excel ができ、来月はまたフォルダを渡して頼む。Claude Code は一度道具を作ってもらえば、来月は新しい明細を道具に入れるだけで、AI に頼まずに結果が出る</title>
+                    <defs>
+                        <marker id="arrow-code" markerWidth="12" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L12,4.5 z" fill="#0f766e"></path></marker>
+                        <marker id="arrow-cowork" markerWidth="12" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L12,4.5 z" fill="#c2410c"></path></marker>
+                        <marker id="arrow-chat" markerWidth="12" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L12,4.5 z" fill="#78716c"></path></marker>
+                    </defs>
+                    <text x="20" y="30" fill="#78716c" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="700">Chat（相談する）</text>
+                    <rect x="20" y="42" width="190" height="64" rx="10" fill="#ffffff" stroke="#78716c" stroke-width="2"></rect>
+                    <text x="115" y="70" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">明細を添付して</text>
+                    <text x="115" y="92" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">合計を聞く</text>
+                    <line x1="210" y1="74" x2="256" y2="74" stroke="#78716c" stroke-width="3" marker-end="url(#arrow-chat)"></line>
+                    <rect x="260" y="42" width="190" height="64" rx="10" fill="#ffffff" stroke="#78716c" stroke-width="2"></rect>
+                    <text x="355" y="80" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">文章で答えが返る</text>
+                    <line x1="450" y1="74" x2="496" y2="74" stroke="#78716c" stroke-width="3" marker-end="url(#arrow-chat)"></line>
+                    <rect x="500" y="42" width="380" height="64" rx="10" fill="#f5f5f4" stroke="#78716c" stroke-width="2" stroke-dasharray="6 4"></rect>
+                    <text x="690" y="70" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">来月: もう一度添付して聞く</text>
+                    <text x="690" y="92" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">（毎回、AI に読ませて計算させる）</text>
+                    <text x="20" y="150" fill="#c2410c" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="700">Cowork（作業をやってもらう）</text>
+                    <rect x="20" y="162" width="190" height="64" rx="10" fill="#ffffff" stroke="#c2410c" stroke-width="2"></rect>
+                    <text x="115" y="190" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">明細のフォルダを渡して</text>
+                    <text x="115" y="212" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">集計を頼む</text>
+                    <line x1="210" y1="194" x2="256" y2="194" stroke="#c2410c" stroke-width="3" marker-end="url(#arrow-cowork)"></line>
+                    <rect x="260" y="162" width="190" height="64" rx="10" fill="#ffffff" stroke="#c2410c" stroke-width="2"></rect>
+                    <text x="355" y="200" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">集計した Excel ができる</text>
+                    <line x1="450" y1="194" x2="496" y2="194" stroke="#c2410c" stroke-width="3" marker-end="url(#arrow-cowork)"></line>
+                    <rect x="500" y="162" width="380" height="64" rx="10" fill="#fdebe0" stroke="#c2410c" stroke-width="2" stroke-dasharray="6 4"></rect>
+                    <text x="690" y="200" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">来月: もう一度フォルダを渡して頼む</text>
+                    <text x="20" y="270" fill="#0f766e" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="700">Claude Code（道具を作ってもらう）</text>
+                    <rect x="20" y="282" width="190" height="64" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"></rect>
+                    <text x="115" y="310" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">作りたい道具を</text>
+                    <text x="115" y="332" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">言葉で伝える</text>
+                    <line x1="210" y1="314" x2="256" y2="314" stroke="#0f766e" stroke-width="3" marker-end="url(#arrow-code)"></line>
+                    <rect x="260" y="282" width="190" height="64" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"></rect>
+                    <text x="355" y="310" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">集計するページ</text>
+                    <text x="355" y="332" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">（道具）ができる</text>
+                    <line x1="450" y1="314" x2="496" y2="314" stroke="#0f766e" stroke-width="3" marker-end="url(#arrow-code)"></line>
+                    <rect x="500" y="282" width="380" height="64" rx="10" fill="#0f766e" stroke="#0f766e" stroke-width="2"></rect>
+                    <text x="690" y="310" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700">来月: 新しい明細を道具に入れるだけ</text>
+                    <text x="690" y="332" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700">（AI に頼まない・使用量も使わない）</text>
+                </svg>
+            </div>
+
+            <p>毎月同じ形のデータに同じ処理をするなら、道具を 1 つ作っておくと、次からは AI に頼まずに済みます。そのかわり、<strong>道具が正しく動くかを確かめるのは自分</strong>です。この資料の後半（Step 5・6）は、その確かめ方に時間を使います。</p>
+
+            <h3>🎯 このハンズオンのゴール</h3>
+            <ul>
+                <li>Claude Desktop の Code タブでフォルダを開き、<strong>言葉で頼んで Web ページを 1 つ作れる</strong>ようになる</li>
+                <li><strong>計画を先に見て、変更を 1 つずつ承認する</strong>進め方を身につける</li>
+                <li>できた道具を、<strong>答えが分かっているデータと、別のデータ</strong>で確かめられるようになる</li>
+                <li>自分の作業の中から、<strong>道具にすると楽になるものを 1 つ選び、頼み方を書ける</strong>ようになる</li>
+            </ul>
+
+            <div class="card" style="background: var(--bg-mid);">
+                <div style="font-weight:700; color: var(--primary); margin-bottom: 8px;">🧭 このハンズオンの流れ</div>
+                <table style="margin: 0;">
+                    <tr><th>Step</th><th>やること</th><th>めやす</th></tr>
+                    <tr><td>0. 準備する</td><td>アプリと練習用フォルダを用意する</td><td>10 分</td></tr>
+                    <tr><td>1. フォルダを開く</td><td>Code タブでフォルダを選び、中身を説明してもらう</td><td>10 分</td></tr>
+                    <tr><td>2. 計画を見る</td><td>作りたいものを伝え、ファイルを作る前に計画を出してもらう</td><td>10 分</td></tr>
+                    <tr><td>3. 作ってもらう</td><td>変更を承認してページを作り、開いて合計を確かめる</td><td>15 分</td></tr>
+                    <tr><td>4. 言葉で直す</td><td>見た目や並び順を、言葉で頼んで直す</td><td>10 分</td></tr>
+                    <tr><td>5. 別のデータで試す</td><td>10 月の明細を入れて、合計が合うかを確かめる</td><td>10 分</td></tr>
+                    <tr><td>6. 中身を確かめる</td><td>データを外へ送っていないかを確かめ、使うときの約束を見る</td><td>5 分</td></tr>
+                    <tr><td>7. 自分の道具を考える</td><td>自分の作業から 1 つ選び、頼み方を書く</td><td>10 分</td></tr>
+                    <tr><td>8. もっと便利な機能</td><td>ルールのファイル・定期実行などを知る（紹介のみ）</td><td>あとで読む</td></tr>
+                </table>
+            </div>
+
+            <div class="callout callout-info">
+                ℹ️ <strong>Cowork 編をやっていなくても進められます。</strong> 練習に使うカード明細は <a href="cowork.html">Cowork 編</a>と同じものです。Cowork 編では「9 月の出費を Excel にまとめてもらう」ところまでをやりました。この資料では、同じ明細を使って「毎月使える集計ページ」を作ります。
+            </div>
+
+            <div class="callout callout-info">
+                ℹ️ <strong>手順どおりに進まないとき。</strong> 各 Step の終わりに「🧯 うまくいかないとき」があります。開くと、起きやすいことと直し方が表で出ます。
+            </div>
+
+            <div class="nav-btns">
+                <a href="index.html" class="btn">← ポータル</a>
+                <a href="#step0" class="btn">Step 0 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 0 -->
+        <section class="section" id="step0">
+            <span class="badge badge-time">🧰 準備</span>
+            <h2>Step 0: アプリと練習用フォルダを用意する</h2>
+
+            <h3 class="preparation-heading">📋 必要なもの</h3>
+            <table>
+                <tr><th>必要なもの</th><th>確認のしかた</th></tr>
+                <tr><td>Claude の有料プラン</td><td>Pro・Max・Team・Enterprise のどれか。無料プランでは Code タブは使えません</td></tr>
+                <tr><td>Claude Desktop アプリ</td><td>macOS か Windows。<a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> から入れて、ログインしておきます。<strong>すでに入っている人は、最新版に更新しておきます</strong></td></tr>
+                <tr><td>インターネット接続</td><td>作業中はずっとつながっている必要があります</td></tr>
+                <tr><td>練習用フォルダ</td><td>下のボタンからダウンロードします</td></tr>
+            </table>
+            <p>公式ドキュメントには「デスクトップアプリに Claude Code が入っているので、Code タブを使うために Node.js やコマンドライン版を入れる必要はない」と書かれています。ほかのソフトを入れる手順はありません。</p>
+
+            <h3 class="preparation-heading">📥 練習用フォルダをダウンロードする</h3>
+            <p style="text-align:center; margin: 20px 0;"><a href="claude-code-practice.zip" class="btn" download>練習用フォルダ（claude-code-practice.zip）をダウンロード</a></p>
+            <ol>
+                <li>ダウンロードした zip を開いて（展開して）、<strong>「出費ビューア」</strong>フォルダを取り出す</li>
+                <li>デスクトップなど、すぐ見つかる場所に置く</li>
+                <li>中に次の 2 つのファイルがあることを確かめる</li>
+            </ol>
+            <div class="code-wrap">
+                <pre><code>出費ビューア/
+├── カード利用明細_202609.csv   ← 9 月分（6 件）。Step 3 で使う
+└── カード利用明細_202610.csv   ← 10 月分（5 件）。Step 5 で使う</code></pre>
+            </div>
+            <p>CSV は、表の中身をカンマ区切りの文字で保存したファイルです。カード会社や銀行のサイトからダウンロードできる明細は、多くがこの形です。中身はすべて架空のものです。</p>
+
+            <div class="callout callout-info">
+                ℹ️ <strong>なぜ専用のフォルダを使うのか。</strong> Code タブで選んだフォルダは、Claude の作業場所になります。Claude はその中のファイルを読み、新しいファイルを作り、書き換えます。デスクトップ全体や書類フォルダ全体を選ばず、<strong>作る道具ごとにフォルダを 1 つ用意し、要るデータだけをコピーして入れます。</strong>
+            </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>zip を開いたのに、フォルダを選べない</td><td>Windows では zip をダブルクリックすると「中をのぞいているだけ」の状態になります。zip を右クリックして<strong>「すべて展開」</strong>を選び、できた「出費ビューア」フォルダを使います</td></tr>
+                        <tr><td>アプリの版が分からない</td><td>macOS は、画面上部のメニューの <strong>Claude</strong> → <strong>About Claude</strong>。Windows は <strong>Help</strong> → <strong>About</strong> で表示されます</td></tr>
+                        <tr><td>CSV をダブルクリックしたら Excel で開いた</td><td>問題ありません。中身を見たら、<strong>保存せずに</strong>閉じます。保存すると形が変わることがあります</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#intro" class="btn">← はじめに</a>
+                <a href="#step1" class="btn">Step 1 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 1 -->
+        <section class="section" id="step1">
+            <span class="badge badge-time">🚪 最初の一歩</span>
+            <h2>Step 1: Code タブでフォルダを開き、中身を説明してもらう</h2>
+            <p>最初は<strong>読むだけ</strong>のお願いにします。ファイルを書き換えないので、何が起きても元に戻す必要がありません。</p>
+
+            <h3 class="preparation-heading">📋 手順</h3>
+            <ol>
+                <li>Claude Desktop アプリを開き、画面の上にある <strong>Code</strong> タブを押す</li>
+                <li>入力欄のまわりで、次の 3 つを設定する（下の表）</li>
+                <li>次のお願いを貼り付けて送る</li>
+            </ol>
+            <table>
+                <tr><th>設定するもの</th><th>選ぶもの</th><th>意味</th></tr>
+                <tr><td>実行する場所（Environment）</td><td><strong>Local</strong></td><td>自分のパソコンの上で、自分のファイルを直接使って動かす</td></tr>
+                <tr><td>フォルダ</td><td><strong>Select folder</strong> を押して「出費ビューア」を選ぶ</td><td>Claude の作業場所になる</td></tr>
+                <tr><td>権限モード（送信ボタンの近くの切り替え）</td><td><strong>Manual</strong></td><td>ファイルを書き換える前・コマンドを実行する前に、止まってあなたに聞く</td></tr>
+            </table>
+
+            <div class="prompt-card">
+                <div class="prompt-title">
+                    <span>🤖 Claude Code にこう頼む</span>
+                    <button class="copy-btn" type="button" data-copy-target="p-step1">コピー</button>
+                </div>
+                <div class="prompt-body" id="p-step1">このフォルダにあるファイルを一覧にして、それぞれに何が入っているかを日本語で説明してください。
+2 つの CSV は、列の名前・件数・金額の合計も教えてください。
+ファイルの変更や新しいファイルの作成はしないでください。</div>
+            </div>
+
+            <h3 class="preparation-heading">📋 返ってきた答えで見るところ</h3>
+            <ul>
+                <li>9 月分が <strong>6 件・合計 9,440 円</strong>、10 月分が <strong>5 件・合計 18,260 円</strong>と答えているか</li>
+                <li>列の名前が「利用日・利用先・金額」になっているか</li>
+            </ul>
+            <p>この 2 つの合計は、あとで道具が正しく動くかを確かめるときの<strong>答え</strong>として使います。メモしておいてください。</p>
+
+            <h3>権限モードは 5 つある</h3>
+            <p>Claude Code には、どこまで確認しながら進めるかを決める「権限モード」があります（公式ドキュメント「Choose a permission mode」）。</p>
+            <table>
+                <tr><th>名前</th><th>動き方</th><th>このハンズオンでは</th></tr>
+                <tr><td><strong>Manual</strong></td><td>ファイルを書き換える前・コマンドを実行する前に聞く。変更の内容を見て、受け入れる（Accept）か断る（Reject）かを選ぶ。受け入れるまでファイルは変わらない</td><td><strong>これを使う</strong></td></tr>
+                <tr><td><strong>Plan</strong></td><td>ファイルを読んで調べ、進め方の計画を出す。ファイルは書き換えない</td><td>Step 2 で使う</td></tr>
+                <tr><td><strong>Accept edits</strong></td><td>ファイルの書き換えと、フォルダを作る・ファイルを移すなどの基本的なファイル操作は、聞かずに進める。それ以外のコマンドは実行の前に聞く</td><td>慣れてから</td></tr>
+                <tr><td><strong>Auto</strong></td><td>聞かずに進める。コマンドの実行や通信の前に、依頼に合っているかを別の仕組みが裏で確かめる</td><td>慣れてから</td></tr>
+                <tr><td><strong>Bypass permissions</strong></td><td>確認なしで進める。公式ドキュメントでは「隔離された環境の中だけで使う」とされている。Pro・Max では設定でオンにしない限り選択肢に出ない。Team・Enterprise では組織の管理者の設定で決まる</td><td>使わない</td></tr>
+            </table>
+            <p>古い版のアプリでは、Manual が「Ask permissions」、Accept edits が「Auto accept edits」、Plan が「Plan mode」と表示されます。</p>
+
+            <div class="callout callout-warn">
+                ⚠️ <strong>Cowork との違い。</strong> Local を選んだ Claude Code は、<strong>自分のパソコンの上で、ファイルを直接使って動きます。</strong>プログラムを動かすこともできます。Cowork 編で紹介した「プログラムの実行は、パソコンとは切り離された環境で行う」という守りは、ここにはありません。そのぶん、<strong>フォルダを絞ることと、Manual で 1 つずつ見ること</strong>が大事になります。
+            </div>
+
+            <div class="callout callout-warn">
+                ⚠️ <strong>Local は「ファイルの操作を自分のパソコンで行う」という意味です。「内容が外に出ない」という意味ではありません。</strong> Claude が読んだファイルの中身は、答えを作るために Anthropic の AI へ送られます。Chat に貼り付けるのと同じです。そのため、<strong>作業フォルダには練習用のデータだけを入れます。</strong>本物のカード明細は作業フォルダに入れず、道具ができあがってから、いつものブラウザで道具に読み込ませます（Step 6）。
+            </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>Code を押すと、アップグレードを求められる</td><td>有料プランが必要です。隣の人と組んで画面を見ます</td></tr>
+                        <tr><td>Code を押すと、サインインを求められる</td><td>画面の案内どおりにサインインを済ませ、アプリを起動し直します</td></tr>
+                        <tr><td>「Error 403」などの認証のエラーが出る</td><td>アプリのメニューからサインアウトして、もう一度サインインします。直らなければ、アプリを完全に終了してから開き直します</td></tr>
+                        <tr><td>Windows で「Git is required」と出る</td><td>古い版のアプリで出る表示です。アプリを最新版に更新します。このハンズオンでは Git は使いません</td></tr>
+                        <tr><td>画面が真っ白のまま動かない</td><td>アプリを起動し直します。直らなければ、更新が残っていないかを確かめます</td></tr>
+                        <tr><td>「Failed to load session」と出る</td><td>選んだフォルダを動かしたか、消した可能性があります。フォルダを選び直します</td></tr>
+                        <tr><td>Local が選べない（灰色になっている）</td><td>会社や学校が管理しているパソコンでは、管理者が Local を止めていることがあります。隣の人と組んで画面を見ます。使いたいときは管理者に確認します</td></tr>
+                        <tr><td>英語で答えが返ってくる</td><td>「これからは日本語で答えてください」と送ります</td></tr>
+                        <tr><td>Manual が選択肢にない</td><td>古い版では「Ask permissions」という名前です。それを選びます</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#step0" class="btn">← Step 0</a>
+                <a href="#step2" class="btn">Step 2 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="section" id="step2">
+            <span class="badge badge-time">🗺️ 計画</span>
+            <h2>Step 2: 作りたいものを伝えて、先に計画を出してもらう</h2>
+            <p>いきなり作らせず、<strong>何をどう作るつもりかを先に見ます。</strong>公式ドキュメントでも、込み入った作業は Plan で進め方を出させてから実行に移すことが勧められています。</p>
+
+            <h3 class="preparation-heading">📋 手順</h3>
+            <ol>
+                <li>権限モードを <strong>Plan</strong> に切り替える</li>
+                <li>次のお願いを貼り付けて送る</li>
+            </ol>
+
+            <div class="prompt-card">
+                <div class="prompt-title">
+                    <span>🤖 Claude Code にこう頼む</span>
+                    <button class="copy-btn" type="button" data-copy-target="p-step2">コピー</button>
+                </div>
+                <div class="prompt-body" id="p-step2">このフォルダのカード利用明細（CSV）を読み込んで、出費を見られる Web ページを作りたいです。
+
+【入れるもの】
+「利用日・利用先・金額」の 3 列がある CSV。ページにある「ファイルを選ぶ」ボタンで選ぶ
+
+【出てくるもの】
+・合計金額と件数
+・利用先ごとの合計（棒グラフ）
+・明細の表
+
+【決まりごと】
+・作るファイルは index.html の 1 つだけにする
+・インターネット上の部品（外部のライブラリやフォント）は使わない
+・選んだ CSV の内容を、どこにも送らない・保存しない
+・来月以降、同じ形の別の CSV を選んでも使えるようにする
+・フォルダにある CSV は書き換えない
+・パソコンに何かをインストールしない
+
+【進め方】
+まだファイルは作らないでください。作り方の計画と、私に確認したいことを、日本語で先に見せてください。</div>
+            </div>
+
+            <h3 class="preparation-heading">📋 計画を見たら確かめること</h3>
+            <p>計画には、プログラムの言葉（HTML・JavaScript など）が出てきます。全部を理解する必要はありません。次の 4 つだけを見ます。</p>
+            <ul>
+                <li>作るファイルが <strong><code>index.html</code> の 1 つだけ</strong>になっているか</li>
+                <li><strong>何かをインストールする・ダウンロードする</strong>と書かれていないか。書かれていたら「インストールなしで作れる方法にしてください」と返す</li>
+                <li>CSV の読み込み方が<strong>「ページのボタンでファイルを選ぶ」</strong>になっているか</li>
+                <li>分からない言葉があれば、<strong>そのまま聞く</strong>。例:「FileReader とは何ですか。高校生に分かる言葉で説明してください」</li>
+            </ul>
+            <p>Claude から質問が返ってきたら、答えます。迷う質問には「おすすめの方でお願いします。理由も教えてください」と返して構いません。</p>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>Plan が選択肢にない</td><td>古い版では「Plan mode」という名前です。それも無ければ Manual のまま送ります。お願いの最後に「まだファイルは作らない」と書いてあるので、計画が返ります</td></tr>
+                        <tr><td>計画を出さずに、ファイルを作ろうとした</td><td>Manual なら確認の画面が出るので、<strong>Reject</strong> を押し、「先に計画を見せてください」と返します</td></tr>
+                        <tr><td>計画が長くて読めない</td><td>「計画を 5 行にまとめてください。作るファイルの名前と、インストールするものがあるかどうかを必ず入れてください」と返します</td></tr>
+                        <tr><td>ファイルを 3 つ（HTML・CSS・JS）に分ける計画になっている</td><td>「index.html の 1 つにまとめてください」と返します。1 つのほうが、あとで人に渡すときや場所を移すときに扱いやすくなります</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#step1" class="btn">← Step 1</a>
+                <a href="#step3" class="btn">Step 3 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="section" id="step3">
+            <span class="badge badge-time">🔨 作る</span>
+            <h2>Step 3: 変更を承認してページを作り、開いて合計を確かめる</h2>
+
+            <h3 class="preparation-heading">📋 手順 1: 作ってもらう</h3>
+            <ol>
+                <li>権限モードを <strong>Manual</strong> に戻す</li>
+                <li>「この計画で作ってください」と送る</li>
+                <li>確認の画面が出たら、下の表の 2 か所を読んでから <strong>Accept</strong> を押す</li>
+            </ol>
+            <table>
+                <tr><th>確認の画面で読むところ</th><th>こうなっていれば Accept</th><th>こうなっていたら Reject</th></tr>
+                <tr><td>どのファイルを変えるか</td><td>「出費ビューア」フォルダの中の <code>index.html</code></td><td>CSV を書き換えようとしている。フォルダの外の場所が出ている</td></tr>
+                <tr><td>コマンドを実行しようとしているか</td><td>コマンドの実行がない。または、何のためかを聞いて納得できた</td><td>何かをインストールしようとしている。何のためか分からない</td></tr>
+            </table>
+            <p>画面には、作ろうとしているプログラムが緑色の行で表示されます（追加される行が緑、消される行が赤）。<strong>プログラムの中身は読めなくて構いません。</strong>ここで見るのは「どのファイルに」「何をしようとしているか」の 2 つです。</p>
+            <p>Reject を押すと、Claude は「ではどう進めますか」と聞いてきます。そこで「なぜそれが必要ですか。使わない方法はありますか」と聞きます。</p>
+
+            <h3 class="preparation-heading">📋 手順 2: できたページを開く</h3>
+            <ol>
+                <li>Claude の返事の中にある <strong><code>index.html</code> の文字を押す</strong>。アプリの中のブラウザ（Browser pane）でページが開く</li>
+                <li>ページの「ファイルを選ぶ」ボタンを押し、<strong><code>カード利用明細_202609.csv</code></strong> を選ぶ</li>
+                <li>合計・グラフ・表が出ることを確かめる</li>
+            </ol>
+            <p>アプリの中で開けないときは、<code>index.html</code> の文字を右クリックして <strong>Show in Finder</strong>（Mac）か <strong>Show in Explorer</strong>（Windows）を選び、出てきた <code>index.html</code> をダブルクリックして、いつものブラウザで開きます。</p>
+
+            <h3 class="preparation-heading">📋 数字を自分で確かめる</h3>
+            <details class="sample-details">
+                <summary>💡 答え合わせ（9 月分）</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>見るところ</th><th>正しい値</th></tr>
+                        <tr><td>合計</td><td><strong>9,440 円</strong>（6 件）</td></tr>
+                        <tr><td>ネット通販</td><td>5,600 円（2,480 + 3,120）</td></tr>
+                        <tr><td>書店</td><td>1,650 円</td></tr>
+                        <tr><td>カフェ</td><td>1,200 円（580 + 620）</td></tr>
+                        <tr><td>動画配信サービス（月額）</td><td>990 円</td></tr>
+                    </table>
+                    <p>見るところ:</p>
+                    <ul>
+                        <li>合計が Step 1 でメモした <strong>9,440 円</strong>と同じか</li>
+                        <li>「ネット通販」と「カフェ」が、<strong>2 件ずつ 1 つにまとめられているか</strong>。4 行ではなく 6 行のグラフになっていたら、まとめる処理が入っていません</li>
+                        <li>「利用先」が日本語のまま読めるか（文字化けしていないか）</li>
+                    </ul>
+                </div>
+            </details>
+
+            <div class="callout callout-tip">
+                💡 <strong>うまく動かなかったら、起きたことをそのまま伝えます。</strong> 原因を自分で考える必要はありません。「何をしたか」「何が起きたか」「どうなってほしいか」の 3 つを書きます。
+                <div class="code-wrap" style="margin-top:8px;">
+                    <button class="copy-btn" type="button" data-copy-target="c-report">コピー</button>
+                    <pre id="c-report"><code>index.html を開いて、カード利用明細_202609.csv を選びました。
+［起きたこと。例: 何も表示されません／合計が 0 円と出ます／利用先の文字が読めない記号になります］
+合計 9,440 円と、利用先ごとの合計が出るようにしてください。原因を調べて直してください。</code></pre>
+                </div>
+                画面の写真（スクリーンショット）を入力欄に貼り付けて、一緒に送ることもできます。
+            </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>確認の画面が何度も出る</td><td>Manual の正しい動きです。1 回ごとに「どのファイルに」「何をするか」を読んで押します</td></tr>
+                        <tr><td>止まったまま動かない</td><td>確認を待っていることがあります。画面に Accept・Reject のボタンが出ていないかを見ます</td></tr>
+                        <tr><td>頼んでいないことを始めた</td><td><strong>先に停止ボタンで止めます。</strong>止めてから「今、何をしようとしていましたか。理由を教えてください」と聞き、「index.html を作るだけにしてください」と返します。止めずに文字を送ると、今の操作は最後まで進みます</td></tr>
+                        <tr><td>「サーバーを起動する」と言って、コマンドの実行を求めてきた</td><td>Reject して「サーバーは使わず、index.html をそのまま開いて動く形にしてください」と返します</td></tr>
+                        <tr><td>アプリの中のブラウザで、ファイルを選んでも反応がない</td><td>上の方法で、いつものブラウザで開いて試します</td></tr>
+                        <tr><td>使用量の上限に達した</td><td>講師に声をかけます。<a href="claude-code-sample/完成見本/index.html" target="_blank" rel="noopener">完成見本のページ</a>を開けば、Step 5 の確かめ方は体験できます</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#step2" class="btn">← Step 2</a>
+                <a href="#step4" class="btn">Step 4 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 4 -->
+        <section class="section" id="step4">
+            <span class="badge badge-time">✏️ 直す</span>
+            <h2>Step 4: 見た目や並び順を、言葉で頼んで直す</h2>
+            <p>できたページを見て、変えたいところを言葉で伝えます。次の中から <strong>1 つか 2 つ</strong>選んで送ってください。自分で考えたものでも構いません。</p>
+
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">
+                        <span>並び順を変える</span>
+                        <button class="copy-btn" type="button" data-copy-target="p-step4a">コピー</button>
+                    </div>
+                    <div class="prompt-body" id="p-step4a">利用先ごとの合計を、金額の大きい順に並べてください。棒グラフの右に、全体に占める割合（％）も出してください。</div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">
+                        <span>絞り込みを足す</span>
+                        <button class="copy-btn" type="button" data-copy-target="p-step4b">コピー</button>
+                    </div>
+                    <div class="prompt-body" id="p-step4b">明細の表の上に、利用先を選ぶ欄を足してください。選んだ利用先の明細だけが表に出るようにしてください。合計とグラフは全体のままにしてください。</div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">
+                        <span>見出しを足す</span>
+                        <button class="copy-btn" type="button" data-copy-target="p-step4c">コピー</button>
+                    </div>
+                    <div class="prompt-body" id="p-step4c">ページの一番上に、読み込んだ明細が何年何月のものかを「2026年9月の出費」のように出してください。月は、明細の利用日から決めてください。</div>
+                </div>
+            </div>
+
+            <h3 class="preparation-heading">📋 直したあとに確かめること</h3>
+            <ol>
+                <li>確認の画面で、変えるファイルが <code>index.html</code> であることを見て Accept を押す</li>
+                <li>ページを<strong>読み込み直して</strong>、もう一度 9 月の CSV を選ぶ</li>
+                <li>頼んだところが変わっているかを見る</li>
+                <li><strong>合計が 9,440 円のままか</strong>を見る</li>
+            </ol>
+            <p>4 つ目が大事です。見た目を直したときに、<strong>前は合っていた数字が変わってしまう</strong>ことがあります。直すたびに、答えが分かっている数字を 1 つ見直します。</p>
+
+            <div class="callout callout-tip">
+                💡 <strong>頼み方のコツ。</strong> 「いい感じにして」では、何を変えるかを Claude が決めることになります。<strong>どこを・どう変えるか</strong>を書きます。
+                <table style="margin-top: 10px;">
+                    <tr><th>伝わりにくい</th><th>伝わりやすい</th></tr>
+                    <tr><td>見やすくして</td><td>合計の数字を、今の 2 倍の大きさにして、ページの一番上に置いて</td></tr>
+                    <tr><td>グラフを直して</td><td>棒グラフの棒が短くて差が分かりません。一番大きい金額の棒が、横幅いっぱいになるようにして</td></tr>
+                    <tr><td>全部まとめて直して</td><td>1 回に 1 つだけ頼み、確かめてから次を頼む</td></tr>
+                </table>
+            </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>直したのに、画面が変わらない</td><td>ページを読み込み直していない可能性があります。読み込み直して、CSV を選び直します</td></tr>
+                        <tr><td>直したら、前より悪くなった</td><td>「今の変更を取り消して、変更の前の状態に戻してください」と送ります。そのうえで、頼み方を変えてもう一度送ります</td></tr>
+                        <tr><td>直したら、合計が変わった</td><td>「9 月の CSV を選ぶと合計が◯◯円と出ます。正しくは 9,440 円です。直してください」と送ります</td></tr>
+                        <tr><td>頼んでいないところまで変わった</td><td>「頼んだところ以外は、前のままに戻してください」と送ります。次からは、お願いの最後に「ほかの部分は変えないでください」と足します</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#step3" class="btn">← Step 3</a>
+                <a href="#step5" class="btn">Step 5 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 5 -->
+        <section class="section" id="step5">
+            <span class="badge badge-level">🔍 いちばん大事</span>
+            <h2>Step 5: 10 月の明細を入れて、合計が合うかを確かめる</h2>
+            <p>道具は、作ったときのデータでは動いても、<strong>別のデータを入れると間違う</strong>ことがあります。来月も使うつもりなら、来月のデータで試しておく必要があります。</p>
+
+            <h3 class="preparation-heading">📋 手順</h3>
+            <ol>
+                <li>ページを読み込み直す</li>
+                <li>「ファイルを選ぶ」ボタンで、<strong><code>カード利用明細_202610.csv</code></strong> を選ぶ</li>
+                <li>合計を見て、Step 1 でメモした数字と比べる</li>
+            </ol>
+
+            <details class="sample-details">
+                <summary>💡 答え合わせ（10 月分。まず自分のページの数字を見てから開く）</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>見るところ</th><th>正しい値</th></tr>
+                        <tr><td>合計</td><td><strong>18,260 円</strong>（5 件）</td></tr>
+                        <tr><td>ネット通販</td><td>12,800 円</td></tr>
+                        <tr><td>スーパー</td><td>3,250 円</td></tr>
+                        <tr><td>カフェ</td><td>1,220 円（640 + 580）</td></tr>
+                        <tr><td>動画配信サービス（月額）</td><td>990 円</td></tr>
+                    </table>
+                    <p>10 月の明細には、9 月には無かった形の行が 1 つあります。</p>
+                    <div class="code-wrap">
+                        <pre><code>2026/10/05,ネット通販,"12,800"</code></pre>
+                    </div>
+                    <p>金額に<strong>桁区切りのカンマ</strong>が入り、引用符で囲まれています。カード会社によっては、1 万円を超えるとこの形で出てきます。カンマを「列の区切り」として読んでしまう道具は、ここで間違えます。</p>
+                    <table>
+                        <tr><th>自分のページの表示</th><th>起きていること</th></tr>
+                        <tr><td>合計 18,260 円</td><td>正しく読めています</td></tr>
+                        <tr><td>合計 5,472 円・ネット通販 12 円</td><td>「12,800」を「12」と「800」に分けて読み、12 円として足しています</td></tr>
+                        <tr><td>合計が「NaN」や空欄になる・エラーが出る</td><td>「"12」を数字として読めず、計算できなくなっています</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <h3 class="preparation-heading">📋 合わなかったときの伝え方</h3>
+            <div class="prompt-card">
+                <div class="prompt-title">
+                    <span>🤖 Claude Code にこう頼む（合わなかった人だけ）</span>
+                    <button class="copy-btn" type="button" data-copy-target="p-step5">コピー</button>
+                </div>
+                <div class="prompt-body" id="p-step5">カード利用明細_202610.csv を選ぶと、合計が［自分のページに出た数字］と表示されます。正しくは 18,260 円です。
+原因を調べて、何が原因だったかを日本語で説明してから直してください。
+直したあと、9 月の CSV で合計が 9,440 円のままであることも確かめてください。</div>
+            </div>
+            <p>直ったら、<strong>10 月と 9 月の両方</strong>を自分で選び直して、18,260 円と 9,440 円が出ることを確かめます。</p>
+
+            <div class="callout callout-info">
+                ℹ️ <strong>最初から合っていた人へ。</strong> Claude が先回りして対応していた、ということです。それでも、<strong>合っていることが分かったのは、試したから</strong>です。本物のデータで使う前には、答えが分かっているデータを 2 種類以上入れて試します。
+            </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>10 月の CSV を選んでも、9 月の表示のまま</td><td>ページを読み込み直してから選びます。それでも変わらなければ、「別の CSV を選び直すと、表示が切り替わるようにしてください」と頼みます</td></tr>
+                        <tr><td>直してもらったら、9 月の合計が変わった</td><td>「9 月の CSV で合計が◯◯円になりました。9,440 円と 18,260 円の両方が出るようにしてください」と送ります</td></tr>
+                        <tr><td>「CSV のほうを直しましょうか」と提案された</td><td>断ります。来月の明細も同じ形で届くので、<strong>道具のほうを直す</strong>必要があります。「CSV は変えず、index.html を直してください」と返します</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#step4" class="btn">← Step 4</a>
+                <a href="#step6" class="btn">Step 6 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 6 -->
+        <section class="section" id="step6">
+            <span class="badge badge-time">🔐 確かめる</span>
+            <h2>Step 6: 道具の中身を確かめ、使うときの約束を見る</h2>
+            <p>この道具には、これから本物のカード明細を入れることになります。<strong>入れたデータがどこかへ送られないか</strong>を、使う前に確かめます。</p>
+
+            <div class="prompt-card">
+                <div class="prompt-title">
+                    <span>🤖 Claude Code にこう頼む</span>
+                    <button class="copy-btn" type="button" data-copy-target="p-step6">コピー</button>
+                </div>
+                <div class="prompt-body" id="p-step6">index.html を読んで、次の 3 つに答えてください。ファイルは変更しないでください。
+1. 選んだ CSV の内容を、インターネット上のどこかへ送る処理はありますか
+2. インターネット上から読み込んでいる部品（ライブラリ・フォント・画像）はありますか
+3. このページが、パソコンの中に何かを保存する処理はありますか
+「ある」場合は、該当する行を示して、何のための処理かを説明してください。</div>
+            </div>
+            <p>3 つとも「ない」なら、Step 2 で決めた決まりごとに沿って作られている、と Claude は答えています。<strong>これは確かめる材料の 1 つで、保証ではありません。</strong>AI の説明は間違うことがあります。「ある」と返ってきたら、「その処理を外してください」と頼み、Step 5 と同じように 2 つの CSV で確かめ直します。</p>
+
+            <div class="callout callout-info">
+                ℹ️ <strong>自分でできる確かめ方（家でやる）。</strong> パソコンの Wi-Fi を切った状態で <code>index.html</code> を開き、CSV を選びます。インターネットにつながっていなくても合計とグラフが出れば、外の部品が無くても動くことが分かります。これも材料の 1 つで、「つながっているときに何も送らない」ことの証明にはなりません。会社のデータや、人に渡す道具では、約束 5 のとおり、プログラムが分かる人に見てもらいます。
+            </div>
+
+            <h3 class="preparation-heading">📋 本物の明細で使うときの手順</h3>
+            <ol>
+                <li>できあがった <code>index.html</code> を、<strong>作業フォルダとは別の場所</strong>（書類フォルダなど）へコピーする</li>
+                <li>コピーした <code>index.html</code> をダブルクリックして、<strong>いつものブラウザ</strong>で開く。Claude のアプリの中のブラウザでは開かない（アプリの中では、Claude が画面を見られるため）</li>
+                <li>本物の明細を「ファイルを選ぶ」ボタンで読み込ませる。<strong>本物の明細を作業フォルダへ入れない</strong></li>
+            </ol>
+
+            <h3>使うときの 5 つの約束</h3>
+            <table>
+                <tr><th>約束</th><th>このハンズオンで見たこと</th><th>本物のデータで使うときにやること</th></tr>
+                <tr><td><strong>1. フォルダは、道具ごとに 1 つ作る</strong></td><td>Step 0・1: 「出費ビューア」フォルダだけを選んだ</td><td>デスクトップ全体や書類フォルダ全体を選ばない。作業フォルダに入れるのは練習用のデータだけにする。Claude が読んだ中身は AI へ送られる</td></tr>
+                <tr><td><strong>2. Manual で、変更を 1 つずつ見る</strong></td><td>Step 3: どのファイルに・何をするかを読んでから Accept した</td><td>分からない確認は Reject して理由を聞く。Bypass permissions は使わない</td></tr>
+                <tr><td><strong>3. 作る前に、計画と決まりごとを見る</strong></td><td>Step 2: インストールしない・外の部品を使わない・送らないを先に決めた</td><td>決まりごとを毎回お願いに書く。または Step 8 の CLAUDE.md に書いておく</td></tr>
+                <tr><td><strong>4. 答えが分かっているデータで確かめる</strong></td><td>Step 3〜5: 9,440 円と 18,260 円で確かめた。直すたびに見直した</td><td>形の違うデータを 2 種類以上入れて試す。直したあとは、前に合っていた数字も見直す</td></tr>
+                <tr><td><strong>5. 人に渡す前・仕事で使う前に、確認を取る</strong></td><td>（このハンズオンでは自分だけで使った）</td><td>会社や学校のデータを入れる前に、組織のルールを確認する。道具をほかの人に配る前に、プログラムが分かる人に見てもらう</td></tr>
+            </table>
+
+            <div class="callout callout-warn">
+                ⚠️ <strong>ネットで見つけた手順を、そのまま頼まない。</strong> 「このコマンドを貼り付けて実行して」「このプラグインを入れて」と書かれた記事や動画があります。Claude Code はパソコンの上でコマンドを実行できるので、<strong>中身の分からないコマンドやプラグインを入れると、パソコンの中のファイルにふれられます。</strong>入れる前に、「これは何をするものですか。入れると何ができるようになりますか」と Claude に聞き、提供元が分かるものだけにします。
+            </div>
+
+            <div class="callout callout-tip">
+                💡 AI に何を渡してよいかの考え方を、ほかのツールも含めて整理したいときは、<a href="personal-ai-security.html">個人でできる AI セキュリティ対策</a>を読んでください。フォルダを渡すときの注意は <a href="cowork.html#step6">Cowork 編の Step 6</a> にもまとめています。
+            </div>
+
+            <div class="nav-btns">
+                <a href="#step5" class="btn">← Step 5</a>
+                <a href="#step7" class="btn">Step 7 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 7 -->
+        <section class="section" id="step7">
+            <span class="badge badge-time">✍️ 演習</span>
+            <h2>Step 7: 自分の作業から 1 つ選んで、道具の頼み方を書く</h2>
+            <p>この Step では、<strong>自分がふだんやっている作業の中から、道具にするものを 1 つ選び、頼み方を自分で書きます。</strong>本物のデータはまだ使いません。書くところまでがこの Step です。</p>
+
+            <h3 class="preparation-heading">📋 1. Cowork に頼むか、道具を作るかを分ける（2 分）</h3>
+            <table>
+                <tr><th>作業の性質</th><th>向いているもの</th><th>例</th></tr>
+                <tr><td>1 回きり。または、毎回ファイルの形や判断が違う</td><td><strong>Cowork に頼む</strong></td><td>散らかったフォルダの整理、ばらばらの書類から期限を拾う</td></tr>
+                <tr><td>毎週・毎月、<strong>同じ形のデータに同じ処理</strong>をする</td><td><strong>Claude Code で道具を作る</strong></td><td>毎月の明細の集計、毎週のアンケート結果の集計</td></tr>
+                <tr><td>データは使わず、<strong>決まった計算や表示</strong>をしたい</td><td><strong>Claude Code で道具を作る</strong></td><td>見積の計算、当番表の表示、発表の時間を測るタイマー</td></tr>
+            </table>
+
+            <h3 class="preparation-heading">📋 2. 頼み方を 5 つの項目で書く（5 分）</h3>
+            <p>Step 2 のお願いと同じ形です。<code>［ ］</code>の中を自分の作業に書き換えてください。</p>
+            <div class="prompt-card">
+                <div class="prompt-title">
+                    <span>✍️ 道具の頼み方のひな形</span>
+                    <button class="copy-btn" type="button" data-copy-target="p-step7">コピー</button>
+                </div>
+                <div class="prompt-body" id="p-step7">［例: 毎週のアンケート結果を集計するページ］を作りたいです。
+
+【入れるもの】
+［例: アンケートの回答 CSV。列は「回答日・満足度（1〜5）・自由記述」。ページの「ファイルを選ぶ」ボタンで選ぶ］
+
+【出てくるもの】
+［例: 回答の件数、満足度ごとの人数（棒グラフ）、満足度の平均、自由記述の一覧］
+
+【決まりごと】
+・作るファイルは index.html の 1 つだけにする
+・インターネット上の部品は使わない
+・入れたデータを、どこにも送らない・保存しない
+・フォルダにある元のデータは書き換えない
+・パソコンに何かをインストールしない
+
+【確かめ方】
+［例: 先週の回答 CSV では、件数 42・平均 3.9 になるはず。作ったあと、この数字が出るかを私が確かめる］
+
+【進め方】
+まだファイルは作らないでください。作り方の計画と、私に確認したいことを、日本語で先に見せてください。</div>
+            </div>
+            <p><strong>【確かめ方】が書けるかどうか</strong>が、道具にしてよいかの目安になります。正しい答えを自分で出せない作業は、道具が間違っていても気づけません。その場合は、手で計算できる小さなデータ（5〜10 行）を先に作り、それを答えにします。</p>
+
+            <h3 class="preparation-heading">📋 3. フォルダとデータを決める（1 分）</h3>
+            <table>
+                <tr><th>決めること</th><th>書き方</th></tr>
+                <tr><td>フォルダ</td><td>新しく作るフォルダの名前。道具 1 つにつきフォルダ 1 つ</td></tr>
+                <tr><td>最初に入れるデータ</td><td><strong>本物ではなく、形だけ同じにした練習用のデータ</strong>。名前や金額を架空のものに置き換えた 5〜10 行で足ります</td></tr>
+                <tr><td>本物のデータを入れてよいか</td><td>個人のデータなら自分で決める。会社や学校のデータなら、組織のルールを確認してから</td></tr>
+            </table>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>道具にする作業が思いつかない</td><td>「先月も今月もやった、Excel での同じ集計」を思い出します。無ければ、タイマーや計算のページなど、データを使わない道具から選びます</td></tr>
+                        <tr><td>本物の CSV を道具に入れたら、日本語が読めない記号になった</td><td>CSV の文字の保存形式が違います。練習用の CSV は UTF-8 という形式ですが、カード会社や銀行の CSV は Shift_JIS という形式のことがあります。練習用の CSV を入れた状態で、Claude に「Shift_JIS の CSV も読めるようにしてください」と頼みます</td></tr>
+                        <tr><td>入れるデータの形が分からない</td><td>いつも使っているファイルの 1 行目（列の名前）を、そのまま書き写します</td></tr>
+                        <tr><td>やりたいことが、メールを送る・Web サイトに書き込むなど、外に出る操作になっている</td><td>最初の 1 つには向きません。「下書きの文章を画面に出す」までを道具にし、送るのは自分でやる形に分けます</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#step6" class="btn">← Step 6</a>
+                <a href="#step8" class="btn">Step 8 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 8 -->
+        <section class="section" id="step8">
+            <span class="badge badge-time">🔌 紹介</span>
+            <h2>Step 8: もっと便利にする機能（紹介のみ）</h2>
+            <p>ハンズオンでは手を動かしませんが、慣れてきたら使える機能です。どれも 2026-10-04 時点の公式ドキュメントに載っているものです。使える条件はプランや組織の設定で変わるので、試す前に公式ドキュメントを確認してください。</p>
+            <table>
+                <tr><th>機能</th><th>できること</th></tr>
+                <tr><td><strong>CLAUDE.md</strong></td><td>フォルダに置いておく、Claude へのルールを書いたファイル。「説明は日本語で」「インターネット上の部品を使わない」「インストールしない」などを書いておくと、毎回のお願いに書かなくても読まれる。「このフォルダ用の CLAUDE.md を作ってください。ルールは次のとおりです」と頼めば作れる</td></tr>
+                <tr><td><strong>差分の画面（diff view）</strong></td><td>Claude がファイルを変えたあとに出る「+12 -1」のような表示を押すと、どのファイルの何行目が変わったかを一覧できる。行を押してコメントを書き、直しを頼める</td></tr>
+                <tr><td><strong>ファイルや画像を添付する</strong></td><td>入力欄に画像や PDF を貼り付けて、「この見本と同じ見た目にして」のように頼める</td></tr>
+                <tr><td><strong>使用量の表示</strong></td><td>モデルを選ぶ欄の近くにある輪の表示を押すと、今の会話とプランの使用量を見られる</td></tr>
+                <tr><td><strong>Cloud で動かす</strong></td><td>Local のかわりに Cloud を選ぶと、Anthropic 側の環境で動き、アプリを閉じても作業が続く</td></tr>
+                <tr><td><strong>スケジュールタスク</strong></td><td>決まった時間に、同じ作業を自動で行う</td></tr>
+                <tr><td><strong>コネクタ・プラグイン</strong></td><td>入力欄の「+」から、外のサービスとの連携や追加の機能を入れられる。Step 6 の注意のとおり、提供元が分かるものを 1 つずつ足す</td></tr>
+                <tr><td><strong>ターミナル版</strong></td><td>黒い画面（ターミナル）で同じ Claude Code を使う。Git やテストなど、開発の作業をする人向け。<a href="claude.html">Claude Code ハンズオンガイド（エンジニア向け）</a>で扱う</td></tr>
+            </table>
+
+            <div class="nav-btns">
+                <a href="#step7" class="btn">← Step 7</a>
+                <a href="#checklist" class="btn">チェックリストへ →</a>
+            </div>
+        </section>
+
+        <!-- Checklist -->
+        <section class="section" id="checklist">
+            <h2>✅ チェックリスト</h2>
+            <h3 class="preparation-heading">作る前（毎回）</h3>
+            <ul>
+                <li>☐ 道具のためのフォルダを 1 つ作り、それだけを選んだか</li>
+                <li>☐ フォルダに入れたのは、練習用のデータか、AI に送られてよいデータだけか</li>
+                <li>☐ 権限モードは Manual（計画を見るときは Plan）になっているか</li>
+                <li>☐ 「入れるもの・出てくるもの・決まりごと・確かめ方・進め方」を書いたか</li>
+                <li>☐ 答えが分かっているデータを用意したか</li>
+            </ul>
+            <h3 class="preparation-heading">作っている間（毎回）</h3>
+            <ul>
+                <li>☐ 確認の画面で「どのファイルに」「何をするか」を読んでから押したか</li>
+                <li>☐ インストールや、フォルダの外への操作を求められたら、理由を聞いたか</li>
+                <li>☐ 直すたびに、前に合っていた数字を見直したか</li>
+            </ul>
+            <h3 class="preparation-heading">本物のデータで使う前（1 回）</h3>
+            <ul>
+                <li>☐ 形の違うデータを 2 種類以上入れて、答えと合うことを確かめたか</li>
+                <li>☐ データを外へ送る処理・外から読み込む部品がないかを確かめたか</li>
+                <li>☐ 会社や学校のデータを入れるなら、組織のルールを確認したか</li>
+                <li>☐ ほかの人に渡すなら、プログラムが分かる人に見てもらったか</li>
+            </ul>
+
+            <div class="nav-btns">
+                <a href="#step8" class="btn">← Step 8</a>
+                <a href="#facilitator" class="btn">講師向け →</a>
+            </div>
+        </section>
+
+        <!-- Facilitator -->
+        <section class="section" id="facilitator">
+            <h2>講師向け: 進行のめやす（90 分版）</h2>
+            <table>
+                <tr><th>時間</th><th>内容</th><th>講師がすること</th></tr>
+                <tr><td>0:00〜0:10</td><td>はじめに</td><td>Cowork と Code の違いを図で説明する。Cowork 編に出た人を挙手で確認する</td></tr>
+                <tr><td>0:10〜0:20</td><td>Step 0</td><td>アプリの更新が済んでいるかを確認する。有料プランでない人は、隣の人と組んで画面を見る形にする</td></tr>
+                <tr><td>0:20〜0:30</td><td>Step 1</td><td>Local・Select folder・Manual の 3 つを、講師の画面で 1 つずつ見せる。9,440 円と 18,260 円をメモしてもらう</td></tr>
+                <tr><td>0:30〜0:40</td><td>Step 2</td><td>Plan に切り替えるところを見せる。返ってきた計画から「作るファイルの名前」と「インストールの有無」を探すところを、声に出して実演する</td></tr>
+                <tr><td>0:40〜0:55</td><td>Step 3</td><td>確認の画面を全員の前で見せ、「どのファイルに」「何を」を読んでから Accept を押す。9,440 円が出た人を挙手で数える</td></tr>
+                <tr><td>0:55〜1:05</td><td>Step 4</td><td>直したあとに合計を見直すところまでを 1 回実演する</td></tr>
+                <tr><td>1:05〜1:15</td><td>Step 5</td><td>18,260 円が出た人・5,472 円が出た人・エラーになった人を挙手で数える。全員が合っていた場合も、CSV の「"12,800"」の行を画面に出して、なぜ試す必要があるかを説明する</td></tr>
+                <tr><td>1:15〜1:20</td><td>Step 6</td><td>確かめるお願いを送ってもらい、5 つの約束の表を、Step 1〜5 で起きたことと結び付けて説明する</td></tr>
+                <tr><td>1:20〜1:30</td><td>Step 7・まとめ</td><td>ひな形を書いてもらう（8 分）。残りの 2 分で、1〜2 人に選んだ作業と「確かめ方」を発表してもらい、Step 8 とチェックリストの場所を案内する</td></tr>
+            </table>
+
+            <h3>進行で気をつけること</h3>
+            <ul>
+                <li><strong>当日の前に、講師の画面で Step 1〜6 を一度通しておく。</strong>ボタンの名前や場所がこの資料と違っていたら、その場で読み替えを伝える。権限モードの名前は版によって違う（Step 1 の表の下を参照）</li>
+                <li><strong>作られるページは、人によって見た目が違う。</strong>同じお願いでも、色・配置・グラフの形は毎回変わる。そろえるのは見た目ではなく、<strong>合計の数字</strong>であることを最初に伝える</li>
+                <li><strong>Step 5 で全員が正しく読めることがある。</strong>その場合も失敗ではない。「試したから合っていると分かった」ことを伝える</li>
+                <li><strong>プログラムの中身の説明に入りすぎない。</strong>質問が出たら、「Claude に、高校生に分かる言葉で説明してと頼む」やり方を見せる</li>
+                <li>Accept edits・Auto・Bypass permissions を勧めない。質問が出たら、Step 1 の表で違いを説明する</li>
+                <li>使用量の上限に達した人がいたら、完成見本のページを開いてもらい、Step 5 の確かめ方だけ体験してもらう</li>
+                <li><strong>Step 7 では、本物のデータを入れさせない。</strong>書くところまでで止める</li>
+                <li><strong>「🧯 うまくいかないとき」を先に案内する。</strong>表にないことが起きたら、次回のために書き留める</li>
+            </ul>
+
+            <h3>配布物</h3>
+            <ul>
+                <li>練習用フォルダ: <code>docs/claude-code-practice.zip</code>（中身は <code>docs/claude-code-sample/出費ビューア/</code> と同じ）</li>
+                <li>完成見本: <code>docs/claude-code-sample/完成見本/index.html</code>（9 月 9,440 円・10 月 18,260 円になることを確認済み）</li>
+                <li>この資料の URL と、チェックリストの節</li>
+            </ul>
+
+            <div class="nav-btns">
+                <a href="#checklist" class="btn">← チェックリスト</a>
+                <a href="#deep-dive" class="btn">公式資料 →</a>
+            </div>
+        </section>
+
+        <!-- Deep dive -->
+        <section class="section" id="deep-dive">
+            <h2>📚 公式資料</h2>
+            <p>この資料は 2026-10-04 に次の公式ドキュメントを読んで書きました。アプリは更新が速いので、使う前に最新の内容を確認してください。</p>
+            <ul>
+                <li>Get started with the desktop app（最初のセッションの始め方）: <a href="https://code.claude.com/docs/en/desktop-quickstart" target="_blank" rel="noopener">code.claude.com/docs/en/desktop-quickstart</a></li>
+                <li>Desktop application（権限モード・ブラウザ表示・差分の画面・困ったとき）: <a href="https://code.claude.com/docs/en/desktop" target="_blank" rel="noopener">code.claude.com/docs/en/desktop</a></li>
+                <li>Permission modes（権限モードのくわしい説明）: <a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener">code.claude.com/docs/en/permission-modes</a></li>
+                <li>Best practices（頼み方のコツ）: <a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">code.claude.com/docs/en/best-practices</a></li>
+                <li>料金とプラン: <a href="https://claude.com/pricing" target="_blank" rel="noopener">claude.com/pricing</a></li>
+            </ul>
+
+            <div class="nav-btns">
+                <a href="#facilitator" class="btn">← 講師向け</a>
+                <a href="#outro" class="btn">おわりに →</a>
+            </div>
+        </section>
+
+        <!-- おわりに -->
+        <section class="section" id="outro">
+            <h2>おわりに</h2>
+            <p>このハンズオンでは、Claude Desktop の Code タブで「出費ビューア」フォルダを開き、計画を先に見てから、カード明細を集計するページを 1 つ作りました。9 月と 10 月の 2 つの明細で合計を確かめ、データを外へ送らないことを確かめ、使うときの 5 つの約束にまとめました。</p>
+            <p>自分の道具を作るときは、<strong>フォルダを 1 つ作り、形だけ同じにした練習用のデータを入れ、Step 7 で書いた頼み方を Plan で送る</strong>ところから始めてください。</p>
+
+            <div class="nav-btns">
+                <a href="#deep-dive" class="btn">← 公式資料</a>
+                <a href="index.html" class="btn">ポータルに戻る →</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // スクロールに応じてサイドバーのアクティブリンクを更新する
+        const sections = document.querySelectorAll('.section');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    sidebarLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px' });
+
+        sections.forEach(s => observer.observe(s));
+
+        // プロンプトと答え合わせ用コードをクリップボードへコピーする
+        const copyTimers = new WeakMap();
+        const copyAttempts = new WeakMap();
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.setAttribute('readonly', '');
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+
+            let copied = false;
+            try {
+                copied = document.execCommand('copy');
+            } catch (error) {
+                copied = false;
+            } finally {
+                document.body.removeChild(textArea);
+            }
+            return copied;
+        }
+
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const previousTimer = copyTimers.get(button);
+                if (previousTimer) clearTimeout(previousTimer);
+                const attempt = (copyAttempts.get(button) || 0) + 1;
+                copyAttempts.set(button, attempt);
+
+                const target = document.getElementById(button.dataset.copyTarget);
+                let copied = false;
+
+                if (target) {
+                    const text = target.textContent;
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        try {
+                            await navigator.clipboard.writeText(text);
+                            copied = true;
+                        } catch (error) {
+                            copied = fallbackCopy(text);
+                        }
+                    } else {
+                        copied = fallbackCopy(text);
+                    }
+                }
+
+                if (copyAttempts.get(button) !== attempt) return;
+
+                button.textContent = copied ? 'コピーしました' : 'コピーできません';
+                const timer = setTimeout(() => {
+                    button.textContent = 'コピー';
+                    copyTimers.delete(button);
+                }, 1500);
+                copyTimers.set(button, timer);
+            });
+        });
+    </script>
+</body>
+
+</html>

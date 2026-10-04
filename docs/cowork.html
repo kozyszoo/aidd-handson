@@ -401,6 +401,24 @@
             padding: 18px;
         }
 
+        /* 「うまくいかないとき」の折りたたみ。答え合わせと見分けがつくよう、枠と見出しを灰色にする */
+        .trouble-details {
+            border-color: #a8a29e;
+        }
+
+        .trouble-details summary {
+            color: #57534e;
+            background: #f5f5f4;
+        }
+
+        .trouble-details[open] summary {
+            border-bottom-color: #a8a29e;
+        }
+
+        .trouble-details table {
+            margin: 0;
+        }
+
         .copy-btn {
             flex-shrink: 0;
             border: 1px solid var(--primary);
@@ -532,7 +550,8 @@
                 <li><a href="#step4">Step 4: 出費をまとめる</a></li>
                 <li><a href="#step5">Step 5: だまされる体験</a></li>
                 <li><a href="#step6">Step 6: 安全に使う約束</a></li>
-                <li><a href="#step7">Step 7: もっと便利な機能</a></li>
+                <li><a href="#step7">Step 7: 自分の作業に当てはめる</a></li>
+                <li><a href="#step8">Step 8: もっと便利な機能</a></li>
                 <li><a href="#checklist">✅ チェックリスト</a></li>
                 <li><a href="#facilitator">講師向け: 進行のめやす</a></li>
                 <li><a href="#deep-dive">📚 公式資料</a></li>
@@ -546,7 +565,7 @@
         <div class="hero">
             <span class="badge badge-level">AI にはじめて仕事を任せる人向け</span>
             <h1>🗂️ Claude Cowork 活用ハンズオン<br>～ 散らかったダウンロードフォルダを、AI に片付けてもらう ～</h1>
-            <p style="margin-top:8px;">チャットの AI は「答えを文章で返す」ところまでです。Claude Cowork は、<strong>渡したフォルダの中のファイルを読み、整理し、新しい Excel や Word を作って置く</strong>ところまでやります。この資料では、よくある「散らかったダウンロードフォルダ」の練習用コピーを使ってその作業を体験し、あわせて<strong>任せるときに気をつけること</strong>を確認します。</p>
+            <p style="margin-top:8px;">チャットは、質問や、1 つずつ添付したファイルに答えるものです。Claude Cowork は、<strong>渡したフォルダの中のファイルを読み、整理し、新しい Excel や Word を作って置く</strong>ところまでやります。この資料では、よくある「散らかったダウンロードフォルダ」の練習用コピーを使ってその作業を体験し、あわせて<strong>任せるときに気をつけること</strong>を確認します。</p>
             <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間: 約 90 分 ／ 前提: Claude の有料プラン（Pro・Max・Team・Enterprise）と Claude Desktop アプリ ／ 内容は 2026-09-27 時点の公式ヘルプで確認</p>
         </div>
 
@@ -567,7 +586,7 @@
             <div class="card" style="background: var(--bg-mid); text-align: center;">
                 <div style="font-weight:700; color: var(--primary); margin-bottom: 12px;">💬 チャットと Cowork の違い</div>
                 <svg viewBox="0 0 900 250" style="max-width:100%; height:auto;" role="img">
-                    <title>チャットは質問に文章で答えるだけで、ファイルは自分でコピーして作る。Cowork は渡したフォルダのファイルを読み、手順を進め、完成したファイルをフォルダに置く</title>
+                    <title>チャットは質問に文章で答え、パソコンのフォルダにはふれない。Cowork は渡したフォルダのファイルを読み、手順を進め、完成したファイルをフォルダに置く</title>
                     <defs>
                         <marker id="arrow-intro" markerWidth="12" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L12,4.5 z" fill="#c2410c"></path></marker>
                         <marker id="arrow-intro-muted" markerWidth="12" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L12,4.5 z" fill="#78716c"></path></marker>
@@ -580,7 +599,7 @@
                     <text x="335" y="80" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">文章で答えが返る</text>
                     <line x1="430" y1="74" x2="476" y2="74" stroke="#78716c" stroke-width="3" marker-end="url(#arrow-intro-muted)"></line>
                     <rect x="480" y="42" width="400" height="64" rx="10" fill="#f5f5f4" stroke="#78716c" stroke-width="2" stroke-dasharray="6 4"></rect>
-                    <text x="680" y="80" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">コピーして Excel に貼る・保存するのは自分</text>
+                    <text x="680" y="80" text-anchor="middle" fill="#292524" font-family="'Segoe UI', sans-serif" font-size="14">フォルダにはふれない（ファイルは 1 つずつ添付する）</text>
 
                     <text x="20" y="150" fill="#c2410c" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="700">Cowork</text>
                     <rect x="20" y="162" width="170" height="64" rx="10" fill="#fdebe0" stroke="#c2410c" stroke-width="2"></rect>
@@ -603,12 +622,31 @@
 
             <p>便利になるのと同時に、<strong>AI があなたのファイルを実際に書き換えられる</strong>ようになります。チャットでは「変な答えが返る」で済んでいた失敗が、Cowork では「ファイルが消える」「外へ送られる」につながりえます。この資料の後半（Step 5・6）は、そのための約束に時間を使います。</p>
 
+            <h3>Chat・Cowork・Claude Code の違い</h3>
+            <p>Claude Desktop アプリには、Chat・Cowork・Code の 3 つがあります。どれも同じ Claude ですが、<strong>渡すものと、返ってくるもの</strong>が違います。このハンズオンで使うカード明細を題材にして比べます。</p>
+            <table>
+                <tr><th></th><th>Chat</th><th>Cowork</th><th>Claude Code（Code タブ）</th></tr>
+                <tr><td><strong>ひとことで言うと</strong></td><td><strong>相談する</strong></td><td><strong>作業をやってもらう</strong></td><td><strong>道具を作ってもらう</strong></td></tr>
+                <tr><td><strong>公式ドキュメントの説明</strong></td><td>ふつうの会話。パソコンのファイルにはふれない</td><td>あなたが他のことをしている間に、任された作業を自分で進めるエージェント</td><td>パソコンのファイルを直接扱う、対話型のコーディングアシスタント</td></tr>
+                <tr><td><strong>渡すもの</strong></td><td>質問の文章。貼り付けた文字や、1 つずつ添付したファイル</td><td>作業に使うフォルダ</td><td>道具を作るためのフォルダ</td></tr>
+                <tr><td><strong>返ってくるもの</strong></td><td>文章の答え。表やファイルを作って返すこともある</td><td>できあがったファイル（Excel・Word など）</td><td>プログラム（Web ページなど）</td></tr>
+                <tr><td><strong>パソコンのファイル</strong></td><td>フォルダにはふれない。読むのは添付されたものだけ</td><td>渡したフォルダの中を読み、作り、書き換える</td><td>選んだフォルダの中を読み、作り、書き換える。コマンドも実行できる</td></tr>
+                <tr><td><strong>プログラムが動く場所</strong></td><td>―</td><td>パソコンとは切り離された環境</td><td>自分のパソコンの上（Local を選んだとき）</td></tr>
+                <tr><td><strong>カード明細で言うと</strong></td><td>明細を 1 つ添付して「合計はいくら？」と聞く</td><td>明細のフォルダを渡して「出費を Excel にまとめて」と頼む</td><td>「明細を選ぶと合計とグラフが出るページを作って」と頼む</td></tr>
+                <tr><td><strong>来月、同じ作業が来たら</strong></td><td>もう一度添付して聞く</td><td>もう一度フォルダを渡して頼む</td><td>新しい明細を道具に入れるだけ。AI には頼まない</td></tr>
+                <tr><td><strong>向いているもの</strong></td><td>相談、文章の下書き、調べもの、ファイル 1 つで済む作業</td><td>1 回きりの作業。ファイルの形がばらばらで、そのつど判断が要る作業</td><td>毎週・毎月、同じ形のデータに同じ処理をする作業</td></tr>
+                <tr><td><strong>自分で確かめること</strong></td><td>答えの内容が正しいか</td><td>できたファイルを、元のファイルと見比べる</td><td>道具を、答えが分かっているデータで試す</td></tr>
+                <tr><td><strong>この資料群で扱うページ</strong></td><td>―</td><td><a href="cowork.html">Claude Cowork 活用ハンズオン</a></td><td><a href="claude-code-beginner.html">Claude Code 入門ハンズオン</a></td></tr>
+            </table>
+            <p>3 つは、同じ Claude Desktop アプリの中にあります。2026 年 9 月から、一部のアカウントでは Chat と Cowork が 1 つの画面にまとまり、同じ入力欄に書くと Claude が必要に応じてファイル作業を始める形になっています（公式ヘルプ「Claude Cowork and chat are one Claude」）。</p>
+
             <h3>🎯 このハンズオンのゴール</h3>
             <ul>
                 <li>フォルダを渡して、<strong>ファイルの整理・期限の拾い出し・出費の集計</strong>を Cowork に任せられるようになる</li>
                 <li>Cowork が作ったものを<strong>自分で確かめる</strong>手順を身につける</li>
                 <li><strong>何を渡してよいか・どこまで任せてよいか</strong>を自分で決められるようになる</li>
                 <li>ファイルに隠れた指示で AI がだまされる「プロンプトインジェクション」を体験して、対策を説明できるようになる</li>
+                <li><strong>自分の作業を 1 つ選び、Cowork への頼み方を書ける</strong>ようになる</li>
             </ul>
 
             <div class="card" style="background: var(--bg-mid);">
@@ -621,8 +659,9 @@
                     <tr><td>3. 期限を一覧にする</td><td>写真・PDF・メモから、期限のあるやることを拾い出す</td><td>10 分</td></tr>
                     <tr><td>4. 出費をまとめる</td><td>レシートの写真と明細から 9 月の出費を集計し、合計を自分で確かめる</td><td>10 分</td></tr>
                     <tr><td>5. だまされる体験</td><td>隠れた指示が入った Web ページを読ませる</td><td>10 分</td></tr>
-                    <tr><td>6. 安全に使う約束</td><td>渡すもの・任せ方・確かめ方の 5 つの約束</td><td>15 分</td></tr>
-                    <tr><td>7. もっと便利な機能</td><td>アプリ連携・定期実行などを知る（紹介のみ）</td><td>5 分</td></tr>
+                    <tr><td>6. 安全に使う約束</td><td>渡すもの・任せ方・確かめ方の 5 つの約束</td><td>10 分</td></tr>
+                    <tr><td>7. 自分の作業に当てはめる</td><td>自分の作業を 1 つ選び、頼み方を書く</td><td>10 分</td></tr>
+                    <tr><td>8. もっと便利な機能</td><td>アプリ連携・定期実行などを知る（紹介のみ）</td><td>あとで読む</td></tr>
                 </table>
             </div>
 
@@ -633,6 +672,14 @@
                     <li><strong>切り替わった画面</strong>: 「Chat」「Cowork」の選択肢はありません。<strong>いつもの入力欄にそのまま書けば</strong>、Claude が必要に応じてファイル作業を始めます。一度切り替わると元には戻せません</li>
                 </ul>
                 この資料の手順はどちらの画面でも同じように進められます。ボタンの名前が違ったら、近くの人か講師に声をかけてください。
+            </div>
+
+            <div class="callout callout-warn">
+                ⚠️ <strong>2026 年 10 月 6 日から、新しい Cowork の作業は Anthropic 側のクラウドで動きます</strong>（公式ヘルプ「Use Claude Cowork on web, desktop, and mobile」。2026-10-04 に確認）。パソコンのフォルダを読み書きできるのは、<strong>Claude Desktop アプリを開いている間だけ</strong>です。作業に要るファイルは、そのファイルのコピーがクラウドへ取り込まれます。この資料の手順は 2026-09-27 時点の画面で書いています。10 月 6 日より後は、画面や動きがこの資料と違うことがあります。違ったら講師に声をかけてください。
+            </div>
+
+            <div class="callout callout-info">
+                ℹ️ <strong>手順どおりに進まないとき。</strong> 各 Step の終わりに「🧯 うまくいかないとき」があります。開くと、起きやすいことと直し方が表で出ます。
             </div>
 
             <div class="nav-btns">
@@ -682,6 +729,19 @@
             <div class="callout callout-info">
                 ℹ️ <strong>なぜ練習用フォルダを使うのか。</strong> 公式ヘルプ「Use Claude Cowork safely」でも、財務書類のような大事な情報が入ったフォルダは渡さず、<strong>Claude 専用の作業フォルダを作る</strong>ことが勧められています。本物のダウンロードフォルダには、明細や身分証のスキャンが紛れていることがよくあります。最初の練習で、本物のダウンロードフォルダやデスクトップ全体を渡さないようにしましょう。
             </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>zip を開いたのに、フォルダを Claude に渡せない</td><td>Windows では zip をダブルクリックすると「中をのぞいているだけ」の状態になります。zip を右クリックして<strong>「すべて展開」</strong>を選び、できた「練習用ダウンロード」フォルダを使います</td></tr>
+                        <tr><td>ファイルが 11 個ない</td><td>展開の途中で止めた可能性があります。できたフォルダを消して、zip をもう一度展開します</td></tr>
+                        <tr><td>入力欄に「Cowork」の選択肢がない</td><td>①「チャットと 1 つにまとまった画面」に切り替わっている場合は、選択肢がないのが正しい状態です。そのまま進めます　② 無料プランでは Cowork は使えません。隣の人と組んで画面を見ます　③ どちらでもなければ、アプリを最新版に更新して起動し直します</td></tr>
+                        <tr><td>ブラウザの claude.ai を開いている</td><td>パソコンのフォルダを渡すには <strong>Claude Desktop アプリ</strong>が要ります。アプリを入れて、そちらで進めます</td></tr>
+                    </table>
+                </div>
+            </details>
 
             <div class="nav-btns">
                 <a href="#intro" class="btn">← はじめに</a>
@@ -735,6 +795,20 @@
             </table>
             <p>最初は <strong>Manually approve</strong> にして、Claude が何をしようとしているかを一つずつ見ます。「こういう順番で作業するのか」が分かってから、次の設定を考えれば十分です。</p>
 
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>フォルダをドラッグしても何も起きない</td><td>入力欄の近くにあるフォルダを選ぶボタンから「練習用ダウンロード」を選びます</td></tr>
+                        <tr><td>許可の画面に、練習用ダウンロード以外の名前が出た</td><td>許可せずに止めます。上の階層（デスクトップなど）を選んでしまっています。フォルダを選び直します</td></tr>
+                        <tr><td>画像や PDF が、ファイル名だけで説明されている</td><td>「画像と PDF は中身を開いて読み、何が書いてあるかを説明してください」と続けて送ります</td></tr>
+                        <tr><td>送ったあと、止まったまま動かない</td><td>許可を待っていることがあります。画面に確認のボタンが出ていないかを見ます。出ていなければ、止めて同じお願いをもう一度送ります</td></tr>
+                        <tr><td>頼んでいないのにファイルを作った・名前を変えた</td><td>練習用フォルダなので、消して zip から展開し直せば元に戻ります。次のお願いから「変更はしないでください」の 1 行が入っているかを確かめます</td></tr>
+                    </table>
+                </div>
+            </details>
+
             <div class="nav-btns">
                 <a href="#step0" class="btn">← Step 0</a>
                 <a href="#step2" class="btn">Step 2 へ進む →</a>
@@ -775,6 +849,19 @@
             <div class="callout callout-info">
                 ℹ️ <strong>必ず止まるのは「完全な削除」だけです。</strong> 名前の変更・移動・上書きは、Automatically approve に切り替えていると止まらずに進みます。本物のフォルダで整理を頼むときは、先にコピーを取っておくか、この Step と同じように「一覧を先に見せて、OK してから実行」と頼んでください。
             </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>一覧を見せずに、すぐファイルを動かし始めた</td><td>止めるボタンで止めます。フォルダを消して zip から展開し直し、お願いをもう一度送ります</td></tr>
+                        <tr><td><code>document (1).pdf</code> が消す候補に入っている</td><td>「document.pdf と document (1).pdf は中身を開いて比べてください。別の書類なら消す候補から外してください」と返します</td></tr>
+                        <tr><td>新しい名前の日付が、今日の日付になっている</td><td>「日付は書類の中に書いてある日付を使ってください。書いていなければ日付を付けないでください」と返します</td></tr>
+                        <tr><td>実行したあとで、元の状態に戻したい</td><td>フォルダを消して zip から展開し直します。<strong>本物のフォルダではこの戻し方が使えない</strong>ので、先にコピーを取ります</td></tr>
+                    </table>
+                </div>
+            </details>
 
             <div class="nav-btns">
                 <a href="#step1" class="btn">← Step 1</a>
@@ -830,6 +917,19 @@
                 </div>
             </div>
 
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>作られた Excel がどこにあるか分からない</td><td>「期限一覧.xlsx をどこに保存しましたか」と聞きます。Finder（Mac）やエクスプローラー（Windows）で「練習用ダウンロード」フォルダの中も見ます</td></tr>
+                        <tr><td>パソコンに Excel が入っていない</td><td>Numbers（Mac）で開くか、ブラウザで Google スプレッドシートを開いて「ファイル」→「インポート」→「アップロード」から読み込みます。どちらも使えなければ、隣の人と組んで画面を見ます</td></tr>
+                        <tr><td>期限が足りない・日付が違う</td><td>どの行が違うかを具体的に返します。例:「図書館の返却期限はスクリーンショットでは 10/3 です。画像をもう一度読んで直してください」</td></tr>
+                        <tr><td>期限のないメモに、日付が入っている</td><td>「メモ.txt には期限が書いてありません。書いていない日付は空欄に戻してください」と返します</td></tr>
+                    </table>
+                </div>
+            </details>
+
             <div class="nav-btns">
                 <a href="#step2" class="btn">← Step 2</a>
                 <a href="#step4" class="btn">Step 4 へ進む →</a>
@@ -876,6 +976,19 @@
             <div class="callout callout-info">
                 ℹ️ <strong>使用量について。</strong> 公式ヘルプ（Claude Enterprise consumption guide）では、Cowork のタスクは中で多くの手順を踏むため、<strong>1 回でチャットよりずっと多くの使用量を使うことがある</strong>と説明されています。チャット・Claude Code・Cowork は同じ使用上限を分け合っています。ハンズオン中に上限に達したら、講師に声をかけてください。
             </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>合計が 14,104 円にならない</td><td>下の表で、どの数字になったかを見ます。<br>・<strong>10,826 円</strong>: スマホ料金（3,278 円）を入れていない。答え合わせのとおり、どちらにも理由があります<br>・<strong>22,104 円</strong>: 講座の受講料（8,000 円）が入っている。まだ払っていないので外してもらいます<br>・どれでもない: レシートの写真の読み取り違いが多いです。1 枚目のシートで 398・298・690 の 3 行を見ます</td></tr>
+                        <tr><td>合計のセルに、式ではなく数字が入っている</td><td>「2 枚目のシートの合計を、1 枚目のシートを参照する数式に直してください」と頼みます</td></tr>
+                        <tr><td>同じ出費が 2 回入っている</td><td>「◯行目と◯行目は同じ出費です。1 つにしてください」と行を指して返します</td></tr>
+                        <tr><td>使用量の上限に達した</td><td>講師に声をかけ、隣の人の画面を見る形に切り替えます</td></tr>
+                    </table>
+                </div>
+            </details>
 
             <div class="nav-btns">
                 <a href="#step3" class="btn">← Step 3</a>
@@ -936,6 +1049,19 @@
             </div>
             <p>公式ヘルプでは、攻撃が成り立つのは「Claude が信頼できる範囲の外の情報を読める」ことと「あなたに不利な操作ができる」ことの<strong>両方がそろったとき</strong>だと説明されています。ダウンロードフォルダは①の入り口になりやすく、身分証やパスワードが紛れていると被害も大きくなります。次の Step 6 の約束は、このどちらかを減らすためのものです。</p>
 
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>テキストエディットで開いても、隠れた一文が見えない（Mac）</td><td>テキストエディットは、Web ページを見た目のまま表示することがあります。かわりに、<strong>Chrome か Edge でそのページを開き、右クリックして「ページのソースを表示」</strong>を選び、一番下を見ます。Windows でも同じ方法が使えます。Safari では、この項目を出すのに設定の変更が要るので、Chrome か Edge を使います</td></tr>
+                        <tr><td>ダウンロードしたファイルが見つからない</td><td>ブラウザのダウンロード一覧から場所を開き、「練習用ダウンロード」フォルダへ移します</td></tr>
+                        <tr><td>「期限一覧.xlsx が見つからない」と言われた</td><td>Step 3 の会話に戻り、作られた期限一覧.xlsx がどこにあるかを確かめます。フォルダに無ければ「期限一覧.xlsx を練習用ダウンロードフォルダに保存してください」と頼んでから、もう一度お願いを送ります。新しい Excel を別に作っていたら、どちらが正しいファイルかを伝えます</td></tr>
+                        <tr><td>🍌 が出なかった</td><td>失敗ではありません。上の表の 2 行目か 3 行目に当たります。隠れた一文があることだけ、自分の目で確かめます</td></tr>
+                    </table>
+                </div>
+            </details>
+
             <div class="nav-btns">
                 <a href="#step4" class="btn">← Step 4</a>
                 <a href="#step6" class="btn">Step 6 へ進む →</a>
@@ -948,42 +1074,68 @@
             <h2>Step 6: 安全に使うための 5 つの約束</h2>
             <p>ここまでの体験を、<strong>本物のファイルで使うときの約束</strong>にまとめます。どれも公式ヘルプ「Use Claude Cowork safely」「Get started with Claude Cowork」に書かれている内容をもとにしています。</p>
 
-            <h3>約束 1: 渡すフォルダは、作業に要るものだけにする</h3>
-            <ul>
-                <li>Cowork は、<strong>渡したフォルダの中のファイルだけ</strong>を読み書きします。逆に言えば、渡したフォルダの中は全部読める・書き換えられると考えます</li>
-                <li>「ダウンロードフォルダ全体」「デスクトップ全体」「書類フォルダ全体」「ホームフォルダ」は渡さない。<strong>Claude 専用の作業フォルダを作り、要るファイルだけコピーして入れる</strong></li>
-                <li>次のものが入ったフォルダは渡さない: パスワードや API キーのメモ、銀行・給与・税金の書類、健康の記録、他人の個人情報（名簿・成績・住所）、会社や学校で「外に出さない」と決められた資料</li>
-                <li>渡したフォルダは、Claude Desktop の <strong>設定（Settings）→「Trusted folders」</strong>で一覧できます（チャットとまとまった新しい画面の場合）。使い終わったものは見直しましょう</li>
-            </ul>
+            <table>
+                <tr><th>約束</th><th>このハンズオンで見たこと</th><th>本物のファイルで使うときにやること</th></tr>
+                <tr><td><strong>1. 渡すフォルダは、作業に要るものだけにする</strong></td><td>Step 1: パスワードと身分証のファイルが、渡した時点で読まれていた</td><td>Claude 専用の作業フォルダを作り、要るファイルだけコピーして入れる</td></tr>
+                <tr><td><strong>2. 取り返しのつかない操作は、自分で押す</strong></td><td>Step 2: 一覧を先に見て、OK してから実行した。削除の前に確認の画面が出た</td><td>送信・購入・公開・削除がからむ作業は Manually approve（チャットとまとまった画面では「Manual」）にする。先にコピーを取る</td></tr>
+                <tr><td><strong>3. 外から来たものは、指示として信じない</strong></td><td>Step 5: 保存した Web ページに、見えない指示が入っていた</td><td>頼んでいないことを始めたら、止めて理由を聞く</td></tr>
+                <tr><td><strong>4. できたものは、自分で開いて確かめてから使う</strong></td><td>Step 3・4: 元のファイルと見比べ、合計を計算し直した</td><td>大事な数字を 1 つ計算し直す。元のファイルにないことが足されていないかを見る</td></tr>
+                <tr><td><strong>5. 連携を広げるときは、1 つずつ・小さく始める</strong></td><td>（Step 8 で紹介する機能が対象）</td><td>機能を 1 つ足すたびに、約束 1〜4 に当てはめて考える</td></tr>
+            </table>
+            <p>それぞれの約束の理由と、公式ヘルプに書かれている内容は、下を開くと読めます。ハンズオンの中では表だけを確認し、くわしい説明はあとで読みます。</p>
 
-            <h3>約束 2: 取り返しのつかない操作は、自分で押す</h3>
-            <ul>
-                <li>公式ヘルプでは、<strong>大事なファイル・アカウント・サイトにふれるとき</strong>や、<strong>メッセージの送信や購入のように間違えると元に戻しにくいとき</strong>は、手動承認（Manually approve）に切り替えるよう勧めています</li>
-                <li>許可の画面では「どのファイルに」「何をするか」を読んでから押す。分からなければ拒否して、Claude に理由を聞く</li>
-                <li>本物のフォルダを整理するときは、先にバックアップを取る。Step 2 のように<strong>「一覧を先に見せて、OK してから実行」</strong>と頼む</li>
-            </ul>
-
-            <h3>約束 3: 外から来たものは、指示として信じない</h3>
-            <ul>
-                <li>メール・Web ページ・もらったファイルは、Step 5 のように<strong>AI への指示が隠れていることがある</strong>。公式ヘルプでは Web の内容が「プロンプトインジェクションの主な入り口」とされています</li>
-                <li>ブラウザの操作を任せるときは、<strong>信頼できるサイトだけ</strong>にする</li>
-                <li>作業の途中で、頼んでいないこと（別のフォルダを見る、外部へ送る、設定を変える）を始めたら、止めて理由を聞く。公式ヘルプでも、操作を一つずつ見るより<strong>作業全体に見慣れない動きがないか</strong>を見るよう勧めています</li>
-            </ul>
-
-            <h3>約束 4: できたものは、自分で開いて確かめてから使う</h3>
-            <ul>
-                <li>Step 3・4 でやったように、<strong>元のファイルと見比べる・大事な数字を 1 つ計算し直す</strong>。画像や PDF の読み取り間違いもある</li>
-                <li>元のファイルにないことが、それらしく書き足されていないかを見る</li>
-                <li>公式ヘルプには「Claude があなたの代わりに行った操作の責任は、あなたにある」とあります。送ったメッセージ・公開した内容・購入・定期実行したタスクの結果も含みます。<strong>「AI がやったから」は通らない</strong>前提で使います</li>
-            </ul>
-
-            <h3>約束 5: 連携を広げるときは、1 つずつ・小さく始める</h3>
-            <ul>
-                <li><strong>拡張機能・プラグイン</strong>: Claude Desktop の一覧にある確認済みのものを使い、求められる権限をよく見る</li>
-                <li><strong>画面の操作（Computer use）</strong>: 大事でない作業から始める。銀行・医療・出会い系などのアプリは、操作できる対象から外しておく。公式ヘルプでは、画面の操作はプログラムの実行のようには隔離されていないと説明されています</li>
-                <li><strong>定期実行（スケジュールタスク）</strong>: あなたが見ていない間に動くため、大事なファイルにふれる・あなたの名前でメッセージを送る・買い物をする作業は予約しない。過去の実行結果をときどき見返し、使っていないものは止める</li>
-                <li><strong>会社・学校で使うとき</strong>: まず組織のルールを確認する。Team・Enterprise では、管理者が Cowork を使えるかどうかや、つなげるアプリを決めています</li>
-            </ul>
+            <details class="sample-details">
+                <summary>約束 1: 渡すフォルダは、作業に要るものだけにする（くわしく）</summary>
+                <div class="sample-body">
+                <ul>
+                    <li>Cowork は、<strong>渡したフォルダの中のファイルだけ</strong>を読み書きします。逆に言えば、渡したフォルダの中は全部読める・書き換えられると考えます。これは<strong>パソコンのフォルダ</strong>についての話です。コネクタでつないだサービス、ブラウザ、画面の操作は、それぞれ別に許可した範囲にふれられます（Step 8）</li>
+                    <li>「ダウンロードフォルダ全体」「デスクトップ全体」「書類フォルダ全体」「ホームフォルダ」は渡さない。<strong>Claude 専用の作業フォルダを作り、要るファイルだけコピーして入れる</strong></li>
+                    <li>次のものが入ったフォルダは渡さない: パスワードや API キー（外のサービスを使うための秘密の文字列）のメモ、銀行・給与・税金の書類、健康の記録、他人の個人情報（名簿・成績・住所）、会社や学校で「外に出さない」と決められた資料</li>
+                    <li>渡したフォルダは、Claude Desktop の <strong>設定（Settings）→「Trusted folders」</strong>で一覧できます（チャットとまとまった新しい画面の場合）。使い終わったものは見直しましょう</li>
+                </ul>
+                </div>
+            </details>
+            <details class="sample-details">
+                <summary>約束 2: 取り返しのつかない操作は、自分で押す（くわしく）</summary>
+                <div class="sample-body">
+                <ul>
+                    <li>公式ヘルプでは、<strong>大事なファイル・アカウント・サイトにふれるとき</strong>や、<strong>メッセージの送信や購入のように間違えると元に戻しにくいとき</strong>は、手動承認（Manually approve）に切り替えるよう勧めています</li>
+                    <li>許可の画面では「どのファイルに」「何をするか」を読んでから押す。分からなければ拒否して、Claude に理由を聞く</li>
+                    <li>本物のフォルダを整理するときは、先にバックアップを取る。Step 2 のように<strong>「一覧を先に見せて、OK してから実行」</strong>と頼む</li>
+                </ul>
+                </div>
+            </details>
+            <details class="sample-details">
+                <summary>約束 3: 外から来たものは、指示として信じない（くわしく）</summary>
+                <div class="sample-body">
+                <ul>
+                    <li>メール・Web ページ・もらったファイルは、Step 5 のように<strong>AI への指示が隠れていることがある</strong>。公式ヘルプでは Web の内容が「プロンプトインジェクションの主な入り口」とされています</li>
+                    <li>ブラウザの操作を任せるときは、<strong>信頼できるサイトだけ</strong>にする</li>
+                    <li>作業の途中で、頼んでいないこと（別のフォルダを見る、外部へ送る、設定を変える）を始めたら、止めて理由を聞く。公式ヘルプでも、操作を一つずつ見るより<strong>作業全体に見慣れない動きがないか</strong>を見るよう勧めています</li>
+                </ul>
+                </div>
+            </details>
+            <details class="sample-details">
+                <summary>約束 4: できたものは、自分で開いて確かめてから使う（くわしく）</summary>
+                <div class="sample-body">
+                <ul>
+                    <li>Step 3・4 でやったように、<strong>元のファイルと見比べる・大事な数字を 1 つ計算し直す</strong>。画像や PDF の読み取り間違いもある</li>
+                    <li>元のファイルにないことが、それらしく書き足されていないかを見る</li>
+                    <li>公式ヘルプには「Claude があなたの代わりに行った操作の責任は、あなたにある」とあります。送ったメッセージ・公開した内容・購入・定期実行したタスクの結果も含みます。<strong>「AI がやったから」は通らない</strong>前提で使います</li>
+                </ul>
+                </div>
+            </details>
+            <details class="sample-details">
+                <summary>約束 5: 連携を広げるときは、1 つずつ・小さく始める（くわしく）</summary>
+                <div class="sample-body">
+                <ul>
+                    <li><strong>拡張機能・プラグイン</strong>: Claude Desktop の一覧にある確認済みのものを使い、求められる権限をよく見る</li>
+                    <li><strong>画面の操作（Computer use）</strong>: 大事でない作業から始める。銀行・医療・出会い系などのアプリは、操作できる対象から外しておく。公式ヘルプでは、画面の操作はプログラムの実行のようには隔離されていないと説明されています</li>
+                    <li><strong>定期実行（スケジュールタスク）</strong>: あなたが見ていない間に動くため、大事なファイルにふれる・あなたの名前でメッセージを送る・買い物をする作業は予約しない。過去の実行結果をときどき見返し、使っていないものは止める</li>
+                    <li><strong>会社・学校で使うとき</strong>: まず組織のルールを確認する。Team・Enterprise では、管理者が Cowork を使えるかどうかや、つなげるアプリを決めています</li>
+                </ul>
+                </div>
+            </details>
 
             <div class="callout callout-info">
                 ℹ️ <strong>Anthropic 側で用意されている守り</strong>（公式ヘルプより）: 怪しい指示を見分けて断るようにモデルを訓練している／入ってくる内容を調べて怪しい指示に印をつける仕組みがある／Automatically approve では操作の前に安全を確かめる／プログラムの実行は、あなたのパソコンとは切り離された使い捨ての環境で行う／ファイルの完全な削除は必ずあなたの許可を待つ。<br>
@@ -1000,10 +1152,99 @@
             </div>
         </section>
 
-        <!-- Step 7 -->
+        <!-- Step 7: 自分の作業に当てはめる -->
         <section class="section" id="step7">
+            <span class="badge badge-time">✍️ 演習</span>
+            <h2>Step 7: 自分の作業を 1 つ選んで、頼み方を書く</h2>
+            <p>ここまでは用意されたお願いを貼り付けてきました。この Step では、<strong>自分がふだんやっている作業を 1 つ選び、Cowork への頼み方を自分で書きます。</strong>本物のファイルはまだ渡しません。書くところまでがこの Step です。</p>
+
+            <h3 class="preparation-heading">📋 1. 作業を 1 つ選ぶ（2 分）</h3>
+            <p>次の 3 つに当てはまる作業が、最初の 1 つに向いています。</p>
+            <ul>
+                <li><strong>形の違うファイルを見比べて、1 つの表や文書にまとめる</strong>作業である（Step 3・4 と同じ形）</li>
+                <li>できあがりが正しいかを、<strong>自分で見て確かめられる</strong></li>
+                <li>間違っていても、<strong>やり直せる</strong>（送信・購入・公開・削除が入らない）</li>
+            </ul>
+            <table>
+                <tr><th>作業の例</th><th>渡すもの</th><th>できあがり</th></tr>
+                <tr><td>請求書をまとめる</td><td>今月届いた請求書の PDF</td><td>「相手 / 金額 / 支払期限」の Excel</td></tr>
+                <tr><td>アンケートを集計する</td><td>回答の CSV や Excel</td><td>設問ごとの集計と、自由記述の分類</td></tr>
+                <tr><td>会議メモからやることを拾う</td><td>議事メモのテキストや Word</td><td>「やること / 担当 / 期限」の一覧</td></tr>
+                <tr><td>写真を整理する</td><td>イベントの写真フォルダのコピー</td><td>日付ごとのフォルダ分けと、名前の付け直し</td></tr>
+                <tr><td>レシートから経費をまとめる</td><td>レシートの写真</td><td>日付・金額・分類の Excel と合計</td></tr>
+            </table>
+
+            <h3 class="preparation-heading">📋 2. 頼み方を 4 つの項目で書く（4 分）</h3>
+            <p>Step 2〜4 のお願いは、どれも次の 4 つの項目でできています。<code>［ ］</code>の中を自分の作業に書き換えてください。</p>
+            <div class="prompt-card">
+                <div class="prompt-title">
+                    <span>✍️ 頼み方のひな形</span>
+                    <button class="copy-btn" type="button" data-copy-target="p-step7">コピー</button>
+                </div>
+                <div class="prompt-body" id="p-step7">【やること】
+［例: フォルダの中の請求書 PDF をすべて読んで、一覧にしてください］
+
+【できあがりの形】
+［例: 「請求一覧.xlsx」を作る。列は「相手 / 金額 / 支払期限 / 元のファイル名」。支払期限が近い順に並べる］
+
+【やらないこと】
+［例: 元の PDF は動かさない・名前を変えない・消さない。書類に書いていないことは推測で埋めず、空欄にする］
+
+【進め方】
+［例: 始める前に、私の依頼を言い直して確認し、分からないことがあれば先に質問する。ファイルを変更する前に、何をするかの一覧を見せて、私が OK と言ってから実行する］</div>
+            </div>
+            <table>
+                <tr><th>項目</th><th>このハンズオンのどこで使ったか</th></tr>
+                <tr><td>やること</td><td>Step 3「画像・PDF・メモをすべて見て、期限のあるやることを拾い出す」</td></tr>
+                <tr><td>できあがりの形</td><td>Step 3 のファイル名・列・並び順、Step 4 の「合計は Excel の数式で」</td></tr>
+                <tr><td>やらないこと</td><td>Step 1「ファイルの変更はしない」、Step 3「推測で埋めず空欄に」、Step 4「まだ払っていないものは入れない」</td></tr>
+                <tr><td>進め方</td><td>Step 2「一覧を先に見せて、OK してから実行」</td></tr>
+            </table>
+
+            <h3 class="preparation-heading">📋 3. 渡すフォルダと、確かめ方を決める（2 分）</h3>
+            <p>頼み方が書けたら、次の 4 つを書き足します。本物のファイルで試すのは、4 つとも決まってからにします。</p>
+            <table>
+                <tr><th>決めること</th><th>書き方</th></tr>
+                <tr><td>渡すフォルダ</td><td>新しく作る作業フォルダの名前と、そこへ<strong>コピーして入れる</strong>ファイル。パスワード・身分証・他人の個人情報・組織の「外に出さない」資料が入らないことを確かめる</td></tr>
+                <tr><td>最初に試すデータ</td><td><strong>本物ではなく、名前や金額を架空のものに置き換えた数件</strong>。請求書・アンケートの回答・議事メモ・写真には、他人の名前や連絡先が入っていることが多い。銀行・給与・税金・健康の書類は、本物を渡さない</td></tr>
+                <tr><td>確かめる数字や項目</td><td>できあがりの中で、<strong>自分で元のファイルと見比べるもの</strong>を 1 つ。例: 合計金額、一番近い期限、件数</td></tr>
+                <tr><td>承認モード</td><td>最初は Manually approve（チャットとまとまった画面では「Manual」と表示されます）</td></tr>
+            </table>
+
+            <div class="callout callout-tip">
+                💡 <strong>書いた頼み方を、Claude に見てもらう。</strong> <strong>新しい会話を開き、フォルダを選ばずに</strong>、次の文の後ろへ自分の頼み方を貼って送ると、足りない情報を質問してもらえます。今までの会話には練習用フォルダが渡してあるので、そのまま続けて送らないようにします。
+                <div class="code-wrap" style="margin-top:8px;">
+                    <button class="copy-btn" type="button" data-copy-target="c-review-request">コピー</button>
+                    <pre id="c-review-request"><code>次の依頼文を Cowork に送る予定です。まだ作業は始めないでください。この依頼文だけでは判断に迷う点を、質問として 3 つまで挙げてください。</code></pre>
+                </div>
+            </div>
+
+            <div class="callout callout-warn">
+                ⚠️ <strong>会社や学校のファイルで試す前に、組織のルールを確認します。</strong> AI に渡してよい情報の範囲が決められていることがあります。分からなければ、渡す前に上司や担当者に聞きます。
+            </div>
+
+            <details class="sample-details trouble-details">
+                <summary>🧯 うまくいかないとき</summary>
+                <div class="sample-body">
+                    <table>
+                        <tr><th>起きていること</th><th>直し方</th></tr>
+                        <tr><td>作業が思いつかない</td><td>上の表の例から 1 つ選びます。または、先週「ファイルを 3 つ以上開いて、1 つにまとめた作業」を思い出します</td></tr>
+                        <tr><td>選んだ作業に、メール送信や申込が入っている</td><td>「下書きを作る」「一覧にする」までを Cowork に頼み、送信や申込は自分でやる形に分けます</td></tr>
+                        <tr><td>できあがりの形が決まらない</td><td>今その作業で自分が作っているファイル（Excel の列、文書の見出し）をそのまま書きます</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <div class="nav-btns">
+                <a href="#step6" class="btn">← Step 6</a>
+                <a href="#step8" class="btn">Step 8 へ進む →</a>
+            </div>
+        </section>
+
+        <!-- Step 8 -->
+        <section class="section" id="step8">
             <span class="badge badge-time">🔌 紹介</span>
-            <h2>Step 7: もっと便利にする機能（紹介のみ）</h2>
+            <h2>Step 8: もっと便利にする機能（紹介のみ）</h2>
             <p>ハンズオンでは手を動かしませんが、慣れてきたら使える機能です。<strong>使える条件がプランや画面によって違う</strong>ので、表の右の列を見てから試してください。約束 5 のとおり、1 つずつ足していきます。</p>
             <table>
                 <tr><th>機能</th><th>できること</th><th>使える条件（2026-09-27 時点の公式ヘルプ）</th></tr>
@@ -1021,7 +1262,7 @@
             </div>
 
             <div class="nav-btns">
-                <a href="#step6" class="btn">← Step 6</a>
+                <a href="#step7" class="btn">← Step 7</a>
                 <a href="#checklist" class="btn">チェックリストへ →</a>
             </div>
         </section>
@@ -1051,7 +1292,7 @@
             </ul>
 
             <div class="nav-btns">
-                <a href="#step7" class="btn">← Step 7</a>
+                <a href="#step8" class="btn">← Step 8</a>
                 <a href="#facilitator" class="btn">講師向け →</a>
             </div>
         </section>
@@ -1068,16 +1309,19 @@
                 <tr><td>0:40〜0:50</td><td>Step 3</td><td>一番近い期限（10/3・画像の中）が拾えていたかを挙手で聞く</td></tr>
                 <tr><td>0:50〜1:00</td><td>Step 4</td><td>14,104 円を全員で確かめる。スマホ料金を入れた人・入れなかった人に分かれたら、どちらも理由があることを話す</td></tr>
                 <tr><td>1:00〜1:10</td><td>Step 5</td><td>ブラウザで見えない一文を、テキストエディタで開いて全員で確かめる。🍌 が出た人・指摘された人・何も言われなかった人を挙手で数え、3 つの結果を比べる</td></tr>
-                <tr><td>1:10〜1:25</td><td>Step 6</td><td>5 つの約束を、Step 1〜5 で起きたことと結び付けて説明する</td></tr>
-                <tr><td>1:25〜1:30</td><td>Step 7・まとめ</td><td>機能の紹介と、チェックリストの案内</td></tr>
+                <tr><td>1:10〜1:20</td><td>Step 6</td><td>5 つの約束を、表の「このハンズオンで見たこと」の列を使って説明する。折りたたみの中は読み上げず、あとで読むよう伝える</td></tr>
+                <tr><td>1:20〜1:30</td><td>Step 7・まとめ</td><td>作業を 1 つ選んでひな形を書いてもらう（8 分）。残りの 2 分で、1〜2 人に選んだ作業と「確かめる数字」を発表してもらい、Step 8 とチェックリストの場所を案内する</td></tr>
             </table>
 
             <h3>進行で気をつけること</h3>
             <ul>
                 <li><strong>本物のダウンロードフォルダを渡させない。</strong>「自分のファイルでも試したい」と言われたら、ハンズオンの後に、専用フォルダへコピーし、身分証・明細・パスワードのメモが入っていないのを確かめてからにしてもらう</li>
                 <li><strong>Step 5 の結果は毎回変わりうる。</strong>モデルや安全の仕組みが更新されると、🍌 が出なくなることがあります。出なかった場合も「見抜けたのは今回の結果で、いつもではない」と伝える</li>
+                <li><strong>Step 7 では、本物のファイルを渡させない。</strong>書くところまでで止める。会社のファイルで試したいと言われたら、組織のルールの確認が先であることを伝える</li>
+                <li><strong>「🧯 うまくいかないとき」を先に案内する。</strong>手が止まった人には、まず各 Step の終わりの表を開いてもらう。表にないことが起きたら、次回のために書き留める</li>
                 <li>Automatically approve や Skip all approvals を勧めない。質問が出たら、Step 1 の表で違いを説明する</li>
                 <li>使用量の上限に達した人がいたら、隣の人の画面を見る形に切り替える</li>
+                <li><strong>2026 年 10 月 6 日より後に開催するときは、必ず通し直す。</strong>新しい作業がクラウドで動く形に変わるため、フォルダの渡し方・許可の画面・できたファイルの置き場所が、この資料（2026-09-27 時点）と違う可能性がある</li>
                 <li><strong>当日の前に、講師の画面で Step 1〜5 を一度通しておく。</strong>画面の切り替えが進んでいる時期なので、ボタンの名前や場所がこの資料と違っていたら、その場で読み替えを伝える</li>
             </ul>
 

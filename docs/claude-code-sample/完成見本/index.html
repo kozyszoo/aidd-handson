@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出費ビューア（完成見本）</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 760px;
+            margin: 32px auto;
+            padding: 0 16px;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .total {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f766e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 28px;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #d1d5db;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        td.amount,
+        th.amount {
+            text-align: right;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 6px 0;
+        }
+
+        .bar-label {
+            width: 190px;
+            font-size: 0.9rem;
+        }
+
+        .bar {
+            height: 22px;
+            background: #0f766e;
+            border-radius: 4px;
+        }
+
+        .bar-value {
+            font-size: 0.9rem;
+        }
+
+        .error {
+            color: #b91c1c;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>出費ビューア</h1>
+    <p>カードの利用明細（CSV）を選ぶと、合計と利用先ごとの内訳を表示します。選んだファイルはこのパソコンの中だけで読み込み、どこにも送りません。</p>
+    <input type="file" id="csvFile" accept=".csv">
+    <p id="message" class="error"></p>
+
+    <div id="result" hidden>
+        <h2>合計</h2>
+        <p><span class="total" id="total"></span>（<span id="count"></span> 件）</p>
+
+        <h2>利用先ごとの合計</h2>
+        <div id="chart"></div>
+
+        <h2>明細</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>利用日</th>
+                    <th>利用先</th>
+                    <th class="amount">金額</th>
+                </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+        </table>
+    </div>
+
+    <script>
+        // CSV の 1 行を、カンマで区切って項目の配列にする。
+        // "12,800" のように引用符で囲まれた項目は、中のカンマを区切りとして扱わない。
+        function splitCsvLine(line) {
+            const fields = [];
+            let current = '';
+            let insideQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    // 引用符の中で "" と続いたら、引用符 1 文字として扱う
+                    if (insideQuotes && line[i + 1] === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        insideQuotes = !insideQuotes;
+                    }
+                } else if (char === ',' && !insideQuotes) {
+                    fields.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            fields.push(current);
+            return fields;
+        }
+
+        // CSV の文字列全体を、{ date, place, amount } の配列にする
+        function parseStatement(text) {
+            // 先頭に付くことがある目印の文字（BOM）を取りのぞく
+            const cleanText = text.replace(/^\uFEFF/, '');
+            const lines = cleanText.split(/\r?\n/).filter(line => line.trim() !== '');
+            const header = splitCsvLine(lines[0]).map(name => name.trim());
+
+            const dateIndex = header.indexOf('利用日');
+            const placeIndex = header.indexOf('利用先');
+            const amountIndex = header.indexOf('金額');
+            if (dateIndex === -1 || placeIndex === -1 || amountIndex === -1) {
+                throw new Error('1 行目に「利用日・利用先・金額」の列が見つかりません。');
+            }
+
+            return lines.slice(1).map((line, index) => {
+                const fields = splitCsvLine(line);
+                // 「12,800」のような桁区切りのカンマを取ってから数字にする
+                const amountText = (fields[amountIndex] || '').replace(/,/g, '').trim();
+                // 空欄を 0 円として足してしまわないよう、先に空欄を調べる
+                if (amountText === '') {
+                    throw new Error((index + 2) + ' 行目の金額が空欄です。');
+                }
+                const amount = Number(amountText);
+                if (!Number.isFinite(amount)) {
+                    throw new Error((index + 2) + ' 行目の金額を数字として読めません。');
+                }
+                return { date: fields[dateIndex], place: fields[placeIndex], amount: amount };
+            });
+        }
+
+        // 利用先ごとの合計を、金額の大きい順に並べて返す
+        function sumByPlace(items) {
+            const totals = new Map();
+            items.forEach(item => {
+                totals.set(item.place, (totals.get(item.place) || 0) + item.amount);
+            });
+            return Array.from(totals.entries()).sort((a, b) => b[1] - a[1]);
+        }
+
+        function formatYen(amount) {
+            return amount.toLocaleString('ja-JP') + ' 円';
+        }
+
+        // 読み込んだ明細を画面に表示する
+        function render(items) {
+            const total = items.reduce((sum, item) => sum + item.amount, 0);
+            document.getElementById('total').textContent = formatYen(total);
+            document.getElementById('count').textContent = items.length;
+
+            // 利用先ごとの棒グラフ。一番大きい金額を幅 100% として長さを決める
+            const chart = document.getElementById('chart');
+            chart.textContent = '';
+            const placeTotals = sumByPlace(items);
+            const maxAmount = placeTotals.length > 0 ? placeTotals[0][1] : 0;
+            placeTotals.forEach(([place, amount]) => {
+                const row = document.createElement('div');
+                row.className = 'bar-row';
+
+                const label = document.createElement('span');
+                label.className = 'bar-label';
+                label.textContent = place;
+
+                const bar = document.createElement('span');
+                bar.className = 'bar';
+                bar.style.width = (maxAmount > 0 ? (amount / maxAmount) * 50 : 0) + '%';
+
+                const value = document.createElement('span');
+                value.className = 'bar-value';
+                value.textContent = formatYen(amount);
+
+                row.append(label, bar, value);
+                chart.appendChild(row);
+            });
+
+            // 明細の表
+            const tbody = document.getElementById('rows');
+            tbody.textContent = '';
+            items.forEach(item => {
+                const tr = document.createElement('tr');
+                [item.date, item.place, formatYen(item.amount)].forEach((text, columnIndex) => {
+                    const td = document.createElement('td');
+                    td.textContent = text;
+                    if (columnIndex === 2) td.className = 'amount';
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('result').hidden = false;
+        }
+
+        // ファイルが選ばれたら、パソコンの中で読み込んで表示する（外部には送らない）
+        document.getElementById('csvFile').addEventListener('change', event => {
+            const file = event.target.files[0];
+            const message = document.getElementById('message');
+            message.textContent = '';
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    render(parseStatement(reader.result));
+                } catch (error) {
+                    document.getElementById('result').hidden = true;
+                    message.textContent = error.message;
+                }
+            };
+            reader.readAsText(file, 'UTF-8');
+        });
+    </script>
+</body>
+
+</html>

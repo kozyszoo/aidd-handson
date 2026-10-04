@@ -88,7 +88,7 @@ Slack、GitHub、Jira など、普段使っているツールに MCP で接続�
 本書のソースコードとハンズオン資料はGitHubで公開しています。
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/antigravity_handson.git
+git clone https://github.com/YOUR_USERNAME/aidd-handson.git
 ```
 
 Issue やプルリクエストも歓迎です。

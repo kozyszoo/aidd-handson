@@ -42,7 +42,7 @@ Antigravity を起動して、ワークスペースの基本設定まで済ま�
 Antigravity CLI を起動し、メニューから以下の操作を行ってください。
 
 1. `File` > `Open Folder` をクリック
-2. このハンズオンのフォルダ（`antigravity_handson`）を選択
+2. このハンズオンのフォルダ（`aidd-handson`）を選択
 3. フォルダが左のサイドバーに表示されれば成功です
 
 ### 4. 基本画面の確認

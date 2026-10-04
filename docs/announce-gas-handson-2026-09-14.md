@@ -42,7 +42,7 @@
 
 📗 **当日つかう資料**
 先に見ておくと進めやすいですが、**当日その場で開くだけでも大丈夫**です。
-https://kozyszoo.github.io/antigravity-handson/gas-beginner.html
+https://kozyszoo.github.io/aidd-handson/gas-beginner.html
 
 🌱 **トレーニングアワーって？**
 - Gemini を実際に触りながら学ぶ、月2回の 1 時間

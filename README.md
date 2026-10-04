@@ -47,8 +47,8 @@ Google が提供する自律型 AI コーディングエージェント「**Anti
 
 ```bash
 # 1. リポジトリをクローン
-git clone https://github.com/YOUR_USERNAME/antigravity_handson.git
-cd antigravity_handson
+git clone https://github.com/YOUR_USERNAME/aidd-handson.git
+cd aidd-handson
 
 # 2. ハンズオン資料を開く
 open docs/index.html
@@ -60,7 +60,7 @@ open docs/index.html
 ## 📂 リポジトリ構成
 
 ```
-antigravity_handson/
+aidd-handson/
 ├── docs/                      # ドキュメント・プレゼンテーション資料
 │   ├── index.html            # ハンズオンWebページ
 │   ├── live-coding-script.md # ライブコーディング台本
@@ -126,8 +126,8 @@ antigravity_handson/
 ### 1. リポジトリのクローン
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/antigravity_handson.git
-cd antigravity_handson
+git clone https://github.com/YOUR_USERNAME/aidd-handson.git
+cd aidd-handson
 ```
 
 ### 2. Antigravity CLI のインストール

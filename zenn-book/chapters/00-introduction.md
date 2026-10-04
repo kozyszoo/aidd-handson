@@ -56,8 +56,8 @@ Antigravity は、2025年11月に Google が発表した AI エージェント�
 本書のハンズオン資料はGitHubリポジトリとして公開しています。手を動かしながら進める場合は、cloneしてお使いください。
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/antigravity_handson.git
-cd antigravity_handson
+git clone https://github.com/YOUR_USERNAME/aidd-handson.git
+cd aidd-handson
 ```
 
 Antigravity で `File > Open Folder` からこのフォルダを開けば、すぐにハンズオンを始められます。

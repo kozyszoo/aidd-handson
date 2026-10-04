@@ -376,7 +376,7 @@ AWS が提唱する AI-DLC の3段階は、Inception（発案）・Construction�
 
 - [Google公式発表](https://www.antigravity.google/blog/introducing-google-antigravity)
 - [Antigravity公式ドキュメント](https://antigravity.google/docs/)
-- [本教材のリポジトリ](https://github.com/kozyszoo/antigravity-handson)
+- [本教材のリポジトリ](https://github.com/kozyszoo/aidd-handson)
 
 ---
 

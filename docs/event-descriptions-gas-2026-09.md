@@ -33,7 +33,7 @@
 プログラミングも GAS も初めてで大丈夫です。必要なのは Google アカウントだけ。アプリのインストールや面倒な初期設定は要りません。
 
 📗 当日つかう資料
-https://kozyszoo.github.io/antigravity-handson/gas-beginner.html
+https://kozyszoo.github.io/aidd-handson/gas-beginner.html
 
 📍 Google Meet で開催します
 🔗 https://meet.google.com/zgg-dxfv-qgy
@@ -69,7 +69,7 @@ https://kozyszoo.github.io/antigravity-handson/gas-beginner.html
 初級編に出ていない方も大丈夫です。当日は完成済みのコードをお渡しするところから始めます。
 
 📗 当日つかう資料
-https://kozyszoo.github.io/antigravity-handson/gas-advanced.html
+https://kozyszoo.github.io/aidd-handson/gas-advanced.html
 
 📍 Google Meet で開催します
 🔗 https://meet.google.com/joy-aadj-yyw

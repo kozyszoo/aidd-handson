@@ -5,7 +5,7 @@
 - 開催: 2026-09-28（月）**21:00-22:00** / Google Meet
 - Discord イベント: `1533146769683251304`
 - Meet: `https://meet.google.com/joy-aadj-yyw`
-- 教材: https://kozyszoo.github.io/antigravity-handson/gas-webapp.html
+- 教材: https://kozyszoo.github.io/aidd-handson/gas-webapp.html
 
 ## 経緯
 
@@ -69,13 +69,13 @@
 うまく動かないときは、**エラー文をそのままコピーして** Gemini に原因と直し方を聞きます。
 
 📗 **当日つかう資料**
-https://kozyszoo.github.io/antigravity-handson/gas-webapp.html
+https://kozyszoo.github.io/aidd-handson/gas-webapp.html
 
 **初級編や発展編に出ていない方も大丈夫です。** 当日は動くコードをお渡しするところから始めます。
 
 ✅ **時間があれば、先に初級編を触っておくと当日が楽になります**
 スプレッドシートと Apps Script エディタの開き方、コードを貼って実行する流れが分かっていると、当日は Web アプリのところだけに集中できます。**30 分ほどで一通り動かせます。**
-https://kozyszoo.github.io/antigravity-handson/gas-beginner.html
+https://kozyszoo.github.io/aidd-handson/gas-beginner.html
 
 🌱 **トレーニングアワーって？**
 - Gemini を実際に触りながら学ぶ、月2回の 1 時間
@@ -126,10 +126,10 @@ https://kozyszoo.github.io/antigravity-handson/gas-beginner.html
 初級編や発展編に出ていない方も大丈夫です。当日は動くコードをお渡しするところから始めます。
 
 時間があれば、先に初級編を触っておくと当日が楽になります（30 分ほどで一通り動かせます）。
-https://kozyszoo.github.io/antigravity-handson/gas-beginner.html
+https://kozyszoo.github.io/aidd-handson/gas-beginner.html
 
 📗 当日つかう資料
-https://kozyszoo.github.io/antigravity-handson/gas-webapp.html
+https://kozyszoo.github.io/aidd-handson/gas-webapp.html
 
 📍 Google Meet で開催します
 🔗 https://meet.google.com/joy-aadj-yyw

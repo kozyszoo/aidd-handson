@@ -26,8 +26,8 @@
 - うまく動かないときは、エラー文をそのままコピーして Gemini に原因と直し方を聞きます
 
 📗 **当日つかう資料（先に見ておくと進めやすいです）**
-- 初級編: https://kozyszoo.github.io/antigravity-handson/gas-beginner.html
-- 発展編: https://kozyszoo.github.io/antigravity-handson/gas-advanced.html
+- 初級編: https://kozyszoo.github.io/aidd-handson/gas-beginner.html
+- 発展編: https://kozyszoo.github.io/aidd-handson/gas-advanced.html
 
 **上級編ですが、GAS もプログラミングも初めてという方で大丈夫です。** 当日は初級編の内容から一緒に進めるので、身構えずに来てください。
 

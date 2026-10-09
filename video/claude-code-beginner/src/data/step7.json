@@ -1,0 +1,38 @@
+{
+  "title": {
+    "file": "audio/step7/title.wav",
+    "sec": 8.843
+  },
+  "goal": {
+    "file": "audio/step7/goal.wav",
+    "sec": 16.885
+  },
+  "split": {
+    "file": "audio/step7/split.wav",
+    "sec": 23.808
+  },
+  "five": {
+    "file": "audio/step7/five.wav",
+    "sec": 29.792
+  },
+  "check": {
+    "file": "audio/step7/check.wav",
+    "sec": 26.709
+  },
+  "folder": {
+    "file": "audio/step7/folder.wav",
+    "sec": 22.816
+  },
+  "trouble": {
+    "file": "audio/step7/trouble.wav",
+    "sec": 32.171
+  },
+  "more": {
+    "file": "audio/step7/more.wav",
+    "sec": 29.643
+  },
+  "summary": {
+    "file": "audio/step7/summary.wav",
+    "sec": 20.512
+  }
+}

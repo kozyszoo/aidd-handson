@@ -1,0 +1,38 @@
+{
+  "title": {
+    "file": "audio/step2/title.wav",
+    "sec": 8.597
+  },
+  "goal": {
+    "file": "audio/step2/goal.wav",
+    "sec": 21.76
+  },
+  "request": {
+    "file": "audio/step2/request.wav",
+    "sec": 24.981
+  },
+  "rules": {
+    "file": "audio/step2/rules.wav",
+    "sec": 26.603
+  },
+  "wait": {
+    "file": "audio/step2/wait.wav",
+    "sec": 14.624
+  },
+  "check": {
+    "file": "audio/step2/check.wav",
+    "sec": 33.28
+  },
+  "ask": {
+    "file": "audio/step2/ask.wav",
+    "sec": 23.499
+  },
+  "trouble": {
+    "file": "audio/step2/trouble.wav",
+    "sec": 47.136
+  },
+  "summary": {
+    "file": "audio/step2/summary.wav",
+    "sec": 25.803
+  }
+}

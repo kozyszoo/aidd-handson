@@ -1,0 +1,34 @@
+{
+  "title": {
+    "file": "audio/step4/title.wav",
+    "sec": 8.939
+  },
+  "goal": {
+    "file": "audio/step4/goal.wav",
+    "sec": 19.232
+  },
+  "prompts": {
+    "file": "audio/step4/prompts.wav",
+    "sec": 41.248
+  },
+  "check": {
+    "file": "audio/step4/check.wav",
+    "sec": 23.093
+  },
+  "why": {
+    "file": "audio/step4/why.wav",
+    "sec": 17.163
+  },
+  "tips": {
+    "file": "audio/step4/tips.wav",
+    "sec": 35.861
+  },
+  "trouble": {
+    "file": "audio/step4/trouble.wav",
+    "sec": 52.224
+  },
+  "summary": {
+    "file": "audio/step4/summary.wav",
+    "sec": 20.021
+  }
+}

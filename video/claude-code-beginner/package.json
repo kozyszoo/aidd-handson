@@ -1,0 +1,23 @@
+{
+  "name": "claude-code-beginner-video",
+  "version": "1.0.0",
+  "description": "Claude Code 入門ハンズオン 各 Step の復習動画",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio",
+    "tts": "python3 scripts/tts_video.py",
+    "render": "node scripts/render.mjs"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "@remotion/google-fonts": "4.0.290",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "playwright": "^1.61.1",
+    "typescript": "5.5.4"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "title": {
+    "file": "audio/step6/title.wav",
+    "sec": 6.965
+  },
+  "goal": {
+    "file": "audio/step6/goal.wav",
+    "sec": 16.224
+  },
+  "prompt": {
+    "file": "audio/step6/prompt.wav",
+    "sec": 28.768
+  },
+  "answer": {
+    "file": "audio/step6/answer.wav",
+    "sec": 25.195
+  },
+  "wifi": {
+    "file": "audio/step6/wifi.wav",
+    "sec": 24.363
+  },
+  "steps": {
+    "file": "audio/step6/steps.wav",
+    "sec": 26.048
+  },
+  "promises1": {
+    "file": "audio/step6/promises1.wav",
+    "sec": 29.611
+  },
+  "promises2": {
+    "file": "audio/step6/promises2.wav",
+    "sec": 25.141
+  },
+  "web": {
+    "file": "audio/step6/web.wav",
+    "sec": 20.651
+  },
+  "summary": {
+    "file": "audio/step6/summary.wav",
+    "sec": 23.445
+  }
+}

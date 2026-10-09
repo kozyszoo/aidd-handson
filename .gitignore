@@ -51,3 +51,9 @@ temp/
 # Antigravity & Playwright MCP
 .antigravitycli/
 .playwright-mcp/
+
+# 復習動画の生成物（動画本体は Google Drive に置く）
+video/*/node_modules/
+video/*/out/
+video/*/audio/
+video/*/public/audio/

@@ -1,0 +1,30 @@
+{
+  "title": {
+    "file": "audio/step0/title.wav",
+    "sec": 7.392
+  },
+  "goal": {
+    "file": "audio/step0/goal.wav",
+    "sec": 19.456
+  },
+  "needs": {
+    "file": "audio/step0/needs.wav",
+    "sec": 23.989
+  },
+  "folder": {
+    "file": "audio/step0/folder.wav",
+    "sec": 29.013
+  },
+  "why": {
+    "file": "audio/step0/why.wav",
+    "sec": 21.216
+  },
+  "trouble": {
+    "file": "audio/step0/trouble.wav",
+    "sec": 35.115
+  },
+  "summary": {
+    "file": "audio/step0/summary.wav",
+    "sec": 17.131
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "title": {
+    "file": "audio/step1/title.wav",
+    "sec": 7.989
+  },
+  "steps": {
+    "file": "audio/step1/steps.wav",
+    "sec": 14.229
+  },
+  "settings": {
+    "file": "audio/step1/settings.wav",
+    "sec": 22.251
+  },
+  "prompt": {
+    "file": "audio/step1/prompt.wav",
+    "sec": 17.515
+  },
+  "check": {
+    "file": "audio/step1/check.wav",
+    "sec": 20.448
+  },
+  "modes": {
+    "file": "audio/step1/modes.wav",
+    "sec": 26.453
+  },
+  "local": {
+    "file": "audio/step1/local.wav",
+    "sec": 29.589
+  },
+  "trouble1": {
+    "file": "audio/step1/trouble1.wav",
+    "sec": 25.291
+  },
+  "trouble2": {
+    "file": "audio/step1/trouble2.wav",
+    "sec": 20.501
+  },
+  "summary": {
+    "file": "audio/step1/summary.wav",
+    "sec": 25.728
+  }
+}

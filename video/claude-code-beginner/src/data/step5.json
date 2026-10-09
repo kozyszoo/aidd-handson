@@ -1,0 +1,42 @@
+{
+  "title": {
+    "file": "audio/step5/title.wav",
+    "sec": 8.501
+  },
+  "why": {
+    "file": "audio/step5/why.wav",
+    "sec": 10.357
+  },
+  "steps": {
+    "file": "audio/step5/steps.wav",
+    "sec": 17.76
+  },
+  "answer": {
+    "file": "audio/step5/answer.wav",
+    "sec": 27.061
+  },
+  "trap": {
+    "file": "audio/step5/trap.wav",
+    "sec": 25.323
+  },
+  "judge": {
+    "file": "audio/step5/judge.wav",
+    "sec": 28.032
+  },
+  "prompt": {
+    "file": "audio/step5/prompt.wav",
+    "sec": 25.173
+  },
+  "after": {
+    "file": "audio/step5/after.wav",
+    "sec": 24.981
+  },
+  "trouble": {
+    "file": "audio/step5/trouble.wav",
+    "sec": 44.576
+  },
+  "summary": {
+    "file": "audio/step5/summary.wav",
+    "sec": 24.672
+  }
+}

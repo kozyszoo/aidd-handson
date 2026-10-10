@@ -68,6 +68,8 @@
     .tips td:first-child { white-space: nowrap; font-weight: 700; color: var(--primary-deep); width: 1%; padding-right: 1.6mm; }
     .tips td small { display: block; font-weight: 400; color: var(--muted); font-size: 6.8pt; white-space: normal; }
     .note { font-size: 6.4pt; color: var(--muted); margin: 0.8mm 0 0; }
+    svg.fig { display: block; width: 100%; height: auto; margin: 0.6mm 0 0; }
+    svg.fig text { font-family: inherit; }
     .toolbar { text-align: center; margin: 4mm 0 0; }
     .toolbar button { font: inherit; font-size: 13px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--primary);
         background: var(--primary); color: #fff; cursor: pointer; }
@@ -87,7 +89,7 @@
     <header>
         <div>
             <h1>Claude Code 入門 チートシート</h1>
-            <p class="sub">付録 ／ ハンズオン（売上データのページを作る）の要点 → つまずき → ハンズオンの先の使い方（活用ガイド）</p>
+            <p class="sub">付録 ／ ハンズオン（売上データのページを作る）の要点 → つまずき → 機能の選び方 → ハンズオンの先の使い方（活用ガイド）</p>
         </div>
         <span class="tag">A4 横 1 枚</span>
     </header>
@@ -100,22 +102,13 @@
                     <tr><td>フォルダ</td><td><b>Select folder</b> →「売上ビューア」</td></tr>
                     <tr><td>権限モード</td><td><b>Manual</b>（変更の前に聞かれる。Accept か Reject を選ぶ）</td></tr>
                 </table>
-                <p style="margin:0.6mm 0 0"><span class="chip mode">Plan</span>計画だけ出す（Step 2）　<span class="chip mode">Accept edits</span><span class="chip mode">Auto</span>聞かずに進む。慣れてから　<span class="chip bad">Bypass</span><b>使わない</b></p>
-                <p style="margin:0.6mm 0 0"><b>Local でも、読んだ中身は AI へ送られる。</b>作業フォルダには練習用のデータだけ。</p>
+                <svg class="fig" viewBox="0 0 330 41" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="aF" markerWidth="6" markerHeight="6" refX="5.2" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#57534e"/></marker></defs><text x="2" y="7.0" font-size="6.2" font-weight="400" fill="#57534e" text-anchor="start">聞かれる・止まる回数 多い</text><text x="328" y="7.0" font-size="6.2" font-weight="400" fill="#57534e" text-anchor="end">少ない</text><rect x="0.5" y="10" width="65" height="18" rx="2" fill="#dbeafe"/><text x="33.0" y="22.0" font-size="7.4" font-weight="700" fill="#1e40af" text-anchor="middle">Plan</text><text x="33.0" y="37.0" font-size="6" font-weight="400" fill="#57534e" text-anchor="middle">計画だけ</text><rect x="66.5" y="10" width="65" height="18" rx="2" fill="#0f766e"/><text x="99.0" y="22.0" font-size="7.4" font-weight="700" fill="#ffffff" text-anchor="middle">Manual</text><text x="99.0" y="37.0" font-size="6" font-weight="400" fill="#57534e" text-anchor="middle">毎回聞く・今回</text><rect x="132.5" y="10" width="65" height="18" rx="2" fill="#fef3c7"/><text x="165.0" y="22.0" font-size="7.4" font-weight="700" fill="#92400e" text-anchor="middle">Accept edits</text><text x="165.0" y="37.0" font-size="6" font-weight="400" fill="#57534e" text-anchor="middle">書換は聞かない</text><rect x="198.5" y="10" width="65" height="18" rx="2" fill="#fed7aa"/><text x="231.0" y="22.0" font-size="7.4" font-weight="700" fill="#9a3412" text-anchor="middle">Auto</text><text x="231.0" y="37.0" font-size="6" font-weight="400" fill="#57534e" text-anchor="middle">聞かず進む</text><rect x="264.5" y="10" width="65" height="18" rx="2" fill="#fee2e2"/><text x="297.0" y="22.0" font-size="7.4" font-weight="700" fill="#b91c1c" text-anchor="middle">Bypass</text><text x="297.0" y="37.0" font-size="6" font-weight="400" fill="#57534e" text-anchor="middle">使わない</text><path d="M70,8 H260" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aF)"/></svg>
+                <p style="margin:0.5mm 0 0"><b>Local でも、読んだ中身は AI へ送られる。</b>作業フォルダには練習用のデータだけ。</p>
             </section>
 
             <section class="box">
-                <h2>2. 進め方（各 Step: 解説動画 → ハンズオン）</h2>
-                <dl class="steps">
-                    <dt>0</dt><dd>アプリと練習用フォルダを用意</dd>
-                    <dt>1</dt><dd>フォルダを開き、中身を説明してもらう（読むだけ）</dd>
-                    <dt>2</dt><dd>Plan で、作る前に計画を出してもらう</dd>
-                    <dt>3</dt><dd>Manual で承認してページを作り、合計を確かめる</dd>
-                    <dt>4</dt><dd>並び順・絞り込み・見出しを、言葉で頼んで直す</dd>
-                    <dt>5</dt><dd>10 月のデータで試し、合計が合うか確かめる</dd>
-                    <dt>6</dt><dd>外へ送っていないか確かめ、5 つの約束を見る</dd>
-                    <dt>7</dt><dd>自分の作業から 1 つ選び、頼み方を書く</dd>
-                </dl>
+                <h2>2. 進め方 <small>各 Step: 解説動画 → ハンズオン</small></h2>
+                <svg class="fig" viewBox="0 0 330 104" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="aA" markerWidth="6" markerHeight="6" refX="5.2" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#57534e"/></marker></defs><rect x="0.0" y="2" width="74" height="36" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="37.0" y="11.5" font-size="7" font-weight="700" fill="#115e59" text-anchor="middle">Step 0</text><text x="37.0" y="21.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">アプリと</text><text x="37.0" y="30.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">フォルダ準備</text><path d="M74.5,20 H84.8" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aA)"/><rect x="85.3" y="2" width="74" height="36" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="122.3" y="11.5" font-size="7" font-weight="700" fill="#115e59" text-anchor="middle">Step 1</text><text x="122.3" y="21.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">中身を説明</text><text x="122.3" y="30.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">(読むだけ)</text><path d="M159.8,20 H170.2" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aA)"/><rect x="170.7" y="2" width="74" height="36" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="207.7" y="11.5" font-size="7" font-weight="700" fill="#115e59" text-anchor="middle">Step 2</text><text x="207.7" y="21.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">Plan で</text><text x="207.7" y="30.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">計画を見る</text><path d="M245.2,20 H255.5" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aA)"/><rect x="256.0" y="2" width="74" height="36" rx="3" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="293.0" y="11.5" font-size="7" font-weight="700" fill="#b45309" text-anchor="middle">Step 3</text><text x="293.0" y="21.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">承認して作り</text><text x="293.0" y="30.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">合計を確かめる</text><rect x="0.0" y="56" width="74" height="36" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="37.0" y="65.5" font-size="7" font-weight="700" fill="#115e59" text-anchor="middle">Step 4</text><text x="37.0" y="75.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">言葉で</text><text x="37.0" y="84.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">頼んで直す</text><path d="M74.5,74 H84.8" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aA)"/><rect x="85.3" y="56" width="74" height="36" rx="3" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="122.3" y="65.5" font-size="7" font-weight="700" fill="#b45309" text-anchor="middle">Step 5</text><text x="122.3" y="75.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">別データで</text><text x="122.3" y="84.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">合計を確かめる</text><path d="M159.8,74 H170.2" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aA)"/><rect x="170.7" y="56" width="74" height="36" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="207.7" y="65.5" font-size="7" font-weight="700" fill="#115e59" text-anchor="middle">Step 6</text><text x="207.7" y="75.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">外へ送って</text><text x="207.7" y="84.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">いないか確認</text><path d="M245.2,74 H255.5" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aA)"/><rect x="256.0" y="56" width="74" height="36" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="293.0" y="65.5" font-size="7" font-weight="700" fill="#115e59" text-anchor="middle">Step 7</text><text x="293.0" y="75.5" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">自分の道具の</text><text x="293.0" y="84.1" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">頼み方を書く</text><path d="M293.0,38 V47 H37.0 V56" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aA)"/><rect x="2" y="97" width="9" height="5.5" rx="1.5" fill="#fef3c7" stroke="#b45309" stroke-width="0.6"/><text x="15" y="101.8" font-size="6.2" font-weight="400" fill="#57534e" text-anchor="start">橙: 数字で確かめる Step</text><text x="130" y="101.8" font-size="6.2" font-weight="400" fill="#57534e" text-anchor="start">各 Step は 解説動画 → ハンズオン</text></svg>
             </section>
 
             <section class="box">
@@ -131,20 +124,16 @@
 
             <section class="box">
                 <h2>4. 計画と確認の画面で見るところ <small>Step 2・3</small></h2>
-                <p style="margin:0 0 0.5mm"><b>計画:</b> ①作るファイルが <code>index.html</code> の 1 つか ②インストール・ダウンロードが無いか（あれば「インストールなしで」と返す）③ CSV は「ページのボタンで選ぶ」形か ④分からない言葉は、そのまま聞く</p>
-                <table class="lab">
-                    <tr><th>確認の画面</th><th><span class="chip ok">Accept</span></th><th><span class="chip bad">Reject</span></th></tr>
-                    <tr><td>変えるファイル</td><td>「売上ビューア」の中の <code>index.html</code> を作る</td><td>CSV を書き換える／フォルダの外が出ている</td></tr>
-                    <tr><td>コマンド</td><td>実行がない。または納得できた</td><td>インストールしようとする／理由が分からない</td></tr>
-                </table>
-                <p style="margin:0.5mm 0 0"><b>直したあと:</b> 変えるファイルを見て Accept → 読み込み直して 9 月の CSV を選び直す → <b>合計が 9,440 円のまま</b>か見る</p>
+                <p style="margin:0 0 0.4mm"><b>計画:</b> ①作るのは <code>index.html</code> の 1 つか ②インストール・ダウンロードが無いか ③ CSV は「ページのボタンで選ぶ」形か ④分からない言葉は、そのまま聞く</p>
+                <svg class="fig" viewBox="0 0 330 99" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="aB" markerWidth="6" markerHeight="6" refX="5.2" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#57534e"/></marker></defs><rect x="2" y="18" width="58" height="30" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="31" y="30.0" font-size="6.8" font-weight="700" fill="#115e59" text-anchor="middle">確認の</text><text x="31" y="38.6" font-size="6.8" font-weight="700" fill="#115e59" text-anchor="middle">画面が出た</text><path d="M60,33 H68" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aB)"/><polygon points="68,33 112,10 156,33 112,56" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="112" y="27.5" font-size="6.2" font-weight="700" fill="#1c1917" text-anchor="middle">変えるのは</text><text x="112" y="34.8" font-size="6.2" font-weight="700" fill="#1c1917" text-anchor="middle">index.html</text><text x="112" y="42.1" font-size="6.2" font-weight="700" fill="#1c1917" text-anchor="middle">だけ？</text><path d="M156,33 H184" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aB)"/><text x="170" y="29.0" font-size="5.8" font-weight="700" fill="#166534" text-anchor="middle">はい</text><polygon points="184,33 228,10 272,33 228,56" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="228" y="27.5" font-size="6.2" font-weight="700" fill="#1c1917" text-anchor="middle">コマンドは</text><text x="228" y="34.8" font-size="6.2" font-weight="700" fill="#1c1917" text-anchor="middle">無い／納得</text><text x="228" y="42.1" font-size="6.2" font-weight="700" fill="#1c1917" text-anchor="middle">できた？</text><path d="M272,33 H283" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aB)"/><rect x="283" y="21" width="45" height="24" rx="3" fill="#dcfce7" stroke="#166534" stroke-width="0.8"/><text x="305.5" y="36.0" font-size="7.6" font-weight="700" fill="#166534" text-anchor="middle">Accept</text><path d="M112,56 V70" fill="none" stroke="#57534e" stroke-width="1"/><path d="M228,56 V70" fill="none" stroke="#57534e" stroke-width="1"/><text x="118" y="66.0" font-size="5.8" font-weight="700" fill="#b91c1c" text-anchor="middle">いいえ</text><text x="234" y="66.0" font-size="5.8" font-weight="700" fill="#b91c1c" text-anchor="middle">いいえ</text><rect x="56" y="70" width="230" height="26" rx="3" fill="#fee2e2" stroke="#b91c1c" stroke-width="0.8"/><text x="171" y="80.5" font-size="6.8" font-weight="700" fill="#b91c1c" text-anchor="middle">Reject して理由を聞く</text><text x="171" y="89.5" font-size="6.8" font-weight="400" fill="#1c1917" text-anchor="middle">「なぜ必要ですか。使わない方法はありますか」</text></svg>
+                <p style="margin:0.5mm 0 0"><b>直したあと:</b> 読み込み直して 9 月の CSV を選び直し、<b>合計が 9,440 円のまま</b>か見る</p>
             </section>
 
             <section class="box">
                 <h2>5. 答え合わせの数字 <small>Step 3・5</small></h2>
                 <p style="margin:0"><b>9 月: 6 件・9,440 円</b>（ギフトセット 5,600／焼き菓子セット 1,650／ブレンドコーヒー 1,200／豆の定期便 990）<br>
-                <b>10 月: 5 件・18,260 円</b>（ギフトセット 12,800／ランチセット 3,250／ブレンドコーヒー 1,220／豆の定期便 990）<br>
-                <b>5,472 円なら:</b> <code>"12,800"</code>（カンマ入り）を「12」と「800」に分けて読んでいる。正しい数字を伝え、原因の説明と直しを頼み、9 月も確かめ直す。</p>
+                <b>10 月: 5 件・18,260 円</b>（ギフトセット 12,800／ランチセット 3,250／ブレンドコーヒー 1,220／豆の定期便 990）</p>
+                <svg class="fig" viewBox="0 0 330 110" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="aC" markerWidth="6" markerHeight="6" refX="5.2" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#57534e"/></marker></defs><polygon points="4,26 60,2 116,26 60,50" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="60" y="23.0" font-size="6.6" font-weight="700" fill="#1c1917" text-anchor="middle">10 月の合計は</text><text x="60" y="30.8" font-size="6.6" font-weight="700" fill="#1c1917" text-anchor="middle">18,260 円？</text><path d="M116,26 H130" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aC)"/><text x="123" y="22.0" font-size="5.8" font-weight="700" fill="#166534" text-anchor="middle">はい</text><rect x="130" y="14" width="96" height="24" rx="3" fill="#dcfce7" stroke="#166534" stroke-width="0.8"/><text x="178" y="29.0" font-size="6.8" font-weight="700" fill="#166534" text-anchor="middle">✓ 正しく読めている</text><path d="M60,50 V58" fill="none" stroke="#57534e" stroke-width="1"/><text x="66" y="57.0" font-size="5.8" font-weight="700" fill="#b91c1c" text-anchor="middle">いいえ</text><path d="M60,58 H247" fill="none" stroke="#57534e" stroke-width="1"/><path d="M60,58 V64" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aC)"/><path d="M247,58 V64" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aC)"/><rect x="2" y="64" width="160" height="30" rx="3" fill="#fee2e2" stroke="#b91c1c" stroke-width="0.8"/><text x="82" y="74.0" font-size="6.4" font-weight="700" fill="#b91c1c" text-anchor="middle">5,472 円</text><text x="82" y="82.4" font-size="6.4" font-weight="400" fill="#1c1917" text-anchor="middle">「12,800」を「12」と「800」に分けて読む</text><rect x="168" y="64" width="160" height="30" rx="3" fill="#fee2e2" stroke="#b91c1c" stroke-width="0.8"/><text x="248" y="74.0" font-size="6.4" font-weight="700" fill="#b91c1c" text-anchor="middle">NaN・空欄・エラー</text><text x="248" y="82.4" font-size="6.4" font-weight="400" fill="#1c1917" text-anchor="middle">「12」を数字として読めず計算できない</text><text x="165" y="105.0" font-size="6.6" font-weight="700" fill="#b45309" text-anchor="middle">→ 正しい数字を伝え、原因の説明と直しを頼む。そのあと 9 月も確かめ直す</text></svg>
             </section>
 
             <section class="box warn">
@@ -161,76 +150,35 @@
             <section class="box">
                 <h2>7. うまくいかないとき</h2>
                 <table class="lab">
-                    <tr><td>アップグレード要求</td><td>有料プランが必要</td></tr>
                     <tr><td>403 などの認証エラー</td><td>サインアウト → サインイン。直らなければアプリを終了して開き直す</td></tr>
                     <tr><td>Local が灰色</td><td>管理者が止めていることがある。管理者に確認</td></tr>
                     <tr><td>ページが開かない</td><td><code>index.html</code> を右クリック → Show in Finder（Mac）／Explorer（Windows）→ ダブルクリック</td></tr>
                     <tr><td>本物の CSV が文字化け</td><td>練習用の CSV を入れた状態で「Shift_JIS の CSV も読めるようにしてください」</td></tr>
-                    <tr><td>使用量の上限に達した</td><td>運営に知らせ、完成見本のページで確かめ方を体験する</td></tr>
+                    <tr><td>使用量の上限</td><td>運営に知らせ、完成見本のページで確かめ方を体験する</td></tr>
                 </table>
             </section>
 
+            <section class="box">
+                <h2>8. どの機能を使う？ <small>Chat・Cowork・Claude Code</small></h2>
+                <svg class="fig" viewBox="0 0 330 126" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="aD" markerWidth="6" markerHeight="6" refX="5.2" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#57534e"/></marker></defs><g transform="translate(0,4)"><rect x="2" y="6" width="50" height="22" rx="3" fill="#e3f3f0" stroke="#0f766e" stroke-width="0.8"/><text x="27" y="20.0" font-size="6.8" font-weight="700" fill="#115e59" text-anchor="middle">やりたいこと</text><path d="M52,17 H60" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aD)"/><polygon points="60,17 118,-3 176,17 118,37" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="118" y="13.5" font-size="6.4" font-weight="700" fill="#1c1917" text-anchor="middle">毎週・毎月、同じ形の</text><text x="118" y="21.3" font-size="6.4" font-weight="700" fill="#1c1917" text-anchor="middle">データに同じ処理？</text><path d="M176,17 H196" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aD)"/><text x="186" y="13.0" font-size="5.8" font-weight="700" fill="#166534" text-anchor="middle">はい</text><rect x="196" y="3" width="132" height="28" rx="3" fill="#dcfce7" stroke="#166534" stroke-width="0.8"/><text x="262" y="13.0" font-size="6.5" font-weight="700" fill="#166534" text-anchor="middle">Claude Code で道具を作る</text><text x="262" y="21.6" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">次からは AI に頼まず結果が出る</text><path d="M118,37 V50" fill="none" stroke="#57534e" stroke-width="1"/><text x="124" y="47.0" font-size="5.8" font-weight="700" fill="#b91c1c" text-anchor="middle">いいえ</text><polygon points="60,68 118,50 176,68 118,86" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="118" y="64.5" font-size="6.4" font-weight="700" fill="#1c1917" text-anchor="middle">ファイル整理・集計など</text><text x="118" y="72.3" font-size="6.4" font-weight="700" fill="#1c1917" text-anchor="middle">作業を任せたい？</text><path d="M176,68 H196" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aD)"/><text x="186" y="64.0" font-size="5.8" font-weight="700" fill="#166534" text-anchor="middle">はい</text><rect x="196" y="54" width="132" height="28" rx="3" fill="#fef3c7" stroke="#b45309" stroke-width="0.8"/><text x="262" y="64.0" font-size="6.5" font-weight="700" fill="#b45309" text-anchor="middle">Cowork に頼む</text><text x="262" y="72.6" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">1 回きり／ファイルの形がばらばら</text><path d="M118,86 V94" fill="none" stroke="#57534e" stroke-width="1"/><text x="124" y="92.0" font-size="5.8" font-weight="700" fill="#b91c1c" text-anchor="middle">いいえ</text><path d="M118,94 V98" fill="none" stroke="#57534e" stroke-width="1" marker-end="url(#aD)"/><rect x="28" y="98" width="180" height="22" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="0.8"/><text x="118" y="107.5" font-size="6.5" font-weight="700" fill="#1e40af" text-anchor="middle">Chat で相談する</text><text x="118" y="115.7" font-size="6.5" font-weight="400" fill="#1c1917" text-anchor="middle">文章の下書き・調べもの・ファイル 1 つ</text></g></svg>
+            </section>
+
             <section class="box accent">
-                <h2>活用ガイド <small>A. 指示の出し方</small></h2>
-                <p class="note" style="margin:0 0 0.6mm"><span class="loc d" style="margin-left:0">Desktop</span>Code タブ ／ <span class="loc c" style="margin-left:0">CLI</span>ターミナル版 ／ <span class="loc b" style="margin-left:0">両方</span>。キーは Mac。画面の名前は版で変わる</p>
+                <h2>9. ハンズオンの先へ: 活用ガイド</h2>
+                <p class="note" style="margin:0 0 0.5mm"><span class="loc d">Desktop</span>Code タブ ／ <span class="loc c">CLI</span>ターミナル版 ／ <span class="loc b">両方</span>。キーは Mac。画面の名前は版で変わる</p>
                 <table class="tips">
-                    <tr><td>具体的に頼む<span class="loc b">両方</span></td><td>対象・場所・できあがりの基準を書く。「動かして確かめて」も添える</td></tr>
-                    <tr><td>先に計画<span class="loc b">両方</span></td><td><b>Plan</b> で方針を出させ、確認してから進める（CLI は Shift+Tab）</td></tr>
+                    <tr><td>具体的に頼む<span class="loc b">両方</span></td><td>対象・場所・できあがりの基準を書く。「動かして確かめて」も添える。先に <b>Plan</b> で方針を出させる</td></tr>
                     <tr><td>ファイル・画像<span class="loc b">両方</span></td><td>入力欄の「+」かドラッグ＆ドロップ。<code>@</code>ファイル名でも渡せる。画面の写真は文章より正確</td></tr>
-                    <tr><td>途中で止める<span class="loc b">両方</span></td><td>停止ボタンか <b>Esc</b>。それまでの作業は残る。実行中に修正文を送ってもよい</td></tr>
-                    <tr><td>会話が長い<span class="loc b">両方</span></td><td>話題が変われば <code>/clear</code>。要約して続けるなら <code>/compact</code>。同じ指摘が 2 回直らないなら、新しい会話で頼み直す</td></tr>
-                </table>
-            </section>
-
-            <section class="box accent">
-                <h2>活用ガイド <small>B. 安全に使う</small></h2>
-                
-                <table class="tips">
+                    <tr><td>止める・区切る<span class="loc b">両方</span></td><td><b>Esc</b> で止める（作業は残る）。話題が変われば <code>/clear</code>、要約して続けるなら <code>/compact</code></td></tr>
                     <tr><td>差分の画面<span class="loc d">Desktop</span></td><td>「+12 -1」をクリック → 変わった行の一覧。行にコメントして直させる</td></tr>
-                    <tr><td>巻き戻し<span class="loc c">CLI</span></td><td>Esc を 2 回か <code>/rewind</code>。<code>rm</code>・<code>mv</code> の変更は戻らない。<small>Desktop は公式で未確認</small></td></tr>
-                    <tr><td>Git で区切る<span class="loc b">両方</span></td><td>「変更を commit して」で区切りを残す。「新しいブランチを作って」で作業を分ける</td></tr>
-                </table>
-            </section>
-
-            <section class="box accent">
-                <h2>活用ガイド <small>C. 覚えさせる</small></h2>
-                
-                <table class="tips">
-                    <tr><td>CLAUDE.md<span class="loc b">両方</span></td><td>毎回守る決まりを書く 1 つのファイル。<code>/init</code> で雛形。「追記して」でも</td></tr>
-                    <tr><td>自動メモリ<span class="loc b">両方</span></td><td>「これを覚えておいて」と頼む（切り替えは CLI の <code>/memory</code>）</td></tr>
-                    <tr><td>スキル<span class="loc b">両方</span></td><td>よくやる手順を <code>SKILL.md</code> に書く → <code>/名前</code> で呼ぶ（Desktop は「+」→ Slash commands）</td></tr>
-                </table>
-            </section>
-
-            <section class="box accent">
-                <h2>活用ガイド <small>D. 作業を広げる</small></h2>
-                
-                <table class="tips">
-                    <tr><td>並行して進める<span class="loc d">Desktop</span></td><td>「+ New session」で作業ごとに分ける。worktree（衝突しない別コピー）で同じフォルダでも並行</td></tr>
-                    <tr><td>Cloud<span class="loc d">Desktop</span></td><td>環境を <b>Cloud</b> にすると、アプリを閉じても続く。claude.ai/code やスマホで見られる</td></tr>
-                    <tr><td>プレビュー<span class="loc d">Desktop</span></td><td>Cmd+Shift+B の Browser pane で、起動したアプリを見ながら直す</td></tr>
-                    <tr><td>コネクタ<span class="loc d">Desktop</span></td><td>「+」→ Connectors で Google カレンダー・Slack・Notion などをつなぐ</td></tr>
-                    <tr><td>定期実行<span class="loc d">Desktop</span></td><td>Routines →「New routine」→ Local。アプリが開き、パソコンが起きている間だけ動く</td></tr>
-                </table>
-            </section>
-
-            <section class="box accent">
-                <h2>活用ガイド <small>E. 使用量・困ったとき</small></h2>
-                
-                <table class="tips">
-                    <tr><td>使用量<span class="loc b">両方</span></td><td>入力欄横の輪（usage ring）をクリック。CLI は <code>/usage</code></td></tr>
-                    <tr><td>モデル<span class="loc b">両方</span></td><td>簡単な作業は軽いモデル。公式は「多くは Sonnet で足りる。Opus は複雑な設計向け」</td></tr>
-                    <tr><td>エラー<span class="loc b">両方</span></td><td>「session limit」は再開の時刻まで待つ。「Prompt is too long」は <code>/compact</code> か <code>/clear</code>。エラー文はそのまま Claude に見せる</td></tr>
-                </table>
-            </section>
-
-            <section class="box accent">
-                <h2>活用ガイド <small>F. ターミナル版の入口</small></h2>
-                
-                <table class="tips">
-                    <tr><td>起動・単発<span class="loc c">CLI</span></td><td><code>cd 作業フォルダ</code> → <code>claude</code>（初回はログイン）。1 回だけなら <code>claude -p "…"</code></td></tr>
-                    <tr><td>前の続き<span class="loc c">CLI</span></td><td><code>claude --continue</code>（直近）／<code>--resume</code>（一覧から）。Desktop は左の一覧から</td></tr>
-                    <tr><td>基本の 3 つ<span class="loc c">CLI</span></td><td><code>/help</code>・<code>/clear</code>・<code>/exit</code>。Shift+Tab のモード切り替えは <b>Desktop では使えない</b></td></tr>
+                    <tr><td>巻き戻し・Git<span class="loc c">CLI</span></td><td>Esc を 2 回か <code>/rewind</code>（<code>rm</code>・<code>mv</code> は戻らない。Desktop は公式で未確認）。「変更を commit して」で区切りを残す</td></tr>
+                    <tr><td>CLAUDE.md<span class="loc b">両方</span></td><td>毎回守る決まりを書くファイル。<code>/init</code> で雛形。「これを覚えておいて」でメモリにも</td></tr>
+                    <tr><td>スキル<span class="loc b">両方</span></td><td>よくやる手順を <code>SKILL.md</code> に書き、<code>/名前</code> で呼ぶ</td></tr>
+                    <tr><td>並行・Cloud<span class="loc d">Desktop</span></td><td>「+ New session」で作業を分ける。環境を <b>Cloud</b> にすると、アプリを閉じても続く</td></tr>
+                    <tr><td>つなぐ・自動化<span class="loc d">Desktop</span></td><td>プレビュー（Cmd+Shift+B）／コネクタ（「+」→ Connectors）／定期実行（Routines → New routine）</td></tr>
+                    <tr><td>使用量・モデル<span class="loc b">両方</span></td><td>入力欄横の輪（usage ring）か <code>/usage</code>。簡単な作業は軽いモデル（公式: 多くは Sonnet で足りる）</td></tr>
+                    <tr><td>エラー<span class="loc b">両方</span></td><td>「session limit」は再開まで待つ。「Prompt is too long」は <code>/compact</code> か <code>/clear</code>。エラー文はそのまま Claude に見せる</td></tr>
+                    <tr><td>ターミナル版<span class="loc c">CLI</span></td><td><code>cd 作業フォルダ</code> → <code>claude</code>。単発は <code>claude -p "…"</code>、続きは <code>--continue</code>／<code>--resume</code>。Shift+Tab のモード切り替えは <b>Desktop では使えない</b></td></tr>
                 </table>
             </section>
     </div>

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code 入門 チートシート（付録・A4 1 枚）</title>
+<title>Claude Code 入門 チートシート（付録・A4 横 1 枚）</title>
 <style>
-    /* A4 縦 1 枚（左: ハンズオンの要点／右: つまずきと活用ガイド）。横向きにしない。ブラウザの印刷で「PDF に保存」できる。余白は用紙側で 0、紙の余白は .sheet の padding で持つ */
-    @page { size: A4 portrait; margin: 0; }
+    /* A4 横 1 枚（3 段組。ハンズオンの要点 → つまずき → 活用ガイドの順に読む）。ブラウザの印刷で「PDF に保存」できる。余白は用紙側で 0、紙の余白は .sheet の padding で持つ */
+    @page { size: A4 landscape; margin: 0; }
     :root {
         --primary: #0f766e;
         --primary-deep: #115e59;
@@ -25,7 +25,7 @@
     html, body { margin: 0; background: #e7e5e4; color: var(--ink);
         font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Noto Sans JP", sans-serif; }
     .sheet {
-        width: 210mm; height: 297mm; margin: 8mm auto; background: #fff;
+        width: 297mm; height: 210mm; margin: 8mm auto; background: #fff;
         padding: 5.5mm 7mm 4.5mm; display: flex; flex-direction: column; gap: 2mm; overflow: hidden;
         font-size: 7.1pt; line-height: 1.32;
     }
@@ -34,9 +34,9 @@
     header h1 { margin: 0; font-size: 14pt; line-height: 1.2; color: var(--primary-deep); }
     header .sub { margin: 0.4mm 0 0; font-size: 7.6pt; color: var(--muted); }
     header .tag { font-size: 8pt; color: #fff; background: var(--primary); border-radius: 1.5mm; padding: 0.8mm 2.4mm; white-space: nowrap; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm; flex: 1; min-height: 0; }
-    .col { display: flex; flex-direction: column; gap: 1.8mm; min-height: 0; }
-    .box { border: 0.3mm solid var(--line); border-radius: 1.6mm; padding: 1.1mm 2mm 1.3mm; break-inside: avoid; }
+    .grid { column-count: 3; column-gap: 2.6mm; column-fill: auto; flex: 1; min-height: 0; }
+    .grid > .box { margin-bottom: 1.8mm; }
+    .box { border: 0.3mm solid var(--line); border-radius: 1.6mm; padding: 1.1mm 2mm 1.3mm; break-inside: avoid; page-break-inside: avoid; }
     .box h2 { margin: 0 0 0.6mm; font-size: 8.4pt; color: var(--primary-deep); display: flex; align-items: baseline; gap: 1.6mm; }
     .box h2 small { font-size: 7.4pt; font-weight: 400; color: var(--muted); }
     .box.accent { background: var(--soft); border-color: #9fd4cc; }
@@ -87,14 +87,12 @@
     <header>
         <div>
             <h1>Claude Code 入門 チートシート</h1>
-            <p class="sub">付録 ／ 左: ハンズオン（売上データのページを作る）の要点 ／ 右: つまずきと、ハンズオンの先の使い方</p>
+            <p class="sub">付録 ／ ハンズオン（売上データのページを作る）の要点 → つまずき → ハンズオンの先の使い方（活用ガイド）</p>
         </div>
-        <span class="tag">A4 縦 1 枚</span>
+        <span class="tag">A4 横 1 枚</span>
     </header>
 
     <div class="grid">
-        <!-- 左の列: ハンズオン -->
-        <div class="col">
             <section class="box accent">
                 <h2>1. 最初の設定と権限モード <small>Step 1</small></h2>
                 <table class="lab">
@@ -159,10 +157,7 @@
                     <li><b>人に渡す前・仕事で使う前に確認を取る。</b>会社や学校のデータは組織のルールを確認</li>
                 </ol>
             </section>
-        </div>
 
-        <!-- 右の列: つまずき + 活用 -->
-        <div class="col">
             <section class="box">
                 <h2>7. うまくいかないとき</h2>
                 <table class="lab">
@@ -176,10 +171,8 @@
             </section>
 
             <section class="box accent">
-                <h2>8. ハンズオンの先へ: 活用ガイド</h2>
+                <h2>活用ガイド <small>A. 指示の出し方</small></h2>
                 <p class="note" style="margin:0 0 0.6mm"><span class="loc d" style="margin-left:0">Desktop</span>Code タブ ／ <span class="loc c" style="margin-left:0">CLI</span>ターミナル版 ／ <span class="loc b" style="margin-left:0">両方</span>。キーは Mac。画面の名前は版で変わる</p>
-
-                <p style="margin:0.4mm 0 0.2mm"><b style="color:var(--primary-deep)">A. 指示の出し方</b></p>
                 <table class="tips">
                     <tr><td>具体的に頼む<span class="loc b">両方</span></td><td>対象・場所・できあがりの基準を書く。「動かして確かめて」も添える</td></tr>
                     <tr><td>先に計画<span class="loc b">両方</span></td><td><b>Plan</b> で方針を出させ、確認してから進める（CLI は Shift+Tab）</td></tr>
@@ -187,22 +180,31 @@
                     <tr><td>途中で止める<span class="loc b">両方</span></td><td>停止ボタンか <b>Esc</b>。それまでの作業は残る。実行中に修正文を送ってもよい</td></tr>
                     <tr><td>会話が長い<span class="loc b">両方</span></td><td>話題が変われば <code>/clear</code>。要約して続けるなら <code>/compact</code>。同じ指摘が 2 回直らないなら、新しい会話で頼み直す</td></tr>
                 </table>
+            </section>
 
-                <p style="margin:0.8mm 0 0.2mm"><b style="color:var(--primary-deep)">B. 安全に使う</b></p>
+            <section class="box accent">
+                <h2>活用ガイド <small>B. 安全に使う</small></h2>
+                
                 <table class="tips">
                     <tr><td>差分の画面<span class="loc d">Desktop</span></td><td>「+12 -1」をクリック → 変わった行の一覧。行にコメントして直させる</td></tr>
                     <tr><td>巻き戻し<span class="loc c">CLI</span></td><td>Esc を 2 回か <code>/rewind</code>。<code>rm</code>・<code>mv</code> の変更は戻らない。<small>Desktop は公式で未確認</small></td></tr>
                     <tr><td>Git で区切る<span class="loc b">両方</span></td><td>「変更を commit して」で区切りを残す。「新しいブランチを作って」で作業を分ける</td></tr>
                 </table>
+            </section>
 
-                <p style="margin:0.8mm 0 0.2mm"><b style="color:var(--primary-deep)">C. 覚えさせる</b></p>
+            <section class="box accent">
+                <h2>活用ガイド <small>C. 覚えさせる</small></h2>
+                
                 <table class="tips">
                     <tr><td>CLAUDE.md<span class="loc b">両方</span></td><td>毎回守る決まりを書く 1 つのファイル。<code>/init</code> で雛形。「追記して」でも</td></tr>
                     <tr><td>自動メモリ<span class="loc b">両方</span></td><td>「これを覚えておいて」と頼む（切り替えは CLI の <code>/memory</code>）</td></tr>
                     <tr><td>スキル<span class="loc b">両方</span></td><td>よくやる手順を <code>SKILL.md</code> に書く → <code>/名前</code> で呼ぶ（Desktop は「+」→ Slash commands）</td></tr>
                 </table>
+            </section>
 
-                <p style="margin:0.8mm 0 0.2mm"><b style="color:var(--primary-deep)">D. 作業を広げる</b></p>
+            <section class="box accent">
+                <h2>活用ガイド <small>D. 作業を広げる</small></h2>
+                
                 <table class="tips">
                     <tr><td>並行して進める<span class="loc d">Desktop</span></td><td>「+ New session」で作業ごとに分ける。worktree（衝突しない別コピー）で同じフォルダでも並行</td></tr>
                     <tr><td>Cloud<span class="loc d">Desktop</span></td><td>環境を <b>Cloud</b> にすると、アプリを閉じても続く。claude.ai/code やスマホで見られる</td></tr>
@@ -210,22 +212,27 @@
                     <tr><td>コネクタ<span class="loc d">Desktop</span></td><td>「+」→ Connectors で Google カレンダー・Slack・Notion などをつなぐ</td></tr>
                     <tr><td>定期実行<span class="loc d">Desktop</span></td><td>Routines →「New routine」→ Local。アプリが開き、パソコンが起きている間だけ動く</td></tr>
                 </table>
+            </section>
 
-                <p style="margin:0.8mm 0 0.2mm"><b style="color:var(--primary-deep)">E. 使用量・困ったとき</b></p>
+            <section class="box accent">
+                <h2>活用ガイド <small>E. 使用量・困ったとき</small></h2>
+                
                 <table class="tips">
                     <tr><td>使用量<span class="loc b">両方</span></td><td>入力欄横の輪（usage ring）をクリック。CLI は <code>/usage</code></td></tr>
                     <tr><td>モデル<span class="loc b">両方</span></td><td>簡単な作業は軽いモデル。公式は「多くは Sonnet で足りる。Opus は複雑な設計向け」</td></tr>
                     <tr><td>エラー<span class="loc b">両方</span></td><td>「session limit」は再開の時刻まで待つ。「Prompt is too long」は <code>/compact</code> か <code>/clear</code>。エラー文はそのまま Claude に見せる</td></tr>
                 </table>
+            </section>
 
-                <p style="margin:0.8mm 0 0.2mm"><b style="color:var(--primary-deep)">F. ターミナル版の入口</b></p>
+            <section class="box accent">
+                <h2>活用ガイド <small>F. ターミナル版の入口</small></h2>
+                
                 <table class="tips">
                     <tr><td>起動・単発<span class="loc c">CLI</span></td><td><code>cd 作業フォルダ</code> → <code>claude</code>（初回はログイン）。1 回だけなら <code>claude -p "…"</code></td></tr>
                     <tr><td>前の続き<span class="loc c">CLI</span></td><td><code>claude --continue</code>（直近）／<code>--resume</code>（一覧から）。Desktop は左の一覧から</td></tr>
                     <tr><td>基本の 3 つ<span class="loc c">CLI</span></td><td><code>/help</code>・<code>/clear</code>・<code>/exit</code>。Shift+Tab のモード切り替えは <b>Desktop では使えない</b></td></tr>
                 </table>
             </section>
-        </div>
     </div>
 
     <footer>

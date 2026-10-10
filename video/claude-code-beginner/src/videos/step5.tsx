@@ -1,4 +1,4 @@
-// Step 5「10 月の明細を入れて、合計が合うかを確かめる」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step5.md。
+// Step 5「10 月の売上データを入れて、合計が合うかを確かめる」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step5.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { ColumnsScene } from "../scenes/ColumnsScene";
@@ -21,7 +21,7 @@ export const Video = makeVideo("step5", [
       <TitleScene
         tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 5 別の月で試す"
-        subtitle="10 月の明細を入れて、"
+        subtitle="10 月の売上データを入れて、"
         accentWord="合計が合うかを確かめる"
         audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
@@ -35,8 +35,8 @@ export const Video = makeVideo("step5", [
         kicker="Step 5"
         lead="作ったときのデータで動いても、別のデータで間違うことがある"
         columns={[
-          { heading: "作ったとき", emoji: "🛠️", tone: "green", items: ["9 月の明細で作った", "9 月の合計は合っている"] },
-          { heading: "これから", emoji: "📅", tone: "accent", highlight: true, items: ["来月も使うつもり", "10 月の明細を入れて試す"] },
+          { heading: "作ったとき", emoji: "🛠️", tone: "green", items: ["9 月の売上データで作った", "9 月の合計は合っている"] },
+          { heading: "これから", emoji: "📅", tone: "accent", highlight: true, items: ["来月も使うつもり", "10 月の売上データを入れて試す"] },
         ]}
         note="来月も使うなら、来月のデータで試しておく"
       />
@@ -46,12 +46,12 @@ export const Video = makeVideo("step5", [
     key: "steps",
     node: (
       <StepsScene
-        title="10 月の明細を入れる手順"
+        title="10 月の売上データを入れる手順"
         kicker="Step 5"
         stepDelay={150}
         steps={[
           { label: "ページを読み込み直す" },
-          { label: "「ファイルを選ぶ」ボタンで 10 月の CSV を選ぶ", desc: <Strong>カード利用明細_202610.csv</Strong> },
+          { label: "「ファイルを選ぶ」ボタンで 10 月の CSV を選ぶ", desc: <Strong>売上明細_202610.csv</Strong> },
           { label: "合計を見て、Step 1 でメモした数字と比べる" },
         ]}
       />
@@ -68,10 +68,10 @@ export const Video = makeVideo("step5", [
         rowDelay={150}
         rows={[
           ["合計", <><Strong>18,260 円</Strong>（5 件）</>],
-          ["ネット通販", "12,800 円"],
-          ["スーパー", "3,250 円"],
-          ["カフェ", "1,220 円（640 + 580）"],
-          ["動画配信サービス（月額）", "990 円"],
+          ["ギフトセット", "12,800 円"],
+          ["ランチセット", "3,250 円"],
+          ["ブレンドコーヒー", "1,220 円（640 + 580）"],
+          ["豆の定期便（月額）", "990 円"],
         ]}
         note="まず自分のページの数字を見てから、この表を見る"
       />
@@ -83,12 +83,12 @@ export const Video = makeVideo("step5", [
       <PairScene
         title="10 月だけにある形の行"
         kicker="Step 5"
-        lead="2026/10/05,ネット通販,&quot;12,800&quot;"
+        lead="2026/10/05,ギフトセット,&quot;12,800&quot;"
         leftHead="この行の特徴"
         rightHead="間違えやすい道具"
         rowDelay={170}
         rows={[
-          { emoji: "🔢", left: <>金額に桁区切りの<br />カンマが入っている</>, right: <>1 万円を超えると、この形で<br /><Strong>出てくるカード会社がある</Strong></> },
+          { emoji: "🔢", left: <>金額に桁区切りの<br />カンマが入っている</>, right: <>1 万円を超えると、この形で<br /><Strong>出てくるレジや会計ソフトがある</Strong></> },
           { emoji: "❝", left: <>金額が引用符で<br />囲まれている</>, right: <>カンマを<Strong>列の区切り</Strong>として<br />読んでしまう道具は、ここで間違える</> },
         ]}
       />
@@ -105,7 +105,7 @@ export const Video = makeVideo("step5", [
         rowDelay={330}
         rows={[
           { emoji: "✅", left: "合計 18,260 円", right: <Strong>正しく読めている</Strong> },
-          { emoji: "⚠️", left: <>合計 5,472 円<br />ネット通販 12 円</>, right: <>「12,800」を「12」と「800」に<br />分けて読み、<Strong>12 円として足している</Strong></> },
+          { emoji: "⚠️", left: <>合計 5,472 円<br />ギフトセット 12 円</>, right: <>「12,800」を「12」と「800」に<br />分けて読み、<Strong>12 円として足している</Strong></> },
           { emoji: "❌", left: <>合計が「NaN」や空欄<br />エラーが出る</>, right: <>「&quot;12」を数字として読めず、<br /><Strong>計算できなくなっている</Strong></> },
         ]}
       />
@@ -119,7 +119,7 @@ export const Video = makeVideo("step5", [
         kicker="Step 5"
         fontSize={38}
         items={[
-          <>カード利用明細_202610.csv を選ぶと、合計が［自分のページに出た数字］と表示されます。<br /><Strong>正しくは 18,260 円</Strong>です。</>,
+          <>売上明細_202610.csv を選ぶと、合計が［自分のページに出た数字］と表示されます。<br /><Strong>正しくは 18,260 円</Strong>です。</>,
           <>原因を調べて、何が原因だったかを<Strong>日本語で説明してから</Strong>直してください。</>,
           <>直したあと、<Strong>9 月の CSV で合計が 9,440 円のまま</Strong>であることも確かめてください。</>,
         ]}
@@ -153,7 +153,7 @@ export const Video = makeVideo("step5", [
         rows={[
           { emoji: "📄", left: <>10 月の CSV を選んでも<br />9 月の表示のまま</>, right: <>ページを読み込み直してから選ぶ。変わらなければ<br />「別の CSV を選び直すと、表示が切り替わるようにしてください」と頼む</> },
           { emoji: "📉", left: <>直してもらったら<br />9 月の合計が変わった</>, right: <>「9 月の CSV で合計が◯◯円になりました。<br />9,440 円と 18,260 円の両方が<br />出るようにしてください」</> },
-          { emoji: "🙅", left: "「CSV のほうを直しましょうか」と提案された", right: <><Strong>断る</Strong>。来月の明細も同じ形なので道具を直す。<br />「CSV は変えず、index.html を直してください」</> },
+          { emoji: "🙅", left: "「CSV のほうを直しましょうか」と提案された", right: <><Strong>断る</Strong>。来月の売上データも同じ形なので、<br />道具を直す。<br />「CSV は変えず、index.html を直してください」</> },
         ]}
       />
     ),
@@ -171,7 +171,7 @@ export const Video = makeVideo("step5", [
           { emoji: "🔁", label: "直したあと", desc: "9 月も確かめ直す（9,440 円のまま）" },
         ]}
         outroLabel="このあと"
-        outroText="Step 5 のハンズオン：10 月の明細を入れて、合計を確かめる"
+        outroText="Step 5 のハンズオン：10 月の売上データを入れて、合計を確かめる"
       />
     ),
   },

@@ -54,7 +54,7 @@ export const Video = makeVideo("step7", [
         rowDelay={210}
         rows={[
           [<>1 回きり。または、<br />毎回ファイルの形や判断が違う</>, <Strong>Cowork に頼む</Strong>, <>散らかったフォルダの整理、<br />ばらばらの書類から期限を拾う</>],
-          [<>毎週・毎月、同じ形のデータに<br />同じ処理をする</>, <Strong>Claude Code で道具を作る</Strong>, <>毎月の明細の集計、<br />毎週のアンケート結果の集計</>],
+          [<>毎週・毎月、同じ形のデータに<br />同じ処理をする</>, <Strong>Claude Code で道具を作る</Strong>, <>毎月の売上データの集計、<br />毎週のアンケート結果の集計</>],
           [<>データは使わず、<br />決まった計算や表示をしたい</>, <Strong>Claude Code で道具を作る</Strong>, <>見積の計算、当番表の表示、<br />発表の時間を測るタイマー</>],
         ]}
       />
@@ -124,7 +124,7 @@ export const Video = makeVideo("step7", [
         rowDelay={200}
         rows={[
           { emoji: "💭", left: "道具にする作業が思いつかない", right: <>先月も今月もやった、<Strong>Excel での同じ集計</Strong>を思い出す。<br />無ければ、データを使わない道具から選ぶ</> },
-          { emoji: "🔤", left: "本物の CSV を入れたら、日本語が読めない記号になった", right: <>文字の保存形式が違う。練習用は UTF-8、<br />カード会社や銀行は Shift_JIS のことがある。<br />練習用の CSV を入れた状態で、<br /><Strong>「Shift_JIS の CSV も<br />読めるようにしてください」</Strong>と頼む</> },
+          { emoji: "🔤", left: "本物の CSV を入れたら、日本語が読めない記号になった", right: <>文字の保存形式が違う。練習用は UTF-8、<br />レジや会計ソフトは Shift_JIS のことがある。<br />練習用の CSV を入れた状態で、<br /><Strong>「Shift_JIS の CSV も<br />読めるようにしてください」</Strong>と頼む</> },
           { emoji: "📑", left: "入れるデータの形が分からない", right: <>いつも使っているファイルの<br /><Strong>1 行目（列の名前）</Strong>をそのまま書き写す</> },
           { emoji: "✉️", left: "やりたいことが、メールを送るなど外に出る操作", right: <>最初の 1 つには向かない。<br /><Strong>下書きを画面に出す</Strong>までを道具に</> },
         ]}

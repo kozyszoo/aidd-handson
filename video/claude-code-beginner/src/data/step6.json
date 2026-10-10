@@ -5,7 +5,7 @@
   },
   "goal": {
     "file": "audio/step6/goal.wav",
-    "sec": 16.224
+    "sec": 16.203
   },
   "prompt": {
     "file": "audio/step6/prompt.wav",
@@ -21,7 +21,7 @@
   },
   "steps": {
     "file": "audio/step6/steps.wav",
-    "sec": 26.048
+    "sec": 26.507
   },
   "promises1": {
     "file": "audio/step6/promises1.wav",
@@ -37,6 +37,6 @@
   },
   "summary": {
     "file": "audio/step6/summary.wav",
-    "sec": 21.6
+    "sec": 21.845
   }
 }

@@ -54,7 +54,7 @@ export const Video = makeVideo("step1", [
         rowDelay={[20, 200, 420]}
         rows={[
           [<>実行する場所<br />（Environment）</>, <Strong key="a">Local</Strong>, <>自分のパソコンの上で、<br />自分のファイルを直接使って動かす</>],
-          ["フォルダ", <><Strong>Select folder</Strong><br />→「出費ビューア」</>, "Claude の作業場所になる"],
+          ["フォルダ", <><Strong>Select folder</Strong><br />→「売上ビューア」</>, "Claude の作業場所になる"],
           [<>権限モード<br />（送信ボタンの近く）</>, <Strong key="c">Manual</Strong>, <>書き換える前・コマンドを実行する前に、<br />止まって聞く</>],
         ]}
       />
@@ -86,7 +86,7 @@ export const Video = makeVideo("step1", [
           { label: "9 月分", value: "6 件", sub: "合計 9,440 円" },
           { label: "10 月分", value: "5 件", sub: "合計 18,260 円" },
         ]}
-        rows={[{ label: "列の名前", text: <>「<Strong>利用日・利用先・金額</Strong>」になっているか</>, tone: "accent" }]}
+        rows={[{ label: "列の名前", text: <>「<Strong>販売日・商品・金額</Strong>」になっているか</>, tone: "accent" }]}
       />
     ),
   },
@@ -128,7 +128,7 @@ export const Video = makeVideo("step1", [
           {
             emoji: "📤",
             left: <>Local ＝ 操作が自分のパソコン。<br />内容が外に出ない、ではない</>,
-            right: <>読んだ中身は、答えを作るために<br />Anthropic の AI へ送られる。<br /><Strong>作業フォルダには練習用データだけ</Strong>。本物の明細は Step 6</>,
+            right: <>読んだ中身は、答えを作るために<br />Anthropic の AI へ送られる。<br /><Strong>作業フォルダには練習用データだけ</Strong>。本物の売上データは Step 6</>,
           },
         ]}
         fontSize={31}
@@ -182,7 +182,7 @@ export const Video = makeVideo("step1", [
         kicker="Step 1"
         lead="設定は 3 つ。最初のお願いは読むだけ"
         rows={[
-          { emoji: "⚙️", label: "Local・出費ビューア・Manual", desc: "Code タブで 3 つを設定する" },
+          { emoji: "⚙️", label: "Local・売上ビューア・Manual", desc: "Code タブで 3 つを設定する" },
           { emoji: "📖", label: "読むだけのお願い", desc: "ファイルの変更・作成はしない" },
           { emoji: "🛡️", label: "Local でも中身は AI へ送られる", desc: "作業フォルダは練習用データだけ" },
           { emoji: "📝", label: "メモする答え", desc: "9 月分 6 件 9,440 円／10 月分 5 件 18,260 円" },

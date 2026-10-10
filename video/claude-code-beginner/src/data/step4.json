@@ -9,7 +9,7 @@
   },
   "prompts": {
     "file": "audio/step4/prompts.wav",
-    "sec": 41.248
+    "sec": 41.835
   },
   "check": {
     "file": "audio/step4/check.wav",

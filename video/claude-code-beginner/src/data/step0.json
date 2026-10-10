@@ -13,7 +13,7 @@
   },
   "folder": {
     "file": "audio/step0/folder.wav",
-    "sec": 29.013
+    "sec": 28.917
   },
   "why": {
     "file": "audio/step0/why.wav",
@@ -25,6 +25,6 @@
   },
   "summary": {
     "file": "audio/step0/summary.wav",
-    "sec": 16.459
+    "sec": 16.48
   }
 }

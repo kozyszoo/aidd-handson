@@ -9,7 +9,7 @@
   },
   "review": {
     "file": "audio/step3/review.wav",
-    "sec": 27.957
+    "sec": 28.053
   },
   "reject": {
     "file": "audio/step3/reject.wav",
@@ -17,19 +17,19 @@
   },
   "open": {
     "file": "audio/step3/open.wav",
-    "sec": 32.309
+    "sec": 32.16
   },
   "answer": {
     "file": "audio/step3/answer.wav",
-    "sec": 24.32
+    "sec": 25.077
   },
   "check": {
     "file": "audio/step3/check.wav",
-    "sec": 21.696
+    "sec": 22.069
   },
   "retry": {
     "file": "audio/step3/retry.wav",
-    "sec": 24.864
+    "sec": 24.683
   },
   "trouble": {
     "file": "audio/step3/trouble.wav",

@@ -9,7 +9,7 @@
   },
   "settings": {
     "file": "audio/step1/settings.wav",
-    "sec": 22.251
+    "sec": 22.357
   },
   "prompt": {
     "file": "audio/step1/prompt.wav",
@@ -17,7 +17,7 @@
   },
   "check": {
     "file": "audio/step1/check.wav",
-    "sec": 20.448
+    "sec": 20.192
   },
   "modes": {
     "file": "audio/step1/modes.wav",
@@ -25,7 +25,7 @@
   },
   "local": {
     "file": "audio/step1/local.wav",
-    "sec": 29.589
+    "sec": 29.867
   },
   "trouble1": {
     "file": "audio/step1/trouble1.wav",
@@ -37,6 +37,6 @@
   },
   "summary": {
     "file": "audio/step1/summary.wav",
-    "sec": 25.035
+    "sec": 25.099
   }
 }

@@ -36,7 +36,7 @@ export const Video = makeVideo("step0", [
         columns={[
           { heading: "有料プラン", emoji: "💳", tone: "accent", items: ["Claude の Pro・Max など", "無料プランは Code タブ不可"] },
           { heading: "デスクトップアプリ", emoji: "🖥️", tone: "green", items: ["Claude Desktop", "ログイン済み・最新版"] },
-          { heading: "練習用フォルダ", emoji: "📁", tone: "blue", items: ["出費ビューア", "カード明細の CSV が 2 つ"] },
+          { heading: "練習用フォルダ", emoji: "📁", tone: "blue", items: ["売上ビューア", "売上明細の CSV が 2 つ"] },
         ]}
         note="Node.js もターミナルも要らない。ほかのソフトを入れる手順はない"
       />
@@ -68,9 +68,9 @@ export const Video = makeVideo("step0", [
         kicker="Step 0"
         stepDelay={140}
         steps={[
-          { label: "zip を展開する", desc: <>「出費ビューア」フォルダを取り出す</> },
+          { label: "zip を展開する", desc: <>「売上ビューア」フォルダを取り出す</> },
           { label: "分かる場所に置く", desc: "デスクトップなど、すぐ見つかる場所" },
-          { label: "中の 2 ファイルを確かめる", desc: <>カード利用明細_202609.csv ＝ 9 月分・6 件（<Strong>Step 3</Strong>）<br />カード利用明細_202610.csv ＝ 10 月分・5 件（<Strong>Step 5</Strong>）</> },
+          { label: "中の 2 ファイルを確かめる", desc: <>売上明細_202609.csv ＝ 9 月分・6 件（<Strong>Step 3</Strong>）<br />売上明細_202610.csv ＝ 10 月分・5 件（<Strong>Step 5</Strong>）</> },
         ]}
         note="CSV ＝ 表の中身をカンマ区切りの文字で保存したファイル。中身はすべて架空"
       />
@@ -120,7 +120,7 @@ export const Video = makeVideo("step0", [
         rows={[
           { emoji: "💳", label: "有料プラン", desc: "Pro・Max・Team・Enterprise" },
           { emoji: "🖥️", label: "デスクトップアプリ", desc: "ログイン済み・最新版" },
-          { emoji: "📁", label: "出費ビューア", desc: "作業フォルダは道具ごとに 1 つ。要るデータだけ入れる" },
+          { emoji: "📁", label: "売上ビューア", desc: "作業フォルダは道具ごとに 1 つ。要るデータだけ入れる" },
         ]}
         outroLabel="このあと"
         outroText="Step 0 のハンズオン：アプリと練習用フォルダを用意する"

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出費ビューア（完成見本）</title>
+    <title>売上ビューア（完成見本）</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -73,8 +73,8 @@
 </head>
 
 <body>
-    <h1>出費ビューア</h1>
-    <p>カードの利用明細（CSV）を選ぶと、合計と利用先ごとの内訳を表示します。選んだファイルはこのパソコンの中だけで読み込み、どこにも送りません。</p>
+    <h1>売上ビューア</h1>
+    <p>売上データ（CSV）を選ぶと、合計と商品ごとの内訳を表示します。選んだファイルはこのパソコンの中だけで読み込み、どこにも送りません。</p>
     <input type="file" id="csvFile" accept=".csv">
     <p id="message" class="error"></p>
 
@@ -82,15 +82,15 @@
         <h2>合計</h2>
         <p><span class="total" id="total"></span>（<span id="count"></span> 件）</p>
 
-        <h2>利用先ごとの合計</h2>
+        <h2>商品ごとの合計</h2>
         <div id="chart"></div>
 
         <h2>明細</h2>
         <table>
             <thead>
                 <tr>
-                    <th>利用日</th>
-                    <th>利用先</th>
+                    <th>販売日</th>
+                    <th>商品</th>
                     <th class="amount">金額</th>
                 </tr>
             </thead>
@@ -134,11 +134,11 @@
             const lines = cleanText.split(/\r?\n/).filter(line => line.trim() !== '');
             const header = splitCsvLine(lines[0]).map(name => name.trim());
 
-            const dateIndex = header.indexOf('利用日');
-            const placeIndex = header.indexOf('利用先');
+            const dateIndex = header.indexOf('販売日');
+            const placeIndex = header.indexOf('商品');
             const amountIndex = header.indexOf('金額');
             if (dateIndex === -1 || placeIndex === -1 || amountIndex === -1) {
-                throw new Error('1 行目に「利用日・利用先・金額」の列が見つかりません。');
+                throw new Error('1 行目に「販売日・商品・金額」の列が見つかりません。');
             }
 
             return lines.slice(1).map((line, index) => {
@@ -157,7 +157,7 @@
             });
         }
 
-        // 利用先ごとの合計を、金額の大きい順に並べて返す
+        // 商品ごとの合計を、金額の大きい順に並べて返す
         function sumByPlace(items) {
             const totals = new Map();
             items.forEach(item => {
@@ -176,7 +176,7 @@
             document.getElementById('total').textContent = formatYen(total);
             document.getElementById('count').textContent = items.length;
 
-            // 利用先ごとの棒グラフ。一番大きい金額を幅 100% として長さを決める
+            // 商品ごとの棒グラフ。一番大きい金額を幅 100% として長さを決める
             const chart = document.getElementById('chart');
             chart.textContent = '';
             const placeTotals = sumByPlace(items);

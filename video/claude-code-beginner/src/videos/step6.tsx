@@ -32,11 +32,11 @@ export const Video = makeVideo("step6", [
       <ColumnsScene
         title="この Step でやること"
         kicker="Step 6"
-        lead="本物の明細を入れる前に、送られないかを確かめる"
+        lead="本物の売上データを入れる前に、送られないかを確かめる"
         columns={[
           { heading: "お願い文で確かめる", emoji: "🤖", tone: "accent", items: ["Claude Code に 3 つ聞く", "ファイルは変更しない"] },
           { heading: "自分でも確かめる", emoji: "📶", tone: "green", items: ["Wi-Fi を切って開く", "家でやる"] },
-          { heading: "使うときの約束", emoji: "📋", tone: "blue", items: ["本物の明細で使う手順", "5 つの約束"] },
+          { heading: "使うときの約束", emoji: "📋", tone: "blue", items: ["本物の売上データで使う手順", "5 つの約束"] },
         ]}
       />
     ),
@@ -97,13 +97,13 @@ export const Video = makeVideo("step6", [
     key: "steps",
     node: (
       <StepsScene
-        title="本物の明細で使うときの手順"
+        title="本物の売上データで使うときの手順"
         kicker="Step 6"
         stepDelay={255}
         steps={[
           { label: "index.html を別の場所へコピーする", desc: "作業フォルダとは別（書類フォルダなど）" },
           { label: "コピーをダブルクリックして開く", desc: <>いつものブラウザで開く。<Strong>Claude のアプリの中では開かない</Strong>（Claude が画面を見られるため）</> },
-          { label: "「ファイルを選ぶ」で読み込ませる", desc: <>本物の明細を<Strong>作業フォルダへ入れない</Strong></> },
+          { label: "「ファイルを選ぶ」で読み込ませる", desc: <>本物の売上データを<Strong>作業フォルダへ入れない</Strong></> },
         ]}
       />
     ),
@@ -166,7 +166,7 @@ export const Video = makeVideo("step6", [
         lead="使う前に確かめ、約束を守る"
         rows={[
           { emoji: "🤖", label: "お願い文で確かめる", desc: "送る処理・外の部品・保存。保証ではない" },
-          { emoji: "📂", label: "本物の明細は別の場所で", desc: "コピーした道具に読み込ませる" },
+          { emoji: "📂", label: "本物の売上データは別の場所で", desc: "コピーした道具に読み込ませる" },
           { emoji: "📋", label: "5 つの約束", desc: "使う前に、毎回見直す" },
         ]}
         outroLabel="このあと"

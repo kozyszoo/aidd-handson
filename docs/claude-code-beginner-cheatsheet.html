@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code 入門 チートシート（付録）</title>
+<title>Claude Code 入門 チートシート（付録・表裏 2 枚）</title>
 <style>
-    /* A4 縦 1 枚。ブラウザの印刷で「PDF に保存」できる。余白は用紙側で 0、紙の余白は .sheet の padding で持つ */
+    /* A4 縦 2 枚（表: ハンズオンの要点／裏: 活用ガイド）。ブラウザの印刷で「PDF に保存」できる。余白は用紙側で 0、紙の余白は .sheet の padding で持つ */
     @page { size: A4 portrait; margin: 0; }
     :root {
         --primary: #0f766e;
@@ -61,12 +61,20 @@
     .steps dd { margin: 0; }
     footer { display: flex; justify-content: space-between; gap: 6mm; font-size: 7.4pt; color: var(--muted);
         border-top: 0.3mm solid var(--line); padding-top: 1.6mm; }
+    .loc { display: inline-block; border-radius: 1mm; padding: 0 1.2mm; font-size: 6.8pt; font-weight: 700; white-space: nowrap; margin-right: 1mm; vertical-align: 0.1mm; }
+    .loc.d { background: #dbeafe; color: #1e40af; }
+    .loc.c { background: #ede9fe; color: #5b21b6; }
+    .loc.b { background: #e7e5e4; color: #44403c; }
+    .tips td:first-child { white-space: nowrap; font-weight: 700; color: var(--primary-deep); width: 27%; }
+    .tips td:first-child small { display: block; font-weight: 400; color: var(--muted); font-size: 6.8pt; white-space: normal; }
+    .note { font-size: 7pt; color: var(--muted); margin: 0.8mm 0 0; }
     .toolbar { text-align: center; margin: 4mm 0 0; }
     .toolbar button { font: inherit; font-size: 13px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--primary);
         background: var(--primary); color: #fff; cursor: pointer; }
     @media print {
         html, body { background: #fff; }
-        .sheet { margin: 0; box-shadow: none; }
+        .sheet { margin: 0; box-shadow: none; break-after: page; page-break-after: always; }
+        .sheet:last-child { break-after: auto; page-break-after: auto; }
         .toolbar { display: none; }
     }
 </style>
@@ -74,13 +82,14 @@
 <body>
 <div class="toolbar"><button type="button" onclick="window.print()" title="印刷画面の送信先で「PDF に保存」を選んでください">📄 PDF で保存（印刷）</button></div>
 
-<main class="sheet">
+<main>
+<section class="sheet" id="page1">
     <header>
         <div>
             <h1>Claude Code 入門 チートシート</h1>
             <p class="sub">付録 ／ 売上データを選ぶと合計と内訳が出る Web ページを、言葉で頼んで作る（Code タブ・練習用データ）</p>
         </div>
-        <span class="tag">A4 ・ 見返し用</span>
+        <span class="tag">表面 ・ ハンズオンの要点</span>
     </header>
 
     <div class="grid">
@@ -208,6 +217,94 @@
         <span>資料: https://kozyszoo.github.io/aidd-handson/claude-code-beginner.html</span>
         <span>使うデータは練習用の架空のもの。内容は 2026-10-04 時点の公式ドキュメントで確認</span>
     </footer>
+</section>
+
+<section class="sheet" id="page2">
+    <header>
+        <div>
+            <h1>Claude Code 活用ガイド</h1>
+            <p class="sub">付録（裏面）／ ハンズオンの先へ。普段使いの便利な使い方を、場面ごとに早見</p>
+        </div>
+        <span class="tag">裏面 ・ 活用全般</span>
+    </header>
+    <p class="note" style="margin:0">
+        使える場所: <span class="loc d">Desktop</span>Claude Desktop の Code タブ ／ <span class="loc c">CLI</span>ターミナル版 ／ <span class="loc b">両方</span>。
+        画面の名前・キーは版や OS で変わる（キーは Mac の場合。Windows は公式ドキュメントで確認）。
+    </p>
+
+    <div class="grid">
+        <div class="col">
+            <section class="box accent">
+                <h2>A. 指示の出し方</h2>
+                <table class="tips">
+                    <tr><td>具体的に頼む <span class="loc b">両方</span></td><td>対象・場所・できあがりの基準を書く。例「ログイン画面で、入力が空のときは赤字で『入力してください』と出す。動かして確かめて」</td></tr>
+                    <tr><td>先に計画だけ <span class="loc b">両方</span></td><td><b>Plan</b> を選ぶ（Desktop は送信ボタン横の切り替え。CLI は Shift+Tab）。変更の前に方針を出させ、確認してから進める</td></tr>
+                    <tr><td>ファイルや画像を渡す <span class="loc b">両方</span></td><td>入力欄の「+」で添付、またはドラッグ＆ドロップ。<code>@</code> とファイル名で、そのファイルを文脈に入れる。画面の写真は文章より正確に伝わる</td></tr>
+                    <tr><td>途中で止める <span class="loc b">両方</span></td><td>停止ボタンか <b>Esc</b>。それまでの作業は残る。実行中に修正文を送ってもよい</td></tr>
+                    <tr><td>会話が長くなったら <span class="loc b">両方</span></td><td>話題が変わったら <code>/clear</code>。要約して続けるなら <code>/compact</code>。同じ指摘を 2 回しても直らないなら、新しい会話で頼み直すほうが速い</td></tr>
+                </table>
+            </section>
+
+            <section class="box">
+                <h2>B. 安全に使う</h2>
+                <table class="tips">
+                    <tr><td>権限モード <span class="loc b">両方</span></td><td>最初は <b>Manual</b>（毎回聞かれる）。<b>Bypass</b> は使い捨ての環境だけ</td></tr>
+                    <tr><td>差分の画面 <span class="loc d">Desktop</span></td><td>変更後の「+12 -1」のような表示をクリックすると、変わった行の一覧が出る。行をクリックしてコメントを書き、まとめて送って直させる</td></tr>
+                    <tr><td>巻き戻し <span class="loc c">CLI</span></td><td>入力欄が空のとき <b>Esc を 2 回</b>、または <code>/rewind</code>。ただし <code>rm</code>・<code>mv</code> など、コマンドで消した・動かしたものは戻らない。<small>Desktop で戻す方法は、公式の記載を確認できなかった</small></td></tr>
+                    <tr><td>Git で区切る <span class="loc b">両方</span></td><td>「変更を分かりやすい名前で commit して」と頼む。区切りごとに残しておけば、前の状態に戻せる。「新しいブランチを作って」で作業を分けられる</td></tr>
+                </table>
+            </section>
+
+            <section class="box">
+                <h2>C. 覚えさせる・ルールを決める</h2>
+                <table class="tips">
+                    <tr><td>CLAUDE.md <span class="loc b">両方</span></td><td>毎回守ってほしい決まりを書く 1 つのファイル。<code>/init</code> で雛形を作る。「CLAUDE.md に追記して」と頼んでもよい</td></tr>
+                    <tr><td>自動メモリ <span class="loc b">両方</span></td><td>「これを覚えておいて」と頼むと、次の会話でも参照される。<small>オン・オフの切り替えは CLI の <code>/memory</code></small></td></tr>
+                    <tr><td>スキル <span class="loc b">両方</span></td><td>よくやる手順を <code>SKILL.md</code> に書くと、<code>/名前</code> で呼び出せる。入力欄で <code>/</code> を打って選ぶ（Desktop は「+」→ Slash commands でも）</td></tr>
+                    <tr><td>フック <span class="loc b">両方</span></td><td>「編集のたびに必ず実行」など、例外なく動かしたい処理を設定ファイルに書く。上級者向け。<small>Desktop で動くかは公式の記載を確認できなかった</small></td></tr>
+                </table>
+            </section>
+        </div>
+
+        <div class="col">
+            <section class="box accent">
+                <h2>D. 作業を広げる</h2>
+                <table class="tips">
+                    <tr><td>複数の作業を並べる <span class="loc d">Desktop</span></td><td>「+ New session」（Cmd+N）で作業ごとにセッションを分ける。Git のフォルダなら、ブランチ名の横の worktree（ファイルが衝突しない別コピー）で並行できる。<small>CLI は <code>claude --worktree 名前</code></small></td></tr>
+                    <tr><td>Cloud で任せる <span class="loc d">Desktop</span></td><td>環境を <b>Cloud</b> にすると、アプリやパソコンを閉じても作業が続く。進み具合は claude.ai/code やスマホのアプリで見て、途中で指示を変えられる</td></tr>
+                    <tr><td>画面のプレビュー <span class="loc d">Desktop</span></td><td>Cmd+Shift+B で Browser pane を開くと、Claude が起動したアプリを右側で見ながら直せる</td></tr>
+                    <tr><td>コネクタ <span class="loc d">Desktop</span></td><td>入力欄の「+」→ Connectors で、Google カレンダー・Slack・Notion などをつなぐ。<small>CLI は <code>claude mcp add</code>（上級者向け）</small></td></tr>
+                    <tr><td>決まった時刻に実行 <span class="loc d">Desktop</span></td><td>Routines →「New routine」→ Local。毎時・毎日・平日・毎週から選ぶ。アプリが開いていて、パソコンが起きている必要がある</td></tr>
+                </table>
+            </section>
+
+            <section class="box">
+                <h2>E. 困ったとき・使用量の管理</h2>
+                <table class="tips">
+                    <tr><td>使用量を見る <span class="loc b">両方</span></td><td>Desktop は入力欄の横、モデル名の隣の輪（usage ring）をクリック。CLI は <code>/usage</code>。上限に当たる前に、作業の量を調整できる</td></tr>
+                    <tr><td>モデルを選ぶ <span class="loc b">両方</span></td><td>簡単な作業は軽いモデル、難しい設計は重いモデル。公式は「多くの作業は Sonnet で足りる。Opus は複雑な設計向け」。CLI は <code>/model</code></td></tr>
+                    <tr><td>上限・エラー <span class="loc b">両方</span></td><td>「session limit」は、再開の時刻まで待つ（<code>/usage</code> で確認）。「Prompt is too long」は <code>/compact</code> か <code>/clear</code> で会話を短くする。エラー文は、そのまま Claude に見せる</td></tr>
+                    <tr><td>使い方を聞く <span class="loc b">両方</span></td><td>「Claude Code で〜はできる？」と聞くと、公式ドキュメントを見て答える。CLI は <code>/help</code> で一覧が出る</td></tr>
+                </table>
+            </section>
+
+            <section class="box warn">
+                <h2>F. ターミナル版の入口 <small>次に進みたい人向け</small></h2>
+                <table class="tips">
+                    <tr><td>起動 <span class="loc c">CLI</span></td><td><code>cd 作業フォルダ</code> のあと <code>claude</code>。初回はブラウザでログイン</td></tr>
+                    <tr><td>1 回だけ聞く <span class="loc c">CLI</span></td><td><code>claude -p "このフォルダの概要を説明して"</code>（会話を始めず、結果だけ受け取る）</td></tr>
+                    <tr><td>前の続き <span class="loc c">CLI</span></td><td><code>claude --continue</code>（直近）／ <code>claude --resume</code>（一覧から選ぶ）。<small>Desktop は左のサイドバーの一覧から選ぶ</small></td></tr>
+                    <tr><td>基本の 3 つ <span class="loc c">CLI</span></td><td><code>/help</code>（一覧）・<code>/clear</code>（会話を空にする）・<code>/exit</code>（終了）。Shift+Tab でモード切り替え（<b>Desktop では使えない</b>）</td></tr>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <span>出典: Claude Code 公式ドキュメント（code.claude.com/docs）。2026-10-11 に確認</span>
+        <span>使ってよいか迷う操作は、練習用のフォルダで試してから</span>
+    </footer>
+</section>
 </main>
 </body>
 </html>

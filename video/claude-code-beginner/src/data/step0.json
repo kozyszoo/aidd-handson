@@ -1,7 +1,7 @@
 {
   "title": {
     "file": "audio/step0/title.wav",
-    "sec": 7.392
+    "sec": 8.235
   },
   "goal": {
     "file": "audio/step0/goal.wav",
@@ -25,6 +25,6 @@
   },
   "summary": {
     "file": "audio/step0/summary.wav",
-    "sec": 17.131
+    "sec": 16.459
   }
 }

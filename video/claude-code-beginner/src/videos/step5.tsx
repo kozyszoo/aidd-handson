@@ -1,4 +1,4 @@
-// Step 5「10 月の明細を入れて、合計が合うかを確かめる」の復習動画。語りは narration/step5.md。
+// Step 5「10 月の明細を入れて、合計が合うかを確かめる」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step5.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { ColumnsScene } from "../scenes/ColumnsScene";
@@ -19,11 +19,11 @@ export const Video = makeVideo("step5", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 5 別の月で試す"
         subtitle="10 月の明細を入れて、"
         accentWord="合計が合うかを確かめる"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -170,8 +170,8 @@ export const Video = makeVideo("step5", [
           { emoji: "💬", label: "合わなかったとき", desc: "正しい数字を伝え、原因の説明と直しを頼む" },
           { emoji: "🔁", label: "直したあと", desc: "9 月も確かめ直す（9,440 円のまま）" },
         ]}
-        outroLabel="次は"
-        outroText="Step 6：中身を確かめる"
+        outroLabel="このあと"
+        outroText="Step 5 のハンズオン：10 月の明細を入れて、合計を確かめる"
       />
     ),
   },

@@ -1,4 +1,4 @@
-// Step 6「道具の中身を確かめ、使うときの約束を見る」の復習動画。語りは narration/step6.md。
+// Step 6「道具の中身を確かめ、使うときの約束を見る」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step6.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { ColumnsScene } from "../scenes/ColumnsScene";
@@ -18,11 +18,11 @@ export const Video = makeVideo("step6", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 6 確かめる"
         subtitle="道具の中身を確かめ、"
         accentWord="使うときの約束を見る"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -169,8 +169,8 @@ export const Video = makeVideo("step6", [
           { emoji: "📂", label: "本物の明細は別の場所で", desc: "コピーした道具に読み込ませる" },
           { emoji: "📋", label: "5 つの約束", desc: "使う前に、毎回見直す" },
         ]}
-        outroLabel="次は"
-        outroText="Step 7：自分の作業から 1 つ選んで、道具の頼み方を書く"
+        outroLabel="このあと"
+        outroText="Step 6 のハンズオン：道具の中身を確かめ、使うときの約束を見る"
       />
     ),
   },

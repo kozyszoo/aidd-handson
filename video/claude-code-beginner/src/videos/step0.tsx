@@ -1,4 +1,4 @@
-// Step 0「アプリと練習用フォルダを用意する」の復習動画。語りは narration/step0.md。
+// Step 0「アプリと練習用フォルダを用意する」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step0.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { ColumnsScene } from "../scenes/ColumnsScene";
@@ -18,11 +18,11 @@ export const Video = makeVideo("step0", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 0 準備する"
         subtitle="アプリと練習用フォルダを、"
         accentWord="用意する"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -116,14 +116,14 @@ export const Video = makeVideo("step0", [
     node: (
       <SummaryScene
         title="Step 0 のまとめ"
-        lead="準備は、この3つで完了"
+        lead="準備するのは、この3つ"
         rows={[
           { emoji: "💳", label: "有料プラン", desc: "Pro・Max・Team・Enterprise" },
           { emoji: "🖥️", label: "デスクトップアプリ", desc: "ログイン済み・最新版" },
           { emoji: "📁", label: "出費ビューア", desc: "作業フォルダは道具ごとに 1 つ。要るデータだけ入れる" },
         ]}
-        outroLabel="次は"
-        outroText="Step 1：Code タブでフォルダを開き、中身を説明してもらう"
+        outroLabel="このあと"
+        outroText="Step 0 のハンズオン：アプリと練習用フォルダを用意する"
       />
     ),
   },

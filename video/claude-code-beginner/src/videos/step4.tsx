@@ -1,4 +1,4 @@
-// Step 4「見た目や並び順を、言葉で頼んで直す」の復習動画。語りは narration/step4.md。
+// Step 4「見た目や並び順を、言葉で頼んで直す」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step4.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { ColumnsScene } from "../scenes/ColumnsScene";
@@ -18,11 +18,11 @@ export const Video = makeVideo("step4", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 4 直す"
         subtitle="見た目や並び順を、言葉で"
         accentWord="頼んで直す"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -141,8 +141,8 @@ export const Video = makeVideo("step4", [
           { emoji: "📄", label: "Accept の前にファイル名を見る", desc: "index.html であることを確かめる" },
           { emoji: "🔢", label: "直すたびに数字を確かめる", desc: "読み込み直して、合計が 9,440 円のままか" },
         ]}
-        outroLabel="次は"
-        outroText="Step 5：10 月分の CSV を使う"
+        outroLabel="このあと"
+        outroText="Step 4 のハンズオン：見た目や並び順を、言葉で頼んで直す"
       />
     ),
   },

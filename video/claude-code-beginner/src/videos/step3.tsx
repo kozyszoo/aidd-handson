@@ -1,4 +1,4 @@
-// Step 3「変更を承認してページを作り、開いて合計を確かめる」の復習動画。語りは narration/step3.md。
+// Step 3「変更を承認してページを作り、開いて合計を確かめる」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step3.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { PairScene } from "../scenes/PairScene";
@@ -17,11 +17,11 @@ export const Video = makeVideo("step3", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 3 作る"
         subtitle="変更を承認してページを作り、"
         accentWord="合計を確かめる"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -181,8 +181,8 @@ export const Video = makeVideo("step3", [
           { emoji: "🌐", label: "ページを開く", desc: "index.html の文字を押して開く" },
           { emoji: "🔢", label: "9 月分の確認", desc: "合計 9,440 円・まとまり方・文字" },
         ]}
-        outroLabel="次は"
-        outroText="Step 4：見た目や並び順を、言葉で頼んで直す"
+        outroLabel="このあと"
+        outroText="Step 3 のハンズオン：変更を承認してページを作り、開いて合計を確かめる"
         note="使用量の上限に達したときは、講師に声をかける"
       />
     ),

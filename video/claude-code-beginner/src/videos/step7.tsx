@@ -1,4 +1,4 @@
-// Step 7「自分の作業から 1 つ選んで、道具の頼み方を書く」の復習動画（Step 8 の紹介を最後に 1 シーン）。語りは narration/step7.md。
+// Step 7「自分の作業から 1 つ選んで、道具の頼み方を書く」の解説動画（Step 8 の紹介を最後に 1 シーン）。語りは narration/step7.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { ColumnsScene } from "../scenes/ColumnsScene";
@@ -19,11 +19,11 @@ export const Video = makeVideo("step7", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 7 自分の道具を考える"
         subtitle="自分の作業から 1 つ選んで、"
         accentWord="頼み方を書く"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -152,7 +152,7 @@ export const Video = makeVideo("step7", [
     node: (
       <SummaryScene
         title="Step 7 のまとめ"
-        lead="この Step で決めたこと"
+        lead="この Step で決めること"
         rows={[
           { emoji: "🔀", label: "分ける", desc: "同じ形の作業は道具、1 回きりは Cowork" },
           { emoji: "✍️", label: "頼み方の 5 項目", desc: "入れるもの・出てくるもの・決\u2060ま\u2060り\u2060ご\u2060と・確\u2060か\u2060め\u2060方・進め方" },

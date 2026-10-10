@@ -1,4 +1,4 @@
-// Step 1「Code タブでフォルダを開き、中身を説明してもらう」の復習動画。語りは narration/step1.md。
+// Step 1「Code タブでフォルダを開き、中身を説明してもらう」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step1.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { InfoScene } from "../scenes/InfoScene";
@@ -19,11 +19,11 @@ export const Video = makeVideo("step1", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 1 フォルダを開く"
         subtitle="Code タブでフォルダを開き、"
         accentWord="中身を説明してもらう"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -187,8 +187,8 @@ export const Video = makeVideo("step1", [
           { emoji: "🛡️", label: "Local でも中身は AI へ送られる", desc: "作業フォルダは練習用データだけ" },
           { emoji: "📝", label: "メモする答え", desc: "9 月分 6 件 9,440 円／10 月分 5 件 18,260 円" },
         ]}
-        outroLabel="次は"
-        outroText="Step 2：作りたいものを伝えて、先に計画を出してもらう"
+        outroLabel="このあと"
+        outroText="Step 1 のハンズオン：Code タブでフォルダを開き、中身を説明してもらう"
       />
     ),
   },

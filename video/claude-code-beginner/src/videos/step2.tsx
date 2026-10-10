@@ -1,4 +1,4 @@
-// Step 2「作りたいものを伝えて、先に計画を出してもらう」の復習動画。語りは narration/step2.md。
+// Step 2「作りたいものを伝えて、先に計画を出してもらう」の解説動画（各 Step のハンズオンの前に見る）。語りは narration/step2.md。
 import React from "react";
 import { makeVideo } from "../lib/makeVideo";
 import { InfoScene } from "../scenes/InfoScene";
@@ -18,11 +18,11 @@ export const Video = makeVideo("step2", [
     key: "title",
     node: (
       <TitleScene
-        tag="Claude Code 入門ハンズオン ― 復習動画"
+        tag="Claude Code 入門ハンズオン ― 解説動画"
         title="Step 2 計画を出してもらう"
         subtitle="作りたいものを伝えて、"
         accentWord="先に計画を見る"
-        audience="ハンズオンのあとで、手順を見直したいかたへ"
+        audience="手を動かす前に、この Step の流れをつかみたいかたへ"
       />
     ),
   },
@@ -152,8 +152,8 @@ export const Video = makeVideo("step2", [
           { emoji: "🔍", label: "計画で確かめる 3 つ", desc: "ファイル 1 つ／インストール無し／ボタンで選ぶ" },
           { emoji: "❓", label: "分からなければ聞く", desc: "分からない言葉はそのまま聞く" },
         ]}
-        outroLabel="次は"
-        outroText="Step 3：計画に沿って、実際に作ってもらう"
+        outroLabel="このあと"
+        outroText="Step 2 のハンズオン：作りたいものを伝えて、先に計画を出してもらう"
       />
     ),
   },

@@ -566,7 +566,7 @@
             <span class="badge badge-level">プログラミングをしたことがない人向け</span>
             <h1>🧰 Claude Code 入門ハンズオン<br>～ カード明細を読み込んで、出費が見える 1 枚のページを作る ～</h1>
             <p style="margin-top:8px;">Claude Code は、プログラムを書く AI です。この資料では、Claude Desktop アプリの <strong>Code タブ</strong>を使い、<strong>カードの利用明細（CSV）を選ぶと合計と内訳が出る Web ページ</strong>を、言葉で頼んで作ります。黒い画面（ターミナル）は使いません。プログラムを自分で書くこともありません。</p>
-            <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間: 約 90 分 ／ 前提: Claude の有料プラン（Pro・Max・Team・Enterprise）と Claude Desktop アプリ。Node.js やターミナルの準備は要りません ／ Claude の利用は 18 歳以上が対象 ／ 内容は 2026-10-04 時点の公式ドキュメントで確認</p>
+            <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間: 約 120 分（解説動画 約 31 分＋ハンズオン）／ 前提: Claude の有料プラン（Pro・Max・Team・Enterprise）と Claude Desktop アプリ。Node.js やターミナルの準備は要りません ／ Claude の利用は 18 歳以上が対象 ／ 内容は 2026-10-04 時点の公式ドキュメントで確認</p>
         </div>
 
         <div class="page-toolbar">
@@ -674,19 +674,23 @@
                 <li>自分の作業の中から、<strong>道具にすると楽になるものを 1 つ選び、頼み方を書ける</strong>ようになる</li>
             </ul>
 
+            <div class="callout callout-info">
+                🎬 <strong>この資料は「動画 → ハンズオン」を Step ごとに繰り返します。</strong> 各 Step の最初に、解説動画（約 3〜4 分）を見て、やることと確かめるところをつかみます。そのあと、同じ Step の手順で実際に手を動かします。動画は音が出ます。イヤホンかスピーカーを用意してください。
+            </div>
+
             <div class="card" style="background: var(--bg-mid);">
                 <div style="font-weight:700; color: var(--primary); margin-bottom: 8px;">🧭 このハンズオンの流れ</div>
                 <table style="margin: 0;">
-                    <tr><th>Step</th><th>やること</th><th>めやす</th></tr>
-                    <tr><td>0. 準備する</td><td>アプリと練習用フォルダを用意する</td><td>10 分</td></tr>
-                    <tr><td>1. フォルダを開く</td><td>Code タブでフォルダを選び、中身を説明してもらう</td><td>10 分</td></tr>
-                    <tr><td>2. 計画を見る</td><td>作りたいものを伝え、ファイルを作る前に計画を出してもらう</td><td>10 分</td></tr>
-                    <tr><td>3. 作ってもらう</td><td>変更を承認してページを作り、開いて合計を確かめる</td><td>15 分</td></tr>
-                    <tr><td>4. 言葉で直す</td><td>見た目や並び順を、言葉で頼んで直す</td><td>10 分</td></tr>
-                    <tr><td>5. 別のデータで試す</td><td>10 月の明細を入れて、合計が合うかを確かめる</td><td>10 分</td></tr>
-                    <tr><td>6. 中身を確かめる</td><td>データを外へ送っていないかを確かめ、使うときの約束を見る</td><td>5 分</td></tr>
-                    <tr><td>7. 自分の道具を考える</td><td>自分の作業から 1 つ選び、頼み方を書く</td><td>10 分</td></tr>
-                    <tr><td>8. もっと便利な機能</td><td>ルールのファイル・定期実行などを知る（紹介のみ）</td><td>あとで読む</td></tr>
+                    <tr><th>Step</th><th>やること</th><th>動画</th><th>ハンズオン</th></tr>
+                    <tr><td>0. 準備する</td><td>アプリと練習用フォルダを用意する</td><td>約 3 分</td><td>約 9 分</td></tr>
+                    <tr><td>1. フォルダを開く</td><td>Code タブでフォルダを選び、中身を説明してもらう</td><td>約 4 分</td><td>約 10 分</td></tr>
+                    <tr><td>2. 計画を見る</td><td>作りたいものを伝え、ファイルを作る前に計画を出してもらう</td><td>約 4 分</td><td>約 10 分</td></tr>
+                    <tr><td>3. 作ってもらう</td><td>変更を承認してページを作り、開いて合計を確かめる</td><td>約 4 分</td><td>約 15 分</td></tr>
+                    <tr><td>4. 言葉で直す</td><td>見た目や並び順を、言葉で頼んで直す</td><td>約 4 分</td><td>約 10 分</td></tr>
+                    <tr><td>5. 別のデータで試す</td><td>10 月の明細を入れて、合計が合うかを確かめる</td><td>約 4 分</td><td>約 10 分</td></tr>
+                    <tr><td>6. 中身を確かめる</td><td>データを外へ送っていないかを確かめ、使うときの約束を見る</td><td>約 4 分</td><td>約 5 分</td></tr>
+                    <tr><td>7. 自分の道具を考える</td><td>自分の作業から 1 つ選び、頼み方を書く</td><td>約 4 分</td><td>約 10 分</td></tr>
+                    <tr><td>8. もっと便利な機能</td><td>ルールのファイル・定期実行などを知る（紹介のみ）</td><td>Step 7 の動画の最後で紹介</td><td>あとで読む</td></tr>
                 </table>
             </div>
 
@@ -709,7 +713,7 @@
             <span class="badge badge-time">🧰 準備</span>
             <h2>Step 0: アプリと練習用フォルダを用意する</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 2 分 43 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1JvSTT7EoDtXBpDEAw_DVK64az2_hZC2H/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 2 分 43 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/1YryhSli5F7v1mWOwiETw8XPREhYt51cU/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
 
             <h3 class="preparation-heading">📋 必要なもの</h3>
@@ -763,7 +767,7 @@
             <span class="badge badge-time">🚪 最初の一歩</span>
             <h2>Step 1: Code タブでフォルダを開き、中身を説明してもらう</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 3 分 44 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1rcs4Zp2Y66_ZRvayJm6v1u9SJ42SvrUe/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 3 分 45 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/11okBzctqVo5d1g7HIFIoTimXwJJ4KgAh/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
             <p>最初は<strong>読むだけ</strong>のお願いにします。ファイルを書き換えないので、何が起きても元に戻す必要がありません。</p>
 
@@ -846,7 +850,7 @@
             <span class="badge badge-time">🗺️ 計画</span>
             <h2>Step 2: 作りたいものを伝えて、先に計画を出してもらう</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 3 分 59 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1VqKIfqkeXzikutVIUy7l2P8HcABHAiaz/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 3 分 57 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/1GkbzVpibmzC2AyBGBjCEVgIhcydwtUSd/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
             <p>いきなり作らせず、<strong>何をどう作るつもりかを先に見ます。</strong>公式ドキュメントでも、込み入った作業は Plan で進め方を出させてから実行に移すことが勧められています。</p>
 
@@ -917,7 +921,7 @@
             <span class="badge badge-time">🔨 作る</span>
             <h2>Step 3: 変更を承認してページを作り、開いて合計を確かめる</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 4 分 13 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1ckhe4SR8JRIBwLL9YYoqPqt61GY8w6Pr/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 4 分 13 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/1nKSK_WoeKR5bwFUEPUbRV6u-0Rsnn4l6/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
 
             <h3 class="preparation-heading">📋 手順 1: 作ってもらう</h3>
@@ -1000,7 +1004,7 @@
             <span class="badge badge-time">✏️ 直す</span>
             <h2>Step 4: 見た目や並び順を、言葉で頼んで直す</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 3 分 49 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1I1ytwL6riXYVm3NKDgHc18mWsVxNH2Bn/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 3 分 49 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/1mbq1yvyn0Mq5_5iEQx9svG6LRJ1kEZ7M/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
             <p>できたページを見て、変えたいところを言葉で伝えます。次の中から <strong>1 つか 2 つ</strong>選んで送ってください。自分で考えたものでも構いません。</p>
 
@@ -1071,7 +1075,7 @@
             <span class="badge badge-level">🔍 いちばん大事</span>
             <h2>Step 5: 10 月の明細を入れて、合計が合うかを確かめる</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 4 分 10 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1jcbrs5OlbSyUqg7wMHjG7fniEdPp1flQ/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 4 分 12 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/1oFSRgG2nBeBLDqfzfsqfbKrq3cRLjl--/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
             <p>道具は、作ったときのデータでは動いても、<strong>別のデータを入れると間違う</strong>ことがあります。来月も使うつもりなら、来月のデータで試しておく必要があります。</p>
 
@@ -1146,7 +1150,7 @@
             <span class="badge badge-time">🔐 確かめる</span>
             <h2>Step 6: 道具の中身を確かめ、使うときの約束を見る</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 4 分 0 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1tPHDoio46Z-TUBIodZtiDR6Jjdundx06/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 4 分 1 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/1Sov1LgAi9G8oR-4YVq383QPOn9CKC8C8/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
             <p>この道具には、これから本物のカード明細を入れることになります。<strong>入れたデータがどこかへ送られないか</strong>を、使う前に確かめます。</p>
 
@@ -1203,7 +1207,7 @@
             <span class="badge badge-time">✍️ 演習</span>
             <h2>Step 7: 自分の作業から 1 つ選んで、道具の頼み方を書く</h2>
             <div class="callout callout-info">
-                🎬 <strong>この Step の復習動画（約 3 分 44 秒）</strong> ― 手順と確かめるところを、あとから見返せます。<a href="https://drive.google.com/file/d/1XAGfrOjTGJiMPOqlk-EUfxDx1sXsB05L/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
+                🎬 <strong>① 先に解説動画を見る（約 3 分 48 秒）</strong> ― やることと確かめるところを、先につかみます。見終わったら、下の手順で ② 手を動かします。<a href="https://drive.google.com/file/d/12a2cA24USk8TnYyShDCvt21P0ng6tcKe/view" target="_blank" rel="noopener">動画を開く（Google Drive）</a>
             </div>
             <p>この Step では、<strong>自分がふだんやっている作業の中から、道具にするものを 1 つ選び、頼み方を自分で書きます。</strong>本物のデータはまだ使いません。書くところまでがこの Step です。</p>
 
@@ -1328,22 +1332,25 @@
 
         <!-- Facilitator -->
         <section class="section" id="facilitator">
-            <h2>講師向け: 進行のめやす（90 分版）</h2>
+            <h2>講師向け: 進行のめやす（120 分版）</h2>
+            <p>各 Step は「解説動画 → ハンズオン」の順です。動画は全員が同時に見られるよう、講師の画面を投影して流すか、各自の画面で一斉に再生します。</p>
             <table>
                 <tr><th>時間</th><th>内容</th><th>講師がすること</th></tr>
-                <tr><td>0:00〜0:10</td><td>はじめに</td><td>Cowork と Code の違いを図で説明する。Cowork 編に出た人を挙手で確認する</td></tr>
-                <tr><td>0:10〜0:20</td><td>Step 0</td><td>アプリの更新が済んでいるかを確認する。有料プランでない人は、隣の人と組んで画面を見る形にする</td></tr>
-                <tr><td>0:20〜0:30</td><td>Step 1</td><td>Local・Select folder・Manual の 3 つを、講師の画面で 1 つずつ見せる。9,440 円と 18,260 円をメモしてもらう</td></tr>
-                <tr><td>0:30〜0:40</td><td>Step 2</td><td>Plan に切り替えるところを見せる。返ってきた計画から「作るファイルの名前」と「インストールの有無」を探すところを、声に出して実演する</td></tr>
-                <tr><td>0:40〜0:55</td><td>Step 3</td><td>確認の画面を全員の前で見せ、「どのファイルに」「何を」を読んでから Accept を押す。9,440 円が出た人を挙手で数える</td></tr>
-                <tr><td>0:55〜1:05</td><td>Step 4</td><td>直したあとに合計を見直すところまでを 1 回実演する</td></tr>
-                <tr><td>1:05〜1:15</td><td>Step 5</td><td>18,260 円が出た人・5,472 円が出た人・エラーになった人を挙手で数える。全員が合っていた場合も、CSV の「"12,800"」の行を画面に出して、なぜ試す必要があるかを説明する</td></tr>
-                <tr><td>1:15〜1:20</td><td>Step 6</td><td>確かめるお願いを送ってもらい、5 つの約束の表を、Step 1〜5 で起きたことと結び付けて説明する</td></tr>
-                <tr><td>1:20〜1:30</td><td>Step 7・まとめ</td><td>ひな形を書いてもらう（8 分）。残りの 2 分で、1〜2 人に選んだ作業と「確かめ方」を発表してもらい、Step 8 とチェックリストの場所を案内する</td></tr>
+                <tr><td>0:00〜0:10</td><td>はじめに</td><td>Cowork と Code の違いを図で説明する。Cowork 編に出た人を挙手で確認する。「動画 → ハンズオン」の進め方と、音が出るか（イヤホン）を確認する</td></tr>
+                <tr><td>0:10〜0:22</td><td>Step 0（動画 3 分＋ハンズオン 9 分）</td><td>アプリの更新が済んでいるかを確認する。有料プランでない人は、隣の人と組んで画面を見る形にする</td></tr>
+                <tr><td>0:22〜0:36</td><td>Step 1（動画 4 分＋ハンズオン 10 分）</td><td>Local・Select folder・Manual の 3 つを、講師の画面で 1 つずつ見せる。9,440 円と 18,260 円をメモしてもらう</td></tr>
+                <tr><td>0:36〜0:50</td><td>Step 2（動画 4 分＋ハンズオン 10 分）</td><td>Plan に切り替えるところを見せる。返ってきた計画から「作るファイルの名前」と「インストールの有無」を探すところを、声に出して実演する</td></tr>
+                <tr><td>0:50〜1:09</td><td>Step 3（動画 4 分＋ハンズオン 15 分）</td><td>確認の画面を全員の前で見せ、「どのファイルに」「何を」を読んでから Accept を押す。9,440 円が出た人を挙手で数える</td></tr>
+                <tr><td>1:09〜1:23</td><td>Step 4（動画 4 分＋ハンズオン 10 分）</td><td>直したあとに合計を見直すところまでを 1 回実演する</td></tr>
+                <tr><td>1:23〜1:37</td><td>Step 5（動画 4 分＋ハンズオン 10 分）</td><td>18,260 円が出た人・5,472 円が出た人・エラーになった人を挙手で数える。全員が合っていた場合も、CSV の「"12,800"」の行を画面に出して、なぜ試す必要があるかを説明する</td></tr>
+                <tr><td>1:37〜1:46</td><td>Step 6（動画 4 分＋ハンズオン 5 分）</td><td>確かめるお願いを送ってもらい、5 つの約束の表を、Step 1〜5 で起きたことと結び付けて説明する</td></tr>
+                <tr><td>1:46〜2:00</td><td>Step 7・まとめ（動画 4 分＋ハンズオン 10 分）</td><td>動画のあと、ひな形を書いてもらう（8 分）。残りの 2 分で、1〜2 人に選んだ作業と「確かめ方」を発表してもらい、Step 8 とチェックリストの場所を案内する</td></tr>
             </table>
 
             <h3>進行で気をつけること</h3>
             <ul>
+                <li><strong>解説動画は、最後まで流してから手を動かす。</strong>途中で止めて質問を受けると、全体が 120 分に収まらなくなる。質問はハンズオンの時間に受ける。動画の語りは、画面に出ていることを話している。速いと感じる人には、動画を再生しながら手を動かすのではなく、見終わってから手順に戻るよう伝える</li>
+                <li><strong>当日の前に、動画が全員の環境で再生できるかを確かめる。</strong>動画は Google Drive にある。共有の設定を事前に確認し、音が出ない人には、画面の文字を読みながら見てもらう</li>
                 <li><strong>当日の前に、講師の画面で Step 1〜6 を一度通しておく。</strong>ボタンの名前や場所がこの資料と違っていたら、その場で読み替えを伝える。権限モードの名前は版によって違う（Step 1 の表の下を参照）</li>
                 <li><strong>作られるページは、人によって見た目が違う。</strong>同じお願いでも、色・配置・グラフの形は毎回変わる。そろえるのは見た目ではなく、<strong>合計の数字</strong>であることを最初に伝える</li>
                 <li><strong>Step 5 で全員が正しく読めることがある。</strong>その場合も失敗ではない。「試したから合っていると分かった」ことを伝える</li>
@@ -1358,6 +1365,7 @@
             <ul>
                 <li>練習用フォルダ: <code>docs/claude-code-practice.zip</code>（中身は <code>docs/claude-code-sample/出費ビューア/</code> と同じ）</li>
                 <li>完成見本: <code>docs/claude-code-sample/完成見本/index.html</code>（9 月 9,440 円・10 月 18,260 円になることを確認済み）</li>
+                <li>Step 0〜7 の解説動画（Google Drive の「Claude Code入門ハンズオン 解説動画」フォルダ。各 Step の見出し下のリンクからも開ける）</li>
                 <li>この資料の URL と、チェックリストの節</li>
             </ul>
 

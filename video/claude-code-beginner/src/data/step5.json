@@ -1,7 +1,7 @@
 {
   "title": {
     "file": "audio/step5/title.wav",
-    "sec": 8.501
+    "sec": 9.461
   },
   "why": {
     "file": "audio/step5/why.wav",
@@ -37,6 +37,6 @@
   },
   "summary": {
     "file": "audio/step5/summary.wav",
-    "sec": 24.672
+    "sec": 25.995
   }
 }

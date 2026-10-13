@@ -458,7 +458,7 @@
             <span class="badge badge-level">入門</span>
             <h1>🎬 Remotion 入門ハンズオン</h1>
             <p style="margin-top:8px; font-size:1.05rem; color: var(--text);"><strong>React のコードで動画(MP4)を作る</strong></p>
-            <p style="margin-top:8px;">Remotion は、タイムラインを GUI で編集する代わりに、<strong>React のコンポーネントとして「各フレームの見た目」をプログラムで定義して動画を作る</strong>オープンソースツールです。このハンズオンでは、ゼロから短い動画を 1 本作り、MP4 として書き出すまでを実際に手を動かして体験します。</p>
+            <p style="margin-top:8px;">Remotion は、タイムラインを GUI で編集する代わりに、<strong>React のコンポーネントとして「各フレームの見た目」をプログラムで定義して動画を作る</strong>ツールです。ソースコードは公開されていますが、利用には独自のRemotion Licenseが適用されます。このハンズオンでは、ゼロから短い動画を 1 本作り、MP4 として書き出すまでを実際に手を動かして体験します。</p>
             <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間の目安: 約 60〜80 分 ／ レベル: 入門（Node.js と React の基礎が少しあると安心）</p>
         </div>
 
@@ -520,7 +520,7 @@
 
             <h3>✅ 必要な環境（前提知識）</h3>
             <ul>
-                <li><strong>Node.js</strong>（推奨 v18 以上）— Remotion は Node.js 上で動きます</li>
+                <li><strong>Node.js</strong>（推奨は現行の LTS 版、v20 以上）— Remotion は Node.js 上で動きます</li>
                 <li><strong>JavaScript / React の基礎</strong>— コンポーネント・JSX・props がなんとなく分かれば十分です（深い知識は不要）</li>
                 <li><strong>ターミナル（コマンドライン）</strong>が少し使えること（<code>cd</code> や <code>npm</code> を打てればOK）</li>
                 <li><strong>エディタ</strong>（VS Code など）</li>
@@ -601,8 +601,9 @@
             <p>まずは Remotion を動かす準備をします。やることは「Node.js の確認 → プロジェクト作成 → Studio 起動」の 3 つだけです。</p>
 
             <h3>1-1. Node.js が入っているか確認する</h3>
-            <p>ターミナルを開いて、次のコマンドでバージョンを確認します。<strong>v18 以上</strong>が表示されれば OK です。</p>
-            <pre><code># Node.js のバージョンを確認（v18 以上が望ましい）
+            <p>MacではmacOS 15（Sequoia）以降が必要です。LinuxではLibc 2.35以上と、公式ページに記載された追加パッケージが必要です。</p>
+            <p>ターミナルを開いて、次のコマンドでバージョンを確認します。<strong>v20 以上</strong>が表示されれば OK です。</p>
+            <pre><code># Node.js のバージョンを確認（v20 以上。できれば LTS 版）
 node -v
 
 # npm（パッケージ管理ツール）のバージョンも確認
@@ -804,7 +805,7 @@ export const MyVideo = () => {
           borderRadius: 24,
           backgroundColor: '#2563eb',
           // 計算した値で位置と大きさを動かす
-          transform: \`translateY(\${translateY}px) scale(\${progress})\`,
+          transform: `translateY(${translateY}px) scale(${progress})`,
         }}
       /&gt;
     &lt;/AbsoluteFill&gt;
@@ -838,6 +839,7 @@ export const MyVideo = () => {
 
             <h3>4-1. Sequence で「いつ表示するか」をずらす</h3>
             <p><code>&lt;Sequence&gt;</code> は、中の要素を<strong>「指定したフレームから登場させる」</strong>ためのコンポーネントです。<code>from</code> で開始フレーム、<code>durationInFrames</code> で表示する長さを指定します。これでテキストと図形を<strong>時間差で出す</strong>演出ができます。</p>
+            <p>先に <code>src/Title.tsx</code> と <code>src/Box.tsx</code> を作ります。Titleには3-2、Boxには3-3の修正済みコードをコピーし、<code>export const MyVideo</code> をそれぞれ <code>export const Title</code>、<code>export const Box</code> に変えます。両方の <code>AbsoluteFill</code> の <code>backgroundColor</code> を削除し、背景色は親のMyVideoに指定します。</p>
             <pre><code>import { AbsoluteFill, Sequence } from 'remotion';
 import { Title } from './Title';   // Step3 で作ったような部品を分割
 import { Box } from './Box';
@@ -874,7 +876,7 @@ export const Background = () =&gt; {
   return (
     &lt;AbsoluteFill
       style={{
-        background: \`linear-gradient(\${angle}deg, #15203a, #2563eb)\`,
+        background: `linear-gradient(${angle}deg, #15203a, #2563eb)`,
       }}
     /&gt;
   );
@@ -920,7 +922,7 @@ open out/video.mp4</code></pre>
             </div>
 
             <div class="callout callout-tip">
-                💡 <strong>よく使うオプション</strong>: <code>--codec=h264</code>（既定。一般的な MP4）、<code>--props='{"name":"Taro"}'</code>（後述のデータ駆動でコンポーネントに値を渡す）、<code>--frames=0-30</code>（一部だけ書き出してチェック）など。まずは引数なしのシンプルな形で 1 本出せれば十分です。
+                💡 <strong>よく使うオプション</strong>: <code>--codec=h264</code>（既定。一般的な MP4）、<code>--props=./props-taro.json</code>（後述のデータ駆動でコンポーネントに値を渡す）、<code>--frames=0-30</code>（一部だけ書き出してチェック）など。まずは引数なしのシンプルな形で 1 本出せれば十分です。
             </div>
 
             <div class="nav-btns">
@@ -936,14 +938,14 @@ open out/video.mp4</code></pre>
             <p>基本ができたら、次のような発展も Remotion の得意分野です。興味があるものを 1 つ試してみてください。</p>
 
             <h3>① 音声・BGM をつける</h3>
-            <p><code>&lt;Audio&gt;</code> コンポーネントで音声ファイルを重ねられます。<code>public/</code> フォルダに音源を置き、<code>staticFile()</code> で参照します。</p>
-            <pre><code>import { AbsoluteFill, Audio, staticFile } from 'remotion';
+            <p><code>&lt;Html5Audio&gt;</code> コンポーネントで音声ファイルを重ねられます。<code>public/</code> フォルダに音源を置き、<code>staticFile()</code> で参照します。音声の最新の公式推奨は <code>@remotion/media</code> の <code>&lt;Audio&gt;</code> です。このハンズオンでは追加パッケージを入れないため、remotion に含まれる <code>&lt;Html5Audio&gt;</code> を使います。</p>
+            <pre><code>import { AbsoluteFill, Html5Audio, staticFile } from 'remotion';
 
 export const MyVideo = () =&gt; {
   return (
     &lt;AbsoluteFill&gt;
       {/* public/bgm.mp3 を動画に重ねる */}
-      &lt;Audio src={staticFile('bgm.mp3')} /&gt;
+      &lt;Html5Audio src={staticFile('bgm.mp3')} /&gt;
       {/* ...映像の中身... */}
     &lt;/AbsoluteFill&gt;
   );
@@ -957,9 +959,11 @@ type Props = { name: string };
 export const Award: React.FC&lt;Props&gt; = ({ name }) =&gt; {
   return &lt;h1&gt;祝・{name} さん 受賞！&lt;/h1&gt;;
 };</code></pre>
+            <p>上のコードを <code>src/Award.tsx</code> に保存します。<code>src/Root.tsx</code> に <code>import { Award } from './Award';</code> を追加し、既存のCompositionの隣に <code>&lt;Composition id="Award" component={Award} durationInFrames={90} fps={30} width={1280} height={720} defaultProps={{ name: '受賞者' }} /&gt;</code> を追加します。</p>
+            <p>プロジェクト直下に <code>props-taro.json</code>（内容は <code>{"name":"山田太郎"}</code>）と <code>props-hanako.json</code>（内容は <code>{"name":"佐藤花子"}</code>）を作ります。</p>
             <pre><code># レンダリング時に props を渡して中身を差し替える
-npx remotion render Award out/taro.mp4  --props='{"name":"山田太郎"}'
-npx remotion render Award out/hanako.mp4 --props='{"name":"佐藤花子"}'</code></pre>
+npx remotion render Award out/taro.mp4 --props=./props-taro.json
+npx remotion render Award out/hanako.mp4 --props=./props-hanako.json</code></pre>
 
             <div class="callout callout-info">
                 💡 さらに進めると、CSV やスプレッドシートの行を読み込んでループで <code>renderMedia()</code>（Node.js API）を呼び、<strong>数百本を完全自動で書き出す</strong>こともできます。「コードで動画を作る」最大の強みがここです。

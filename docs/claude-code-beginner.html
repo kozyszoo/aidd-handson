@@ -654,12 +654,12 @@
                 <tr><th>言葉</th><th>工房で言うと</th><th>この資料での意味</th><th>出てくる場所</th></tr>
                 <tr><td><strong>Claude Code</strong></td><td>注文を聞いて道具を作る職人</td><td>頼んだことをもとに、プログラムを書いたり直したりする AI</td><td>全体</td></tr>
                 <tr><td><strong>プログラム</strong></td><td>職人が作る道具そのもの</td><td>パソコンに「こう動け」と伝える文章。この資料で作る Web ページもその 1 つ</td><td>Step 3</td></tr>
-                <tr><td><strong>フォルダを選ぶ</strong></td><td>職人に貸す作業台。台の上にあるものだけ使える</td><td>Claude が読み、作り、書き換えてよい範囲。選んだフォルダの外には手を出さない</td><td>Step 0・1</td></tr>
+                <tr><td><strong>フォルダを選ぶ</strong></td><td>職人に貸す作業台。台の外の材料を使うときは一声かけてもらう</td><td>Claude の主な作業場所。選んだフォルダの外にあるファイルを読み書きするときは、確認の画面が出ます（承認しない限り外には手を出せません）</td><td>Step 0・1</td></tr>
                 <tr><td><strong>Local</strong></td><td>自分の家の作業台で、職人に作業してもらう</td><td>自分のパソコンの上で、自分のファイルを使って動かす選び方</td><td>Step 1</td></tr>
                 <tr><td><strong>お願い（プロンプト）</strong></td><td>注文書</td><td>Claude に送る指示の文章。何を、どんな条件で作るかを書くほど、思ったものに近づく</td><td>全 Step</td></tr>
                 <tr><td><strong>権限モード</strong></td><td>職人にどこまで任せるかの取り決め</td><td>ファイルを書き換える前に、毎回聞くか、聞かずに進めるかを決める設定</td><td>Step 1</td></tr>
                 <tr><td><strong>Manual</strong></td><td>手を入れる前に、必ず声をかけてもらう</td><td>書き換えの前に止まって聞く。このハンズオンで使う</td><td>Step 1・3</td></tr>
-                <tr><td><strong>コマンド</strong></td><td>職人が使う特殊な工具</td><td>パソコンに直接出す命令。Claude が実行しようとするときは、Manual で止まって聞いてくる。何のためか分からなければ Reject する</td><td>Step 1・3</td></tr>
+                <tr><td><strong>コマンド</strong></td><td>職人が使う特殊な工具</td><td>パソコンに直接出す命令。Claude が実行しようとするときは、Manual で止まって聞いてくる（※ファイル一覧の表示など、中身を読むだけの安全なコマンドは確認なしで動くことがあります）。何のためか分からなければ Reject する</td><td>Step 1・3</td></tr>
                 <tr><td><strong>スラッシュコマンド</strong></td><td>職人に出す決まった合図。「メモをまとめて」「道具の型番を見せて」のように、言えば毎回同じことをしてくれる</td><td>入力欄の先頭に「/」を打って選ぶ、Claude Code への短い命令。上の「コマンド」は Claude がパソコンに出す命令で、こちらは自分が Claude Code に出す命令</td><td>スラッシュコマンドの節</td></tr>
                 <tr><td><strong>Plan（計画）</strong></td><td>作り始める前に見せてもらう設計図</td><td>ファイルを書き換えずに、進め方だけを出してもらう</td><td>Step 2</td></tr>
                 <tr><td><strong>Accept / Reject</strong></td><td>職人が「これから、こう手を入れます」と見せてくる予定を見て、「それでお願い」か「やり直して」と返事する</td><td>変更を受け入れるか、断るか。受け入れるまでファイルは変わらない</td><td>Step 3</td></tr>
@@ -809,7 +809,7 @@
             <p>Claude Code には、どこまで確認しながら進めるかを決める「権限モード」があります（公式ドキュメント「Choose a permission mode」）。</p>
             <table>
                 <tr><th>名前</th><th>動き方</th><th>このハンズオンでは</th></tr>
-                <tr><td><strong>Manual</strong></td><td>ファイルを書き換える前・コマンドを実行する前に聞く。変更の内容を見て、受け入れる（Accept）か断る（Reject）かを選ぶ。受け入れるまでファイルは変わらない</td><td><strong>これを使う</strong></td></tr>
+                <tr><td><strong>Manual</strong></td><td>ファイルを書き換える前・コマンドを実行する前に聞く（※ <code>ls</code> や <code>cat</code> など、中身を読むだけの安全なコマンドや、すでに許可した操作は確認なしで動くことがあります）。変更の内容を見て、受け入れる（Accept）か断る（Reject）かを選ぶ。受け入れるまでファイルは変わらない</td><td><strong>これを使う</strong></td></tr>
                 <tr><td><strong>Plan</strong></td><td>ファイルを読んで調べ、進め方の計画を出す。ファイルは書き換えない</td><td>Step 2 で使う</td></tr>
                 <tr><td><strong>Accept edits</strong></td><td>ファイルの書き換えと、フォルダを作る・ファイルを移すなどの基本的なファイル操作は、聞かずに進める。それ以外のコマンドは実行の前に聞く</td><td>慣れてから</td></tr>
                 <tr><td><strong>Auto</strong></td><td>聞かずに進める。コマンドの実行や通信の前に、依頼に合っているかを別の仕組みが裏で確かめる</td><td>慣れてから</td></tr>

@@ -694,7 +694,7 @@
             </ul>
 
             <div class="callout callout-info">
-                ℹ️ 画像生成モデルである <strong>Nano Banana 2（Gemini 3.1 Flash Image）</strong> は <strong>Google AI Studio</strong> や <strong>Gemini API</strong> からも使えますが、今回は<strong>コードを書かずに使える</strong> Gemini アプリ（Web）を使います。API での使い方は最後の「さらに深掘り」で触れます。
+                ℹ️ APIで新しく画像生成を始める場合は、<strong>Nano Banana 2.1</strong> を使います。今回は<strong>コードを書かずに使える</strong> Gemini アプリ（Web）を使います。API での使い方は最後の「さらに深掘り」で触れます。
             </div>
 
             <div class="callout callout-warn">
@@ -709,7 +709,7 @@
                     <tr><th>プラン</th><th>画像生成の利用上限</th><th>備考</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><strong>無料（通常アカウント）</strong></td><td>作れる枚数は固定ではありません</td><td>選択したモデルにより Nano Banana 2 または Nano Banana 2 Lite。混雑状況により制限される場合あり</td></tr>
+                    <tr><td><strong>無料（通常アカウント）</strong></td><td>作れる枚数は固定ではありません</td><td>無料の個人アカウントでは Flash-Lite（Nano Banana 2 Lite）が使われます。複数の画像の参照や複数回の編集には対応していません。2026年10月9日以降の扱いです。</td></tr>
                     <tr><td><strong>Google AI Pro</strong>（旧 Gemini Advanced、月額 約 2,900円）</td><td>さらに余裕のある上限</td><td>優先アクセス。高画質画像生成や、動画生成（Veo）なども解放</td></tr>
                     <tr><td><strong>Gemini API（画像生成）</strong></td><td>無料枠なし・従量課金</td><td>API経由でプログラムから呼び出す場合。この教材の画像生成APIは有料です</td></tr>
                 </tbody>
@@ -743,7 +743,7 @@
             <p><a href="https://gemini.google.com/" target="_blank" rel="noopener">https://gemini.google.com/</a> にアクセスし、Google アカウントでログインします。中央に入力欄が表示されるので、左側の <strong>＋（「アップロードとツール」）</strong> ボタンを開き、メニュー内の <strong>「画像を作成」</strong> が選べることを確認しましょう。</p>
 
             <div class="callout callout-info">
-                ℹ️ Gemini はバージョンによって画面が少し変わります。<strong>「画像を作って」と日本語で頼むだけ</strong>でも、自動的に画像生成モデル（Nano Banana）が呼び出されます。画像生成前に<strong>「Flash」または「Pro」</strong>を選びます。「Flash-Lite」では、複数画像の参照や繰り返しの編集に対応しない Nano Banana 2 Lite が使われます。
+                ℹ️ Gemini はバージョンによって画面が少し変わります。<strong>「画像を作って」と日本語で頼むだけ</strong>でも、自動的に画像生成モデル（Nano Banana）が呼び出されます。無料の個人アカウントでは「Flash-Lite」（Nano Banana 2 Lite）が使われます。複数の画像の参照や複数回の編集を行うには、<strong>「Flash」または「Pro」</strong>が利用できる有料プラン（Google AI Plus、Google AI Pro など）のアカウントが必要です。
             </div>
 
             <img class="screenshot" src="img/nb-step1-open.png"
@@ -1019,36 +1019,31 @@
             <p>Nano Banana（Gemini 画像モデル）をさらに使いこなすための参考情報とリンク集です。慣れてきたら、コードからの自動化にも挑戦してみてください。</p>
 
             <h3>🧑‍💻 コードから使う（Gemini API / AI Studio）</h3>
-            <p>画像生成モデルは <strong>Google AI Studio</strong> で API キーを取得すれば、Python や Node.js から呼び出せます。大量生成や、他システムへの組み込みに向いています。Nano Banana 2 を API で呼び出す際のモデル名は <code>gemini-3.1-flash-image</code>です。公式ドキュメントで最新のモデル名を必ず確認してください。旧モデル Gemini 2.5 Flash Image は2026年10月2日に提供終了予定です。Imagen 4 は2026年8月17日に Gemini API での提供を終了しました。Pythonで実行する前に、課金設定と料金を確認してください。</p>
+            <p>画像生成モデルは <strong>Google AI Studio</strong> で API キーを取得すれば、Python や Node.js から呼び出せます。大量生成や、他システムへの組み込みに向いています。Nano Banana 2.1 を API で呼び出す際のモデル名は <code>gemini-nano-banana-2.1</code>です。公式ドキュメントで最新のモデル名を必ず確認してください。旧モデル Gemini 2.5 Flash Image は非推奨です。この教材では、現在推奨されている画像生成モデルを使います。Imagen 4 は2026年8月17日に Gemini API での提供を終了しました。Pythonで実行する前に、課金設定と料金を確認してください。</p>
 
             <span class="code-label tip">🐍 Python での画像生成例</span>
             <pre><code>from google import genai
-from PIL import Image
-import io
+import base64
 
 # クライアントの初期化（APIキーは環境変数 GEMINI_API_KEY または引数から読み込みます）
 client = genai.Client(api_key="YOUR_API_KEY")
 
-# Nano Banana 2（Gemini 3.1 Flash Image）による画像生成
-result = client.models.generate_content(
-    model="gemini-3.1-flash-image",
-    contents="A cute banana character sitting in front of a laptop, digital art",
+# Nano Banana 2.1（gemini-nano-banana-2.1）による画像生成
+interaction = client.interactions.create(
+    model="gemini-nano-banana-2.1",
+    input="A cute banana character sitting in front of a laptop, digital art",
 )
 
-# 生成された画像の保存（レスポンスから画像パートを取り出す）
-image_index = 0
-for part in result.candidates[0].content.parts:
-    if getattr(part, "inline_data", None) and part.inline_data.data:
-        image = Image.open(io.BytesIO(part.inline_data.data))
-        image.save(f"generated_banana_{image_index}.png")
-        print(f"画像を保存しました: generated_banana_{image_index}.png")
-        image_index += 1
+# 生成された画像の保存（画像データを base64 から戻して書き込む）
+with open("generated_banana_0.png", "wb") as f:
+    f.write(base64.b64decode(interaction.output_image.data))
+print("画像を保存しました: generated_banana_0.png")
 </code></pre>
 
             <ul>
                 <li>Google AI Studio: <a href="https://aistudio.google.com/" target="_blank" rel="noopener">https://aistudio.google.com/</a></li>
                 <li>Gemini API 画像生成ドキュメント: <a href="https://ai.google.dev/gemini-api/docs/image-generation" target="_blank" rel="noopener">https://ai.google.dev/gemini-api/docs/image-generation</a></li>
-                <li>Nano Banana 2（Gemini 3.1 Flash Image）モデルページ: <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image" target="_blank" rel="noopener">https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image</a></li>
+                <li>Nano Banana 2.1 モデルページ: <a href="https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1" target="_blank" rel="noopener">https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1</a></li>
             </ul>
 
             <h3>📚 公式リファレンス</h3>

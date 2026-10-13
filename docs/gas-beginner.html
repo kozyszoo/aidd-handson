@@ -858,6 +858,7 @@
             </div>
 
             <p>③ 最後にアクセスの許可画面が出ます。下までスクロールして<strong>「許可」</strong>を押すと承認完了です。</p>
+            <p>画像にはメール送信の権限も表示されていますが、Step 1 のコードで必要なのはスプレッドシートへのアクセス権限だけです。</p>
             <img class="screenshot screenshot-sm" src="img/gas-09.png"
                 alt="GASハンズオンが Google アカウントへのアクセスをリクエストしています、という画面。スプレッドシートの参照・編集とメール送信の許可を求める内容と許可ボタンが表示されているスクリーンショット">
 
@@ -1162,7 +1163,7 @@ function sendEMail() {
                     <span>🤖 Gemini にこう聞く</span>
                     <button class="copy-btn" type="button" data-copy-target="p-step3-1">コピー</button>
                 </div>
-                <div class="prompt-body" id="p-step3-1">（いまのコードを全文貼り付けてから）↑これを書き換えて、A1 への書き込みをやめ、シートの全データを data に読み込んでください。今日の日付を Utilities.formatDate で JST の「yyyy/MM/dd」文字列にし、1行目のヘッダーを除いて、実施日（2列目）が今日の行だけを tasksToday に入れてください。</div>
+                <div class="prompt-body" id="p-step3-1">（いまのコードを全文貼り付けてから）↑これを書き換えて、A1 への書き込みをやめ、シートの全データを data に読み込んでください。今日の日付を Utilities.formatDate で JST の「yyyy/MM/dd」文字列にし、1行目のヘッダーを除いて、実施日（2列目）が今日の行だけを tasksToday に入れてください。実施日が空欄、または日付として認識されていない行は除いてください。</div>
             </div>
 
             <details class="sample-details">
@@ -1202,7 +1203,7 @@ function sendEMail() {
 
   // 今日実施予定のタスクを抽出（2列目 row[1] が実施日）
   const tasksToday = data.filter(row =>
-    Utilities.formatDate(row[1], 'JST', 'yyyy/MM/dd') === formattedToday
+    row[1] instanceof Date &amp;&amp; Utilities.formatDate(row[1], 'JST', 'yyyy/MM/dd') === formattedToday
   );
 }</code></pre>
                     </div>
@@ -1246,7 +1247,7 @@ function sendEMail() {
 
   data.shift();
   const tasksToday = data.filter(row =>
-    Utilities.formatDate(row[1], 'JST', 'yyyy/MM/dd') === formattedToday
+    row[1] instanceof Date &amp;&amp; Utilities.formatDate(row[1], 'JST', 'yyyy/MM/dd') === formattedToday
   );
 
   // ここから追加
@@ -1423,11 +1424,12 @@ function sendEMail() {
                 alt="トリガーを追加する設定画面。実行する関数 myFunction、時間主導型、特定の日時が設定され、保存ボタンがあるスクリーンショット">
 
             <div class="callout callout-info">
-                ℹ️ 「特定の日時」を <strong>「時間ベースのタイマー」「日付ベースのタイマー」</strong>に変えると、<strong>毎日◯時に実行</strong>のような定期実行も設定できます。実運用ではこちらを使います。毎日のタイマーは「午前7時〜8時」のような1時間の枠で指定し、その中のどこかで動きます（ちょうど7:00とは限りません）。
+                ℹ️ 「特定の日時」は1回だけ実行するテスト用です。「特定の日時」を <strong>「時間ベースのタイマー」「日付ベースのタイマー」</strong>に変えると、<strong>毎日◯時に実行</strong>のような定期実行も設定できます。実運用ではこちらを使います。毎日のタイマーは「午前7時〜8時」のような1時間の枠で指定し、その中のどこかで動きます（ちょうど7:00とは限りません）。
             </div>
 
             <h3>4-3. 指定時刻に通知が届くことを確認</h3>
             <p>設定した時刻になると <code>myFunction()</code> が自動実行され、Gmail にタスク通知が届きます。Gmail を確認し、正しく送信されていれば完成です 🎉🎉</p>
+            <p>毎日自動で動かしたいときは、作ったテスト用トリガーの右端の︙から「トリガーを削除」を選び、もう一度「+ トリガーを追加」から次のように設定して保存します。実行する関数: <code>myFunction</code>／イベントのソース: 時間主導型／時間ベースのトリガーのタイプ: 日付ベースのタイマー／時刻を選択: 午前7時〜8時</p>
 
             <div class="card" style="background: var(--bg-mid); border-color: var(--purple);">
                 <div style="font-weight:700; color: var(--purple); margin-bottom: 8px;">🚀 おつかれさまでした！次は発展編へ</div>

@@ -628,7 +628,7 @@
                 </ul>
                 <p style="font-size: 0.9rem; line-height: 1.7; margin: 0 0 12px;">
                     <strong>CLI（<code>agy</code>）</strong>は別の番号で進み、2026年9月22日時点で <strong>1.2.8</strong>。8〜9月に Remote Control（<code>/remote-control</code>・<code>agy remote-control start</code>）、<code>/model &lt;名前&gt; &lt;指示&gt;</code>（1回だけ別モデルで実行）、<code>/skills reload</code>、ヘッドレス実行（<code>-p</code>）の既定タイムアウト撤廃と <code>AGY_ERROR</code> 形式の構造化エラーが入りました。
-                    <strong>Gemini API 側</strong>では 2026年9月17日に <strong>Antigravity Agent 09-2026</strong>（<code>antigravity-preview-09-2026</code>）が出て、<code>antigravity-preview-05-2026</code> は <strong>2026年10月5日に停止</strong>予定です。
+                    <strong>Gemini API 側</strong>では 2026年9月17日に <strong>Antigravity Agent 09-2026</strong>（<code>antigravity-preview-09-2026</code>）が出て、<code>antigravity-preview-05-2026</code> は <strong>2026年10月5日に提供停止されました</strong>。
                 </p>
                     </div>
                 </details>
@@ -1010,6 +1010,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p>利用できるモデルは契約プランによって異なります。Claude 4.6系とGPT-OSS 120Bは2026年11月2日に提供終了予定です。</p>
             <div class="card">
                 <strong>💡 Rate Limit に達したときの対処法</strong>
                 <ul style="margin-top: 8px;">
@@ -1031,6 +1032,7 @@
                         Credits）や、クレジットの追加、使用履歴（See Activity）を確認できます。</li>
                     <li><strong>クレジット超過の自動補填 (Enable AI Credit Overages):</strong>
                         この設定を有効（ON）にしておくと、各モデルに割り当てられた月間/週間のクォータを使い切った後でも、保有している AI クレジットから自動的に補填されてモデルへのリクエストを継続できます。
+                        AIクレジットによる超過利用はGoogle AI Pro・Ultraが対象です。無料・Plusでは利用枠の回復を待ってください。
                     </li>
                     <li><strong>モデルクォータの確認 (Model Quota):</strong> <code>Gemini 3.8 Flash</code> や
                         <code>Claude Sonnet 4.6</code> など、登録されている各モデルの残りクォータ状況と、それがリセット（定期更新）されるまでの残り時間がリアルタイムに表示されます。
@@ -1338,7 +1340,7 @@
                 alt="AIによって生成されたHTMLファイルのコード。GEMINI.md で指定した通り、日本語のコメントが含まれ、変数名にキャメルケースが適用されていることが確認できるスクリーンショット">
 
             <h3>応用: Workflows を体験しよう（任意）</h3>
-            <p>Workflowsは2026年11月1日に終了予定で、公式はSkillsへの移行を案内しています。</p>
+            <p>現在のWorkflowsは2026年10月19日に利用停止予定です。既存のWorkflowsは、公式の移行ガイドまたは <code>/migrate-workflows</code> でSkillsへ移行できます。</p>
             <p><code>.agent/workflows/</code> フォルダに <code>.md</code> ファイルを作成し、チャットで <code>/ワークフロー名</code> と入力して実行できます。
             </p>
             <pre><code># .agent/workflows/hello.md
@@ -1780,7 +1782,7 @@ $ agy remote-control start        # 常駐サービスとして登録（再起�
                     Gemini API 側からワンコールで Antigravity のエージェントを呼び出せる仕組みです。<strong>マルチターンのセッションごとに独立した実行環境（サンドボックス）が永続化</strong>される設計で、自分でハーネスを運用しなくてもエージェントを使えます。プロトタイプを早く出したいときの最短ルート。
                 </p>
                 <p style="font-size: 0.85rem; color: var(--muted); margin-top: 6px;">
-                    💡 2026年5月19日に公開プレビューが始まり（エージェント名 <code>antigravity-preview-05-2026</code>）、<strong>2026年9月17日に <code>antigravity-preview-09-2026</code>（Antigravity Agent 09-2026）へ更新</strong>されました。09-2026 ではローカルでツールを実行するときの組み込みツールが変わり（ファイル編集が全体の書き直しから行範囲の置き換えへ、引数名が snake_case から PascalCase へ）、Managed Agents の既定モデルは Gemini 3.8 Flash になっています。<strong>05-2026 は 2026年10月5日に停止</strong>予定なので、5月版で作ったものはエージェント名を差し替えてください。エンタープライズ向けには <strong>Gemini Enterprise Agent Platform</strong> 経由で Google Cloud プロジェクトに直接統合できます。
+                    💡 2026年5月19日に公開プレビューが始まり（エージェント名 <code>antigravity-preview-05-2026</code>）、<strong>2026年9月17日に <code>antigravity-preview-09-2026</code>（Antigravity Agent 09-2026）へ更新</strong>されました。09-2026 ではローカルでツールを実行するときの組み込みツールが変わり（ファイル編集が全体の書き直しから行範囲の置き換えへ、引数名が snake_case から PascalCase へ）、Managed Agents の既定モデルは Gemini 3.8 Flash になっています。<strong>05-2026 は 2026年10月5日に提供停止されました</strong>。09-2026へ移行してください。Googleの実行環境で文章の結果だけを受け取る場合は名前を変更します。自分のPCでツールを動かす場合や、ツール呼び出しを処理する場合は、ツール名・引数・ファイル編集の処理も更新してください。エンタープライズ向けには <strong>Gemini Enterprise Agent Platform</strong> 経由で Google Cloud プロジェクトに直接統合できます。
                 </p>
             </div>
 
@@ -1788,6 +1790,7 @@ $ agy remote-control start        # 常駐サービスとして登録（再起�
                 <strong>📌 ハンズオン参加者への補足</strong>
                 <ul style="margin-top: 6px; font-size: 0.88rem; padding-left: 20px;">
                     <li>Step 4 の <code>multi-ai-review</code> には、<strong>Codex・Gemini・Claude の各CLIのインストールと認証が別途必要です</strong>。</li>
+                    <li>Gemini CLIの個人向け無料・Pro・Ultraでの利用は2026年6月18日に終了しました。この演習には、対応する有料APIキーまたは企業向けライセンスが必要です。</li>
                     <li>「自分の業務にも Antigravity を取り込みたい」と感じたら、<strong>まず CLI から</strong>触るのが一番手軽です。</li>
                     <li>API 仕様や料金は変動しやすいので、必ず <a href="https://antigravity.google/docs" target="_blank" style="color: var(--blue);">公式ドキュメント</a> と <a href="https://antigravity.google/changelog" target="_blank" style="color: var(--blue);">Changelog</a> で最新を確認してください。</li>
                 </ul>
@@ -1829,7 +1832,7 @@ $ agy remote-control start        # 常駐サービスとして登録（再起�
                     </tr>
                     <tr>
                         <td>Workflows</td>
-                        <td>定型タスクを自動化する。Workflowsは2026年11月1日に終了予定で、公式はSkillsへの移行を案内しています。</td>
+                        <td>定型タスクを自動化する。現在のWorkflowsは2026年10月19日に利用停止予定です。既存のWorkflowsは、公式の移行ガイドまたは <code>/migrate-workflows</code> でSkillsへ移行できます。</td>
                         <td><code>/ワークフロー名</code></td>
                     </tr>
                     <tr>
@@ -2206,6 +2209,7 @@ Vite + React + TailwindCSS のプロジェクトを作成して。
 
             <h4>Part 5: 品質チェック（Skills活用）— 所要時間: 5分</h4>
             <p><code>multi-ai-review</code> には、Codex・Gemini・Claude の各CLIのインストールと認証が別途必要です。</p>
+            <p>Gemini CLIの個人向け無料・Pro・Ultraでの利用は2026年6月18日に終了しました。この演習には、対応する有料APIキーまたは企業向けライセンスが必要です。</p>
             <p><strong>目的：</strong> 実装したコードの品質を自動レビューし、バグやアンチパターンを事前に発見・修正します。</p>
             <p><strong>やること：</strong> <code>@multi-ai-review</code> Skill を呼び出すと、AI
                 が全コンポーネントをレビューし、改善すべき点をまとめた統合レポートを自動的に生成してくれます。</p>

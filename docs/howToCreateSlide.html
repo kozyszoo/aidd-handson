@@ -693,8 +693,8 @@
                     </tr>
                     <tr>
                         <td>ブラウザ</td>
-                        <td>Chromium（Playwright が自動取得）</td>
-                        <td><code>npx playwright install</code></td>
+                        <td>方法AのMCPでは Google Chrome、方法Bのスクリプトでは Playwright用の Chromium を使います</td>
+                        <td>Google Chrome がインストール済みか確認（方法A）／<code>npx playwright install chromium</code>（方法B）</td>
                     </tr>
                     <tr>
                         <td>Git</td>
@@ -899,6 +899,7 @@ npx playwright install chromium</code></pre>
             </p>
 
             <h3>2-1. 方法A: Playwright MCP（推奨）</h3>
+            <p>MCP方式では、事前に Google Chrome をインストールしてください。</p>
             <p>MCP（Model Context Protocol）でブラウザ操作機能を AI に「ツール」として渡す方法です。AI が能動的にブラウザを操作できます。</p>
 
             <h4><span class="badge badge-claude">Claude Code</span></h4>
@@ -1017,11 +1018,12 @@ node shot.mjs
 
             <h3>3-2. そのまま使える「自律ループ」指示文</h3>
             <p>以下のプロンプトを、お好きなエージェントにそのまま貼り付けてください。エージェントを問わず動作します。</p>
+            <p>Marp・自作HTMLのHTTPサーバーの起動手順は、<a href="#step5">Step 5</a>・<a href="#step6">Step 6</a>を参照してください。</p>
             <div class="card">
                 <strong>🎯 自律デザインチェックの指示テンプレート</strong>
                 <pre style="margin-top: 12px;"><code>これからスライドを作成します。次の手順を「合格するまで」繰り返してください。
 
-1. スライドを生成し、開発サーバー（またはファイル）を表示する
+1. スライドを生成し、開発サーバーのURLを開く（Marp・自作HTMLの場合は、人が別の端末で起動したHTTPサーバーのURL http://127.0.0.1:8000/slides.html を開く）
 2. Playwright で各スライドのスクリーンショットを撮る
 3. 撮った画像を自分で確認し、以下の観点で採点する：
    - 文字や画像が枠 (1280×720) からはみ出していないか
@@ -1178,6 +1180,7 @@ npx @marp-team/marp-cli@latest slides.md --pdf
 npx @marp-team/marp-cli@latest -w slides.md -o slides.html</code></pre>
 
             <h3>5-3. AI への実習プロンプト</h3>
+            <p><code>slides.html</code> があるフォルダで <code>npx --yes http-server . -a 127.0.0.1 -p 8000</code> を実行し、この端末は開いたままにします。Playwrightでは <code>http://127.0.0.1:8000/slides.html</code> を開きます。</p>
             <div class="card">
                 <strong>🎯 演習: Marp で同じ内容を作り、見た目を比較する</strong>
                 <pre style="margin-top: 12px;"><code>Marp で「AI 駆動開発入門」のスライド（slides.md）を作成してください。
@@ -1238,6 +1241,7 @@ theme は default、paginate は true。
 # https://revealjs.com/ の &lt;section&gt; 区切りでスライドを書く</code></pre>
 
             <h3>6-3. AI への実習プロンプト</h3>
+            <p><code>slides.html</code> があるフォルダで <code>npx --yes http-server . -a 127.0.0.1 -p 8000</code> を実行し、この端末は開いたままにします。Playwrightでは <code>http://127.0.0.1:8000/slides.html</code> を開きます。</p>
             <div class="card">
                 <strong>🎯 演習: 世界観のある HTML スライドを作る</strong>
                 <pre style="margin-top: 12px;"><code>HTML/CSS だけで「AI 駆動開発入門」のスライド（slides.html）を作成してください。
@@ -1267,7 +1271,7 @@ Step 3 の自律デザインチェックを最大5ラウンド実施して仕上
 
             <h3><span class="badge badge-claude">Claude Code</span></h3>
             <ul>
-                <li><code>CLAUDE.md</code> に「スライドは1枚6行以内」「16:9」などのルールを書いておくと毎回守ってくれる</li>
+                <li><code>CLAUDE.md</code> に「スライドは1枚6行以内」「16:9」などのルールを書いておくと、Claude Codeが作業時に参照します。ただし、必ず守られるとは限りません。</li>
                 <li>長い反復に強い。自律ループを最後まで粘り強く回せる</li>
                 <li>スクショ画像をそのまま会話に貼って指摘するのも有効</li>
             </ul>
@@ -1325,14 +1329,16 @@ Step 3 の自律デザインチェックを最大5ラウンド実施して仕上
             </table>
 
             <h3>HTML を Playwright で PDF 化する例</h3>
+            <p><code>slides.html</code> があるフォルダで <code>npx --yes http-server . -a 127.0.0.1 -p 8000</code> を実行し、この端末は開いたままにします。Playwrightでは <code>http://127.0.0.1:8000/slides.html</code> を開きます。</p>
             <pre><code>// to-pdf.mjs
 import { chromium } from 'playwright';
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
-await page.goto('http://localhost:8000/slides.html');
+await page.goto('http://127.0.0.1:8000/slides.html');
 await page.pdf({ path: 'slides.pdf', preferCSSPageSize: true, printBackground: true });
 await browser.close();</code></pre>
+            <p>方法Bの準備を済ませ、別の端末で同じフォルダを開いて <code>node to-pdf.mjs</code> を実行します。</p>
 
             <div class="info-box">
                 <strong>📌 発表直前のチェック</strong><br>

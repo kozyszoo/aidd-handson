@@ -592,6 +592,10 @@
             </table>
 
             <div class="callout callout-info">
+                Codex、Claude Code、Antigravity のいずれも、対話での作業とタスクの委任・自律実行に対応しています。この表は本講座での役割分担として読んでください。
+            </div>
+
+            <div class="callout callout-info">
                 💡 <strong>用語補足 — エージェント（Agent）</strong>: ここでの「エージェント」は、人間の指示を受けて<strong>自律的にファイルを読み・編集し・コマンドを実行する</strong> AI のこと。単発の補完（オートコンプリート）と違い、複数ステップの作業を自分で進めてくれます。
             </div>
 
@@ -749,10 +753,54 @@ $ git config --global --list</code></pre>
             <pre><code># 作業フォルダを作って Git 初期化
 $ mkdir todo-multi-ai && cd todo-multi-ai
 $ git init
-$ git branch -M main
+$ git branch -M main</code></pre>
 
-# 題材ファイル（バグ入り）を作成 ※後述
-# ... ファイルを作成したら ...
+            <p>以下のコードを <code>app.js</code> に保存し、<code>node app.js</code> で実行してから初期コミットします。</p>
+            <pre><code>const tasks = [
+  { id: 1, title: "牛乳を買う", completed: false },
+  { id: 2, title: "宿題を提出する", completed: true },
+  { id: 3, title: "本を返す", completed: false },
+];
+
+function getActiveTasks(tasks) {
+  return tasks.filter((task) => task.completed !== "true");
+}
+
+console.log("すべてのタスク:");
+for (const task of tasks) {
+  const status = task.completed ? "完了" : "未完了";
+  console.log(`${task.id}. ${task.title} [${status}]`);
+}
+
+console.log("\n未完了のタスク:");
+for (const task of getActiveTasks(tasks)) {
+  const status = task.completed ? "完了" : "未完了";
+  console.log(`${task.id}. ${task.title} [${status}]`);
+}</code></pre>
+
+            <pre><code>$ node app.js</code></pre>
+            <p>修正前の出力例。「未完了のタスク」に完了済みの「宿題を提出する」が残っています。</p>
+            <pre><code>すべてのタスク:
+1. 牛乳を買う [未完了]
+2. 宿題を提出する [完了]
+3. 本を返す [未完了]
+
+未完了のタスク:
+1. 牛乳を買う [未完了]
+2. 宿題を提出する [完了]
+3. 本を返す [未完了]</code></pre>
+
+            <p>Step 2 で修正した後の出力例。「未完了のタスク」には未完了の2件だけが表示されます。</p>
+            <pre><code>すべてのタスク:
+1. 牛乳を買う [未完了]
+2. 宿題を提出する [完了]
+3. 本を返す [未完了]
+
+未完了のタスク:
+1. 牛乳を買う [未完了]
+3. 本を返す [未完了]</code></pre>
+
+            <pre><code># 初期コミット
 $ git add .
 $ git commit -m "chore: 初期コミット（バグ入り ToDo アプリ）"
 

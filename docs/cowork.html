@@ -566,7 +566,7 @@
             <span class="badge badge-level">AI にはじめて仕事を任せる人向け</span>
             <h1>🗂️ Claude Cowork 活用ハンズオン<br>～ 散らかったフォルダを片付け、9 月のお金の出入り表（Excel）を作る ～</h1>
             <p style="margin-top:8px;">チャットは、質問や、1 つずつ添付したファイルに答えるものです。Claude Cowork は、<strong>渡したフォルダの中のファイルを読み、整理し、新しい Excel や Word を作って置く</strong>ところまでやります。この資料では、よくある「散らかったダウンロードフォルダ」の練習用コピーを使ってその作業を体験し、あわせて<strong>任せるときに気をつけること</strong>を確認します。</p>
-            <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間: 約 80 分（説明 20 分＋実践 40 分＋共有 20 分）／ 前提: Claude の有料プラン（Pro・Max・Team・Enterprise）と Claude Desktop アプリ ／ 内容は 2026-09-27 時点の公式ヘルプで確認</p>
+            <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間: 約 80 分（説明 20 分＋実践 40 分＋共有 20 分）／ 前提: Claude の有料プラン（Pro・Max・Team・Enterprise）と Claude Desktop アプリ ／ 内容は 2026-09-27 時点の公式ヘルプで確認。Claude のアカウント作成・利用は18歳以上が対象です。</p>
         </div>
 
         <!-- Intro -->
@@ -675,7 +675,7 @@
             </div>
 
             <div class="callout callout-warn">
-                ⚠️ <strong>2026 年 10 月 6 日から、新しい Cowork の作業は Anthropic 側のクラウドで動きます</strong>（公式ヘルプ「Use Claude Cowork on web, desktop, and mobile」。2026-10-04 に確認）。パソコンのフォルダを読み書きできるのは、<strong>Claude Desktop アプリを開いている間だけ</strong>です。作業に要るファイルは、そのファイルのコピーがクラウドへ取り込まれます。この資料の手順は 2026-09-27 時点の画面で書いています。10 月 6 日より後は、画面や動きがこの資料と違うことがあります。違ったら講師に声をかけてください。
+                ⚠️ <strong>Pro・Max では、2026 年 10 月 6 日以降に始める新しい作業は Anthropic 側のクラウドで動きます</strong>（それ以前にパソコン上で始めた作業はそのまま続けられます）。Team・Enterprise では、クラウドを使うかどうかは組織の設定によります（公式ヘルプ「Use Claude Cowork on web, desktop, and mobile」。2026-10-04 に確認）。クラウドで動く場合、パソコンのフォルダを読み書きできるのは、<strong>Claude Desktop アプリを開いている間だけ</strong>です。作業に要るファイルは、そのファイルのコピーがクラウドへ取り込まれます。この資料の手順は 2026-09-27 時点の画面で書いています。10 月 6 日より後は、画面や動きがこの資料と違うことがあります。違ったら講師に声をかけてください。
             </div>
 
             <div class="callout callout-info">
@@ -785,15 +785,15 @@
                 ⚠️ <strong>許可の画面は、読まずに押さない。</strong> 「どのフォルダか」「何をしようとしているか」が書いてあります。練習用ダウンロード以外の名前が出たら、許可せずに止めてください。
             </div>
 
-            <h3>任せ方（承認モード）を「Manually approve」にしておく</h3>
-            <p>Cowork には、どこまで確認しながら進めるかを決める設定が 3 つあります（公式ヘルプ「Get started with Claude Cowork」）。</p>
+            <h3>任せ方（承認モード）を「Manual」（従来の画面では「Manually approve」）にしておく</h3>
+            <p>入力欄の承認設定は、チャットとまとまった新しい画面では「Manual」と「Auto」の2種類、従来の画面では「Manually approve」「Automatically approve」「Skip all approvals」の3種類があります（新しい画面には Skip all approvals はありません）（公式ヘルプ「Get started with Claude Cowork」）。</p>
             <table>
                 <tr><th>設定の名前</th><th>動き方</th><th>このハンズオンでは</th></tr>
-                <tr><td><strong>Manually approve</strong>（手動で承認）</td><td>操作の前に止まって、許可するかをあなたに聞く</td><td><strong>これを使う</strong></td></tr>
-                <tr><td><strong>Automatically approve</strong>（自動で承認）</td><td>止まらずに進める。そのかわり操作ごとに Claude が安全かを確かめ、危ないと判断したものは止める。安全の確認をする分、<strong>使用量を多く使う</strong></td><td>慣れてから</td></tr>
-                <tr><td><strong>Skip all approvals</strong>（すべて確認しない）</td><td>止まらず、自動の安全確認もしない。公式ヘルプでは「関わるアプリや連携先を完全に信頼できるときだけ」とされている</td><td>使わない</td></tr>
+                <tr><td><strong>Manual</strong>（従来の画面: Manually approve / 手動で承認）</td><td>操作の前に止まって、許可するかをあなたに聞く</td><td><strong>これを使う</strong></td></tr>
+                <tr><td><strong>Auto</strong>（従来の画面: Automatically approve / 自動で承認）</td><td>止まらずに進める。そのかわり操作ごとに Claude が安全かを確かめ、危ないと判断したものは止める。安全の確認をする分、<strong>使用量を多く使う</strong></td><td>慣れてから</td></tr>
+                <tr><td><strong>Skip all approvals</strong>（従来の画面のみ / すべて確認しない）</td><td>止まらず、自動の安全確認もしない。公式ヘルプでは「関わるアプリや連携先を完全に信頼できるときだけ」とされている</td><td>使わない</td></tr>
             </table>
-            <p>最初は <strong>Manually approve</strong> にして、Claude が何をしようとしているかを一つずつ見ます。「こういう順番で作業するのか」が分かってから、次の設定を考えれば十分です。</p>
+            <p>このハンズオンでは <strong>Manual</strong>（従来の画面では Manually approve）を選びます。Claude が何をしようとしているかを一つずつ見ます。「こういう順番で作業するのか」が分かってから、次の設定を考えれば十分です。</p>
 
             <details class="sample-details trouble-details">
                 <summary>🧯 うまくいかないとき</summary>
@@ -1252,10 +1252,10 @@
                 <tr><td><strong>コネクタ</strong></td><td>Gmail・Google Drive・Slack などとつないで、その中の情報を使って作業する</td><td>有料プラン。つなげるアプリはプランや組織の設定による</td></tr>
                 <tr><td><strong>ブラウザの操作</strong></td><td>Web ページを開いて調べる・入力する。Claude 専用のブラウザか、Chrome の拡張機能「Claude in Chrome」を使う</td><td>Pro・Max・Team（Enterprise は管理者が有効にした場合）</td></tr>
                 <tr><td><strong>スケジュールタスク</strong></td><td>「毎朝」「毎週月曜」のように決まった時間に同じ作業を自動で行う</td><td>有料プラン</td></tr>
-                <tr><td><strong>プロジェクト</strong></td><td>関係する作業・指示・フォルダ・定期実行を 1 つの場所にまとめる</td><td>Claude Desktop（Mac・Windows）</td></tr>
+                <tr><td><strong>プロジェクト</strong></td><td>関係する作業・指示・フォルダ・定期実行を 1 つの場所にまとめる</td><td>Desktop・Web・スマホ。パソコンのフォルダに結び付けたプロジェクトで Cowork を使う場合は Desktop のみ</td></tr>
                 <tr><td><strong>画面の操作（Computer use）</strong></td><td>Claude がパソコンの画面を見て、クリックや入力をする。コネクタやブラウザでできないときの最後の手段</td><td>Pro・Max のみ。設定で自分でオンにし、アプリごとに許可する</td></tr>
                 <tr><td><strong>Dispatch</strong></td><td>スマホから作業を頼み、パソコンの Claude に進めてもらう</td><td>Pro・Max。公式ヘルプでは限られた人向けの試験提供で、新しく使い始めることはできないとされている</td></tr>
-                <tr><td><strong>スマホ・Web から使う</strong></td><td>claude.ai やスマホアプリからも頼める</td><td>パソコンのファイル・ブラウザ・画面を使う作業は、<strong>Claude Desktop が起動していてつながっている</strong>ことが条件</td></tr>
+                <tr><td><strong>スマホ・Web から使う</strong></td><td>claude.ai やスマホアプリからも頼める</td><td>パソコンのファイル・ブラウザ・画面を使う作業は、<strong>Claude Desktop が起動していてつながっている</strong>ことが条件。パソコンのフォルダを使う作業は、Desktopアプリで始めてフォルダを接続し、読み書きする間はアプリを開いておきます。その会話をWeb・スマホで開けば、続きを指示できます。</td></tr>
             </table>
 
             <div class="callout callout-warn">

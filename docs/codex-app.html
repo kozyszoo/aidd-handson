@@ -622,9 +622,10 @@
             <table>
                 <tr><th>必要なもの</th><th>確認すること</th></tr>
                 <tr><td>ChatGPT デスクトップアプリ</td><td>公式ページでは macOS・Windows・Linux 向けに案内されています。アプリを開き、Codex を選べることを確認します</td></tr>
-                <tr><td>利用できるアカウント</td><td>公式料金ページは Plus・Pro・Business・Enterprise / Education を掲載しています。組織のアカウントでは、管理者の設定も確認します</td></tr>
+                <tr><td>利用できるアカウント</td><td>Plus・Pro・Business・Enterprise・Eduに加え、Free・Goでも対象アカウントではデスクトップ版のCodexをGPT-6 Lunaで使えます。Free・Goへの提供は順次進んでいるため、開催前に自分のアカウントでCodexを選び、短い依頼を実行できるか確認してください。組織のアカウントでは、管理者の設定も確認します</td></tr>
                 <tr><td>練習用フォルダ</td><td>下の zip をダウンロードして展開します。中身はすべて架空です</td></tr>
             </table>
+            <div class="callout callout-info">ℹ️ 個人のChatGPTアカウントを使う場合は、13歳以上で居住国の最低利用年齢も満たす必要があり、18歳未満は親または法定保護者の許可が必要です。</div>
 
             <p style="text-align:center; margin: 20px 0;"><a href="codex-app-sample.zip" class="btn" download>練習用フォルダ（codex-app-sample.zip）をダウンロード</a></p>
             <ol>
@@ -824,8 +825,9 @@
             <ul>
                 <li>Step 3 の正解表と 6 つの数字を一つずつ見比べる</li>
                 <li>ページを再読み込みし、表示が変わらないことを見る</li>
-                <li>ブラウザのアドレスが <code>file://</code> で始まることを見る。外部サイトに送っていないことの確認になる</li>
-                <li>ファイルをテキストエディタで開き、<code>http://</code> と <code>https://</code> が入っていないことを検索する</li>
+                <li>ブラウザのアドレスが <code>file://</code> で始まることを見る。ローカルファイルを開いていることの確認になります。外部に通信していないことまでは確認できません</li>
+                <li>ファイルをテキストエディタで開き、<code>http://</code> と <code>https://</code> が入っていないことを検索する。文字列の検索だけでは、すべての通信先は分かりません</li>
+                <li>通信を調べるには、Chromeの開発者ツールで「Network」を開き、ページの再読み込みと操作をして、接続先と送信内容を確認します</li>
             </ul>
 
             <div class="nav-btns">
@@ -896,7 +898,7 @@
                 <tr><td><strong>Ask for approval</strong></td><td><code>workspace-write</code>、<code>on-request</code>、<code>user</code>。現在の作業範囲内では読み書きし、範囲外やネットワーク利用の前に確認する</td><td><strong>最初に使う</strong></td></tr>
                 <tr><td><strong>Approve for me</strong></td><td>確認が必要な操作を自動レビューへ回す。作業範囲そのものは広げない</td><td>仕組みを理解してから検討する</td></tr>
                 <tr><td><strong>Full access</strong></td><td><code>danger-full-access</code> と <code>never</code>。ファイルとネットワークの制限を外す</td><td>このハンズオンでは使わない</td></tr>
-                <tr><td><code>read-only</code></td><td>ファイルを調べる用途。変更やコマンドには承認が必要</td><td>説明や計画だけのときに使える</td></tr>
+                <tr><td><code>read-only</code></td><td>ファイルを書き換えずに調べる設定です。ファイルの閲覧以外の変更やコマンドの実行には承認が必要です</td><td>説明や計画だけのときに使える</td></tr>
             </table>
             <p>公式ドキュメントでは、権限の操作は入力欄の下にあります。組織の設定によって、選べる項目が無効になる場合があります。</p>
 
@@ -910,7 +912,7 @@
             <h3>約束 4: 外から来た内容と操作する権限を同時に広げない</h3>
             <ul>
                 <li>Web、メール、共有ファイルは指示を含むかもしれないデータとして扱う</li>
-                <li>ネットワークアクセスは初期状態では無効です。必要な理由と接続先を確認してから広げる</li>
+                <li>標準設定では、Codexが実行するコマンドからのネットワーク利用は制限されています。Web検索、ブラウザ、外部サービスとの連携は別の設定です。利用する前に、必要な理由・接続先・送る情報を確認します</li>
                 <li>隠れた指示が入りうる内容を読む作業では、削除・送信・公開・購入を同時に任せない</li>
             </ul>
 
@@ -953,7 +955,7 @@
                 <tr><th>機能</th><th>できること</th><th>条件・注意</th></tr>
                 <tr><td><strong>複数のチャット</strong></td><td>別のプロジェクトや長い作業を並べて進める</td><td>同じファイルを同時に変更する依頼は避ける</td></tr>
                 <tr><td><strong>Worktree</strong></td><td>Git の作業コピーを分け、別の作業を並行する</td><td>Git リポジトリでだけ使える</td></tr>
-                <tr><td><strong>Scheduled tasks</strong></td><td>決まった時間や対応イベントで作業を実行する</td><td>利用可否はプランと組織設定による。ローカルファイルを使う実行では、パソコンとアプリを動かしておく</td></tr>
+                <tr><td><strong>Scheduled tasks</strong></td><td>デスクトップ版では、決まった時刻に作業を実行する</td><td>利用可否はプランと組織設定による。ローカルファイルを使う実行では、パソコンとアプリを動かしておく。メール受信などをきっかけに実行する機能は、対象プランのChatGPT Web・モバイルで使います</td></tr>
                 <tr><td><strong>Skills</strong></td><td>手順、参考資料、必要ならスクリプトをまとめ、同じ流れを再利用する</td><td>中身を確認してから使う</td></tr>
                 <tr><td><strong>Codex IDE extension</strong></td><td>エディタで開いているコードを文脈にして説明・編集・確認する</td><td>公式ページは VS Code と互換エディタ、Xcode、JetBrains の連携を案内している</td></tr>
             </table>

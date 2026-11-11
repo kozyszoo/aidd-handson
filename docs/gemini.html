@@ -202,6 +202,7 @@
             background: var(--bg-light);
             color: var(--primary-deep);
             font-weight: 600;
+            white-space: nowrap;
         }
 
         td.center,
@@ -478,6 +479,241 @@
             font-size: 1.1rem;
         }
 
+        /* 図・画像（クリックで原寸を開く） */
+        .figure {
+            margin: 20px 0;
+        }
+
+        .figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid var(--bg-light);
+            box-shadow: 0 4px 14px rgba(31, 41, 55, 0.08);
+        }
+
+        .figure.narrow img {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .figure figcaption {
+            font-size: 0.82rem;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .figure-pair {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .figure-pair .figure {
+            margin: 0;
+        }
+
+        /* 横に並ぶ手順のフローチャート（狭い画面では縦に並ぶ） */
+        .flow {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin: 20px 0;
+            counter-reset: flow;
+        }
+
+        .flow-step {
+            flex: 1 1 0;
+            position: relative;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 14px 14px 12px;
+            margin-right: 30px;
+            font-size: 0.88rem;
+            color: var(--muted);
+            /* 長い URL があっても、手順の幅をそろえる */
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .flow-step:last-child {
+            margin-right: 0;
+        }
+
+        /* 手順と手順の間の矢印 */
+        .flow-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-style: solid;
+            border-width: 9px 0 9px 14px;
+            border-color: transparent transparent transparent var(--accent);
+        }
+
+        .flow-step b {
+            display: block;
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .flow-step .n {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.75rem;
+            border-radius: 999px;
+            padding: 1px 9px;
+            margin-bottom: 6px;
+        }
+
+        .flow-step.goal {
+            border-color: var(--accent-pink);
+            background: #fdf3f4;
+        }
+
+        .flow-step.goal .n {
+            background: var(--accent-pink);
+        }
+
+        /* 分かれ道（1年後に決める など） */
+        .flow-fork {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .flow-fork span {
+            display: block;
+            background: #fff;
+            border: 1px dashed var(--accent);
+            border-radius: 8px;
+            padding: 4px 8px;
+            font-size: 0.82rem;
+            color: var(--text);
+        }
+
+        @media (max-width: 820px) {
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow-step {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .flow-step:last-child {
+                margin-bottom: 0;
+            }
+
+            .flow-step:not(:last-child)::after {
+                right: auto;
+                left: 50%;
+                top: auto;
+                bottom: -24px;
+                transform: translateX(-50%);
+                border-width: 14px 9px 0 9px;
+                border-color: var(--accent) transparent transparent transparent;
+            }
+        }
+
+        /* 「どれを使う？」の分かれ道の図 */
+        .tree {
+            margin: 24px 0;
+        }
+
+        .tree-root {
+            max-width: 420px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--gemini-gradient);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 12px 18px;
+            position: relative;
+        }
+
+        /* 根元から下へ伸びる線 */
+        .tree-root::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -20px;
+            width: 2px;
+            height: 20px;
+            background: var(--accent);
+        }
+
+        .tree-branches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+            padding: 18px;
+            border: 2px dashed var(--accent);
+            border-radius: 14px;
+        }
+
+        .tree-branch {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--text);
+            border-radius: 12px;
+            border: 1px solid var(--bg-light);
+            background: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        .tree-branch:hover {
+            border-color: var(--primary);
+        }
+
+        .tree-branch .if {
+            padding: 12px 14px;
+            font-size: 0.88rem;
+            flex: 1;
+        }
+
+        .tree-branch .then {
+            padding: 10px 14px;
+            font-weight: 700;
+            color: #fff;
+            background: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .tree-branch.notebook .then { background: var(--accent); }
+        .tree-branch.image .then { background: var(--accent-pink); }
+        .tree-branch.live .then { background: var(--green); }
+
+        .tree-branch .then small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* プロンプトを直しながら近づける繰り返しの図 */
+        .loop {
+            display: block;
+            max-width: 720px;
+            width: 100%;
+            height: auto;
+            margin: 16px auto;
+        }
+
         .btn {
             background: var(--primary);
             color: #ffffff;
@@ -613,6 +849,10 @@
             </div>
             <p style="margin-top:8px;">Google の AI アシスタント <strong>Gemini（ジェミニ）</strong> の基本から、勉強・レポート・リサーチ・就活・日常生活での使い方までをまとめたページです。Training Hour「Gemini 入門」の投影資料をもとに、当日の説明をあとから読み返せる形にしました。</p>
             <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間の目安: 約 45〜60 分（読むだけなら 20 分）／ 必要なもの: Google アカウント、ブラウザまたはスマホ</p>
+            <figure class="figure">
+                <a href="img/gemini-hero.jpg" target="_blank" rel="noopener"><img src="img/gemini-hero.jpg" alt="ノートパソコンとスマホを前にした学生のそばで、きらりと光る形の AI アシスタントがノート・資料・カレンダー・地図を手伝っているイラスト" loading="lazy"></a>
+                <figcaption>Gemini の画像生成で作ったイラスト</figcaption>
+            </figure>
         </div>
 
         <div class="page-toolbar">
@@ -635,6 +875,12 @@
                 <div class="bubble"><span class="cat">例</span>英語の論文を読むのに時間がかかる</div>
             </div>
             <p>このページを読み終えたあとに、書いたことをもう一度見返してみてください。どの機能で解決できそうかが分かるはずです。</p>
+
+            <h3>全体像</h3>
+            <figure class="figure">
+                <a href="img/gemini-ig-overview.jpg" target="_blank" rel="noopener"><img src="img/gemini-ig-overview.jpg" alt="Gemini 入門の全体像のインフォグラフィック。左に始め方とプラン・モデル・料金、右に学習・調査と整理・生活と就活・画像生成の4つの活用シーン" loading="lazy"></a>
+                <figcaption>このページの内容から Gemini Notebook で作ったインフォグラフィック（クリックで拡大）</figcaption>
+            </figure>
 
             <h3>このページの流れ</h3>
             <div class="step-grid">
@@ -664,6 +910,10 @@
             </div>
 
             <h3>🍛 カレー作りに例えると</h3>
+            <figure class="figure">
+                <a href="img/gemini-curry.jpg" target="_blank" rel="noopener"><img src="img/gemini-curry.jpg" alt="3つの場面のイラスト。左はレシピカードどおりに料理するロボット、中央はたくさんのレシピと味の記録を学ぶロボット、右は残り物の野菜から新しいカレーを考え出すロボット" loading="lazy"></a>
+                <figcaption>左から AI・機械学習・生成AI。Gemini の画像生成で作ったイラスト</figcaption>
+            </figure>
             <div class="table-wrap">
                 <table>
                     <tr><th>言葉</th><th>カレー作りでいうと</th></tr>
@@ -770,6 +1020,16 @@
                     <li><strong>上位プラン:</strong> Google AI Pro も最大75%割引（最長4年間）で使えます。割引後の金額、割引が終わったあとの請求、Plus の1年無料との関係は、申し込みページで確かめてください</li>
                 </ul>
             </div>
+            <h4>申し込みから1年後までの流れ</h4>
+            <div class="flow">
+                <div class="flow-step"><span class="n">1</span><b>申し込む</b>個人の Google アカウントで gemini.google.com/students を開く</div>
+                <div class="flow-step"><span class="n">2</span><b>学生であることを確認</b>画面の案内に沿って手続きする</div>
+                <div class="flow-step"><span class="n">3</span><b>支払い方法を登録</b>この時点では請求されない</div>
+                <div class="flow-step"><span class="n">4</span><b>1年間無料で使う</b>申し込んだ日に、1年後の予定をカレンダーへ</div>
+                <div class="flow-step goal"><span class="n">5</span><b>1年後に決める</b>
+                    <div class="flow-fork"><span>続ける → 月725円が自動で請求</span><span>やめる → 請求の前に解約</span></div>
+                </div>
+            </div>
             <div class="callout callout-tip">
                 📅 申し込んだ日に、<strong>1年後の日付を Google カレンダーへ入れておきましょう。</strong> 続けるか解約するかを、請求が始まる前に決められます。
             </div>
@@ -798,11 +1058,13 @@
             <p><a href="https://gemini.google.com/students" target="_blank" rel="noopener">gemini.google.com/students</a> から開きます。学習ノートブックや単語帳を作る、クイズを受ける、がここからできます。学習向けの新しい道具は、今後ここに追加されます。</p>
 
             <h3>学習ノートブック：授業資料から学習プランを作る</h3>
-            <ol>
-                <li>講義ノートやシラバスをアップロードすると、Gemini がテーマを小さく分けた学習プランを作ります。</li>
-                <li>診断クイズを受けると苦手な部分が分かり、それに合わせた短いレッスンとクイズが作られます。</li>
-                <li>進み具合はダッシュボードで見られます。スマホでも使えます。</li>
-            </ol>
+            <div class="flow">
+                <div class="flow-step"><span class="n">1</span><b>資料をアップロード</b>講義ノートやシラバス</div>
+                <div class="flow-step"><span class="n">2</span><b>学習プランができる</b>テーマを小さく分けたプランを Gemini が作る</div>
+                <div class="flow-step"><span class="n">3</span><b>診断クイズ</b>苦手な部分が分かる</div>
+                <div class="flow-step"><span class="n">4</span><b>短いレッスンとクイズ</b>苦手に合わせて作られる</div>
+                <div class="flow-step goal"><span class="n">5</span><b>進み具合を見る</b>ダッシュボードで確認。スマホでも使える</div>
+            </div>
             <p>Google AI Plus・Pro では、使える資料の数と作れるノートブックの数が増えます。</p>
             <div class="callout callout-info">
                 ℹ️ <strong>名前が似ているので注意:</strong> 「学習ノートブック」は Gemini アプリの中の機能です。<a href="#research">5章</a>で紹介する「Gemini Notebook」は別のサイト（notebook.google）にある、別のサービスです。
@@ -863,12 +1125,12 @@
 
             <h3>Deep Research：調べ物を数分でレポートにする</h3>
             <p>事例調査や新しいトレンドの調査など、込み入ったテーマについて、多数のウェブサイトを読んで調査レポートを作る機能です。使える回数はプランによって変わります。</p>
-            <ol>
-                <li><strong>リサーチ計画を提案:</strong> 調べたい内容を伝えると、Gemini がまずリサーチ計画を出します。必要なら直してから始めます。</li>
-                <li><strong>情報を集めて読む:</strong> 計画に沿って、100件から数百件のウェブサイトの情報をその場で読み込みます。</li>
-                <li><strong>レポートにまとめる:</strong> 数分で、出典つきの調査レポートができあがります。</li>
-                <li><strong>図にする:</strong> できたレポートの「作成」から、インフォグラフィックを自動で作り、長い文章を図で見られるようにできます。</li>
-            </ol>
+            <div class="flow">
+                <div class="flow-step"><span class="n">1</span><b>リサーチ計画</b>調べたい内容を伝えると、Gemini がまず計画を出す。必要なら直してから始める</div>
+                <div class="flow-step"><span class="n">2</span><b>情報を集めて読む</b>計画に沿って、100件から数百件のウェブサイトをその場で読む</div>
+                <div class="flow-step"><span class="n">3</span><b>レポートにまとめる</b>数分で、出典つきの調査レポートができる</div>
+                <div class="flow-step goal"><span class="n">4</span><b>図にする</b>レポートの「作成」から、インフォグラフィックを自動で作れる</div>
+            </div>
             <div class="callout callout-warn">
                 ⚠️ Deep Research のレポートも、AI が作ったものです。レポートや論文に使う前に、出典のリンクを開いて内容が合っているか確かめてください。
             </div>
@@ -935,6 +1197,11 @@
             <span class="code-label">写真をアップロード ＋ プロンプト</span>
             <pre><code>写真のキャラクターを、リアルなスタイルと環境で1/7スケールの商品化フィギュアの画像を作成してください。フィギュアは、テキストなしの円形透明アクリルベースを使用して、机の上に置いて。そのフィギュアの横に、元の作品が印刷されたおもちゃのパッケージボックスを置いて、ボックスの下の方には「Made with Gemini」とだけ書かれている。背景にはお洒落なリビングが見える。</code></pre>
 
+            <figure class="figure narrow">
+                <a href="img/gemini-figure.jpg" target="_blank" rel="noopener"><img src="img/gemini-figure.jpg" alt="木の机の上に置かれた、透明なアクリル台に立つ茶トラ猫のフィギュアと、同じ猫の絵が印刷されたおもちゃの箱" loading="lazy"></a>
+                <figcaption>作例: 写真を使わず、文章の指示だけで Gemini の画像生成に作らせたもの。実際は自分のペットの写真をアップロードして使う</figcaption>
+            </figure>
+
             <h4>写真に手書き風のコメントを入れる</h4>
             <p>「ここに写真内のアイテムを記入」の行は、写真に写っているもの（例: カフェラテ、チーズケーキ、木のテーブル）に書き換えてから送ります。</p>
             <span class="code-label">写真をアップロード ＋ プロンプト</span>
@@ -961,6 +1228,10 @@
 【仕上がり】
 ・インスタのストーリー風、雑誌のラフメモ風
 ・おしゃれで力の抜けた雰囲気</code></pre>
+            <figure class="figure narrow">
+                <a href="img/gemini-annotate.jpg" target="_blank" rel="noopener"><img src="img/gemini-annotate.jpg" alt="カフェラテとチーズケーキの写真に、白いペンで描いたような線と短い手書き風のコメントが入った画像" loading="lazy"></a>
+                <figcaption>作例: 文章の指示だけで作ったもの。実際は自分で撮った写真をアップロードして使う</figcaption>
+            </figure>
             <div class="callout callout-warn">
                 ⚠️ 他の人が写った写真を使うときは、本人の許可を取ってください。作った画像を SNS に載せるときも同じです。アニメやゲームのキャラクター、芸能人の写真、他の人のイラストなど、権利を持つ人がいる画像も勝手に使わないでください。
             </div>
@@ -970,6 +1241,10 @@
         <section class="section" id="prompt">
             <h2>8. よりよい回答を得るためのプロンプトのコツ</h2>
             <p>プロンプト（Gemini への指示文）に次の6つを入れると、ほしい答えに近づきやすくなります。全部を毎回入れる必要はありません。</p>
+            <figure class="figure">
+                <a href="img/gemini-ig-prompt.jpg" target="_blank" rel="noopener"><img src="img/gemini-ig-prompt.jpg" alt="プロンプトの6つのコツのインフォグラフィック。ペルソナ指定、文脈・背景伝達、具体的なタスク、形式の指定、出力例の提示、追加指示の実行と、面接の質問を考えるプロンプトの構成例" loading="lazy"></a>
+                <figcaption>このページの内容から Gemini Notebook で作ったインフォグラフィック（クリックで拡大）</figcaption>
+            </figure>
             <div class="step-grid">
                 <div class="step-card"><div class="step-num">1</div><h4>ペルソナ（役割）を指定する</h4><p>「あなたはコピーライターです」「製品管理の専門家です」のように、立場を決める。</p></div>
                 <div class="step-card"><div class="step-num">2</div><h4>文脈や背景を伝える</h4><p>どんな状況なのかを説明する。PDF などの資料を一緒に渡すのも有効。</p></div>
@@ -995,6 +1270,35 @@
             </ul>
             <p>表が出たら、「3番目の質問について、私の答えを添削して」のように続けます（<strong>6 追加の指示</strong>）。</p>
 
+            <h4>1回で決めず、繰り返して近づける</h4>
+            <svg class="loop" viewBox="0 0 720 200" role="img" aria-label="プロンプトを書く、答えを読む、ほしい形かを確かめる。ほしい形なら完成。違えば追加で指示して、もう一度答えを読む">
+                <defs>
+                    <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                        <path d="M0,0 L10,5 L0,10 z" fill="#9b72cb"></path>
+                    </marker>
+                </defs>
+                <g font-size="16" font-weight="700" text-anchor="middle" fill="#1f2937">
+                    <rect x="10" y="30" width="150" height="56" rx="12" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"></rect>
+                    <text x="85" y="64">① 書く</text>
+                    <rect x="195" y="30" width="150" height="56" rx="12" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"></rect>
+                    <text x="270" y="64">② 答えを読む</text>
+                    <rect x="380" y="30" width="150" height="56" rx="12" fill="#f3ecfa" stroke="#9b72cb" stroke-width="2"></rect>
+                    <text x="455" y="64">③ ほしい形？</text>
+                    <rect x="580" y="30" width="130" height="56" rx="12" fill="#fdf3f4" stroke="#d96570" stroke-width="2"></rect>
+                    <text x="645" y="64">完成</text>
+                </g>
+                <g stroke="#9b72cb" stroke-width="2" fill="none" marker-end="url(#arrowHead)">
+                    <path d="M160 58 H191"></path>
+                    <path d="M345 58 H376"></path>
+                    <path d="M530 58 H576"></path>
+                    <path d="M455 86 V152 H270 V90"></path>
+                </g>
+                <g font-size="15" fill="#5f6b7a" text-anchor="middle">
+                    <text x="553" y="48">はい</text>
+                    <text x="362" y="182">いいえ → ④ 追加で指示する（深掘り・形式の変更）</text>
+                </g>
+            </svg>
+
             <h3>こんな相談もできる</h3>
             <div class="bubble-grid">
                 <div class="bubble"><span class="cat">要約・外国語の勉強</span>この長い英語のニュース記事を、日本語で要約して分かりやすく教えて</div>
@@ -1016,6 +1320,21 @@
         <section class="section" id="choose">
             <h2>9. Gemini と Gemini Notebook の使い分け、料金</h2>
             <p>ネット上の広い情報を使うなら <strong>Gemini</strong>、自分が持ち込んだ資料だけをもとにするなら <strong>Gemini Notebook</strong> を使います。</p>
+            <h3>どれを使う？</h3>
+            <div class="tree">
+                <div class="tree-root">何をしたい？</div>
+                <div class="tree-branches">
+                    <a class="tree-branch" href="#meet-gemini"><span class="if">ちょっと聞きたい・相談したい・アイデアがほしい</span><span class="then">Gemini（チャット）<small>gemini.google.com</small></span></a>
+                    <a class="tree-branch notebook" href="#research"><span class="if">授業の PDF など、自分の資料だけをもとに知りたい</span><span class="then">Gemini Notebook<small>notebook.google</small></span></a>
+                    <a class="tree-branch" href="#research"><span class="if">ネットで広く調べて、レポートにまとめたい</span><span class="then">Deep Research<small>Gemini アプリの中</small></span></a>
+                    <a class="tree-branch notebook" href="#study"><span class="if">レポートや小さなアプリを一緒に作りたい</span><span class="then">Canvas<small>Gemini アプリの中</small></span></a>
+                    <a class="tree-branch image" href="#image"><span class="if">画像を作りたい・写真を作り変えたい</span><span class="then">Nano Banana<small>Gemini アプリの中</small></span></a>
+                    <a class="tree-branch live" href="#life"><span class="if">目の前のものや画面を見せながら話したい</span><span class="then">Gemini Live<small>スマホのアプリが便利</small></span></a>
+                </div>
+            </div>
+            <p style="font-size:0.88rem; color: var(--muted);">カードを押すと、その機能の説明へ移動します。</p>
+
+            <h3>Gemini と Gemini Notebook の違い</h3>
             <div class="compare">
                 <div class="compare-box">
                     <div class="tag">外の世界を調べる</div>
@@ -1061,6 +1380,11 @@
             <div class="callout callout-info">
                 💡 <strong>ハルシネーションとは:</strong> AI が、事実と違うことを本当のことのように答えてしまう現象です（もっともらしい嘘・知ったかぶり）。
             </div>
+
+            <figure class="figure">
+                <a href="img/gemini-ig-responsible.jpg" target="_blank" rel="noopener"><img src="img/gemini-ig-responsible.jpg" alt="生成AIを責任を持って使うためのインフォグラフィック。ハルシネーションの説明と、学内ルールの確認、機密の入力禁止、明確なプロンプト、出力の確認、AI利用の明記、主体性の保持の6つのルール" loading="lazy"></a>
+                <figcaption>このページの内容から Gemini Notebook で作ったインフォグラフィック（クリックで拡大）</figcaption>
+            </figure>
 
             <h3>守ること6つ</h3>
             <ol>

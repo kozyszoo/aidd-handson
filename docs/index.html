@@ -31,6 +31,7 @@
             --accent-gas-gradient: linear-gradient(135deg, #34a853, #188038);
             --accent-gas2-gradient: linear-gradient(135deg, #a78bfa, #7c3aed);
             --accent-banana-gradient: linear-gradient(135deg, #fbbf24, #d99e00);
+            --accent-gemini-gradient: linear-gradient(135deg, #4285f4, #9b72cb);
             --accent-toolkit-gradient: linear-gradient(135deg, #38bdf8, #0284c7);
             --accent-ethics-gradient: linear-gradient(135deg, #94a3b8, #475569);
             --accent-multiai-gradient: linear-gradient(135deg, #f472b6, #db2777);
@@ -129,6 +130,7 @@
         .card.gas::before { background: var(--accent-gas-gradient); }
         .card.gas2::before { background: var(--accent-gas2-gradient); }
         .card.banana::before { background: var(--accent-banana-gradient); }
+        .card.gemini::before { background: var(--accent-gemini-gradient); }
         .card.cowork::before { background: var(--accent-cowork-gradient); }
         .card.code-beginner::before { background: var(--accent-code-beginner-gradient); }
         .card.toolkit::before { background: var(--accent-toolkit-gradient); }
@@ -151,6 +153,7 @@
         .card.gas:hover { box-shadow: 0 20px 40px rgba(24, 128, 56, 0.12); }
         .card.gas2:hover { box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1); }
         .card.banana:hover { box-shadow: 0 20px 40px rgba(217, 158, 0, 0.15); }
+        .card.gemini:hover { box-shadow: 0 20px 40px rgba(66, 133, 244, 0.15); }
         .card.toolkit:hover { box-shadow: 0 20px 40px rgba(2, 132, 199, 0.14); }
         .card.ethics:hover { box-shadow: 0 20px 40px rgba(71, 85, 105, 0.14); }
         .card.multiai:hover { box-shadow: 0 20px 40px rgba(219, 39, 119, 0.13); }
@@ -199,6 +202,7 @@
         .card.gas .badge { background: rgba(24, 128, 56, 0.18); color: #86efac; }
         .card.gas2 .badge { background: rgba(124, 58, 237, 0.15); color: #c4b5fd; }
         .card.banana .badge { background: rgba(217, 158, 0, 0.18); color: #fcd34d; }
+        .card.gemini .badge { background: rgba(66, 133, 244, 0.18); color: #a5c8ff; }
         .card.toolkit .badge { background: rgba(2, 132, 199, 0.18); color: #7dd3fc; }
         .card.ethics .badge { background: rgba(71, 85, 105, 0.22); color: #cbd5e1; }
         .card.multiai .badge { background: rgba(219, 39, 119, 0.18); color: #fbcfe8; }
@@ -237,6 +241,7 @@
         .card.gas .btn { background: var(--accent-gas-gradient); }
         .card.gas2 .btn { background: var(--accent-gas2-gradient); }
         .card.banana .btn { background: var(--accent-banana-gradient); }
+        .card.gemini .btn { background: var(--accent-gemini-gradient); }
         .card.personal .btn { background: var(--accent-personal-gradient); }
         .card.cowork .btn { background: var(--accent-cowork-gradient); }
         .card.code-beginner .btn { background: var(--accent-code-beginner-gradient); }
@@ -403,6 +408,21 @@
                 <p class="card-desc">Claude Desktop の Code タブで、お店の売上データ（CSV）を選ぶと合計と内訳が出る Web ページを、言葉で頼んで作ります。計画を先に見る・変更を 1 つずつ承認する・9 月と 10 月の 2 つの売上データで合計を確かめる、の順に進め、最後に自分の作業から道具にするものを 1 つ選んで頼み方を書きます。Chat・Cowork・Claude Code の違いの比較表つき（2026-10-04 時点の公式ドキュメントで確認）。この実習には、Claude の有料プラン（Pro・Max・Team・Enterprise）と、その機能を使える権限が必要です。</p>
             </div>
             <a href="claude-code-beginner.html" class="btn">Claude Code 入門を開始 ➔</a>
+        </div>
+
+        <!-- Gemini 入門 -->
+        <div class="card gemini">
+            <div class="card-header">
+                <span class="card-icon">✦</span>
+                <h2 class="card-title">Gemini 入門</h2>
+                <div class="badges">
+                    <span class="badge">Training Hour</span>
+                    <span class="badge">コード不要</span>
+                    <span class="badge">大学生向け</span>
+                </div>
+                <p class="card-desc">Google の AI アシスタント Gemini の基本と、学習・リサーチ・生活と就活・画像づくりでの使い方をまとめた解説ページ。始め方とプラン・大学生向けの特典、学習ノートブック・Canvas・Gemini Notebook・Deep Research・Gemini Live・Nano Banana、プロンプトの6つのコツ、責任ある使い方までを、フローチャートとインフォグラフィックで確認できます。料金とプランは 2026-10-05 時点の情報です。</p>
+            </div>
+            <a href="gemini.html" class="btn">Gemini 入門を開く ➔</a>
         </div>
 
         <!-- Nano Banana ハンズオン -->

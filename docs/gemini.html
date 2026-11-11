@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 入門ガイド ｜ 学生のための Gemini 活用</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Gemini のロゴに合わせて、青〜紫のグラデーションを基調にしたテーマ */
+            --primary: #4285f4;
+            --primary-deep: #1a56c4;
+            --accent: #9b72cb;
+            --accent-pink: #d96570;
+            --bg-dark: #f4f7fc;
+            --bg-mid: #ffffff;
+            --bg-light: #e6eefc;
+            --text: #1f2937;
+            --muted: #5f6b7a;
+            --green: #188038;
+            --orange: #e8710a;
+            --sidebar: 280px;
+            --gemini-gradient: linear-gradient(90deg, #4285f4, #9b72cb, #d96570);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.75;
+        }
+
+        h1, h2, h3, h4, .sidebar h2, .btn {
+            font-family: 'Outfit', 'Inter', "Hiragino Sans", sans-serif;
+        }
+
+        /* サイドバー（目次） */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar);
+            height: 100vh;
+            background: var(--bg-mid);
+            border-right: 1px solid var(--bg-light);
+            overflow-y: auto;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .sidebar h2 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            background: var(--gemini-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar a {
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: var(--bg-light);
+            color: var(--primary-deep);
+            padding-left: 14px;
+        }
+
+        .sidebar .sub-link {
+            padding-left: 20px;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* メイン */
+        .main {
+            margin-left: var(--sidebar);
+            padding: 40px;
+            max-width: 1100px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ffffff, #eef2fd 60%, #f6eefb);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid var(--primary);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .hero h1 .grad {
+            background: var(--gemini-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .section {
+            background: var(--bg-mid);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .section h2 {
+            color: var(--primary-deep);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .section h3 {
+            color: var(--primary-deep);
+            font-size: 1.3rem;
+            margin: 28px 0 12px;
+        }
+
+        .section h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin: 18px 0 8px;
+        }
+
+        .section p {
+            margin-bottom: 12px;
+        }
+
+        .section ul,
+        .section ol {
+            margin-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .section li {
+            margin-bottom: 6px;
+        }
+
+        /* 表は狭い画面で横スクロールさせる */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-light);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--bg-light);
+            color: var(--primary-deep);
+            font-weight: 600;
+        }
+
+        td.center,
+        th.center {
+            text-align: center;
+        }
+
+        code {
+            background: #eef2fb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #b3261e;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88em;
+        }
+
+        pre {
+            background: #1e2433;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 6px 0 16px;
+            white-space: pre-wrap;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: #e8ecf6;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+        }
+
+        .card {
+            background: var(--bg-mid);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 16px 0;
+            border: 1px solid rgba(66, 133, 244, 0.2);
+            box-shadow: 0 4px 20px rgba(66, 133, 244, 0.05);
+        }
+
+        /* 注意・補足のコールアウト */
+        .callout {
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        .callout-warn {
+            background: #fff4e5;
+            border-left: 4px solid var(--orange);
+            color: #7a4a06;
+        }
+
+        .callout-info {
+            background: #e8f0fe;
+            border-left: 4px solid var(--primary);
+            color: #174ea6;
+        }
+
+        .callout-tip {
+            background: #f3ecfa;
+            border-left: 4px solid var(--accent);
+            color: #4a2a6e;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            margin-right: 6px;
+        }
+
+        .badge-level {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge-time {
+            background: var(--accent);
+            color: white;
+        }
+
+        .badge-date {
+            background: #fde7e9;
+            color: #a1323c;
+        }
+
+        /* 機能紹介のカード並び */
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .step-card {
+            background: var(--bg-dark);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .step-card.purple {
+            border-left-color: var(--accent);
+        }
+
+        .step-card.pink {
+            border-left-color: var(--accent-pink);
+        }
+
+        .step-card.green {
+            border-left-color: var(--green);
+        }
+
+        .step-card .step-num {
+            color: var(--primary-deep);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .step-card h4 {
+            color: var(--text);
+            margin: 0 0 6px;
+            font-size: 1rem;
+        }
+
+        .step-card p,
+        .step-card li {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .step-card ul {
+            margin: 6px 0 0 18px;
+        }
+
+        /* 3つの円で AI の範囲を示す図 */
+        .nest {
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+
+        .nest-ai {
+            background: #e8f0fe;
+            border: 2px solid var(--primary);
+        }
+
+        .nest-ml {
+            background: #f3ecfa;
+            border: 2px solid var(--accent);
+            margin-top: 12px;
+        }
+
+        .nest-gen {
+            background: #fde7e9;
+            border: 2px solid var(--accent-pink);
+            margin-top: 12px;
+        }
+
+        .nest-title {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .nest-desc {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        /* 使い分けの2列比較 */
+        .compare {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .compare-box {
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid var(--primary);
+            background: #f5f8ff;
+        }
+
+        .compare-box.notebook {
+            border-color: var(--accent);
+            background: #faf6fd;
+        }
+
+        .compare-box .tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .compare-box h4 {
+            margin: 4px 0 8px;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        /* プロンプト例のラベル */
+        .code-label {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin: 16px 0 4px;
+            background: #e8f0fe;
+            color: #174ea6;
+        }
+
+        /* 活躍シーンの例（チャット風の吹き出し） */
+        .bubble-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .bubble {
+            background: var(--bg-dark);
+            border: 1px solid var(--bg-light);
+            border-radius: 14px 14px 14px 4px;
+            padding: 12px 14px;
+            font-size: 0.9rem;
+        }
+
+        .bubble .cat {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        /* 今日のお題 */
+        .quest {
+            border-radius: 12px;
+            padding: 20px 22px;
+            margin: 14px 0;
+            background: var(--bg-dark);
+            border: 1px solid var(--bg-light);
+        }
+
+        .quest .lv {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .quest.easy .lv { background: var(--green); }
+        .quest.mid .lv { background: var(--primary); }
+        .quest.hard .lv { background: var(--accent); }
+
+        .quest h4 {
+            margin: 0 0 6px;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        a {
+            color: var(--primary-deep);
+        }
+
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1001;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px 16px;
+                padding-top: 60px;
+            }
+
+            .hero {
+                padding: 24px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section h2 {
+                font-size: 1.45rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+    <style id="page-toolbar-style">
+        /* ページ上部の PDF 保存ボタンと進捗リアクションのお願い */
+        .page-toolbar { display: flex; justify-content: flex-end; margin: 0 0 16px; }
+        .pdf-download-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid #1a73e8; border-radius: 8px; background: #fff; color: #1a73e8; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+        .pdf-download-btn:hover { background: #e8f0fe; }
+        .progress-reaction-note { background: #fff8e1; border-left: 4px solid #f9ab00; border-radius: 8px; padding: 14px 18px; margin: 0 0 32px; color: #3c2f00; font-size: 0.95rem; line-height: 1.7; }
+        @media print {
+            .sidebar, .menu-toggle, .page-toolbar { display: none !important; }
+            .main { margin-left: 0 !important; max-width: none !important; padding: 0 !important; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+    <script>
+        // 印刷（PDF 保存）時は折りたたみを開いて、中身も PDF に入れる
+        window.addEventListener('beforeprint', function () {
+            document.querySelectorAll('details').forEach(function (d) { d.setAttribute('open', ''); });
+        });
+    </script>
+</head>
+
+<body>
+    <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ メニュー</button>
+
+    <aside class="sidebar" id="sidebar">
+        <h2>✦ Gemini 入門</h2>
+        <nav>
+            <ul>
+                <li><a href="index.html" style="font-weight: bold; color: var(--muted); border-bottom: 1px solid var(--bg-light); margin-bottom: 10px; padding-bottom: 10px; display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">arrow_back</span>ポータルに戻る</a></li>
+                <li><a href="#intro">はじめに</a></li>
+                <li><a href="#ai-basics">1. AI・機械学習・生成AI</a></li>
+                <li><a href="#meet-gemini">2. Gemini アプリとは</a></li>
+                <li><a href="#start">3. 使い始める</a></li>
+                <li><a href="#models" class="sub-link">モデルとプラン</a></li>
+                <li><a href="#students" class="sub-link">大学生向けの特典</a></li>
+                <li><a href="#study">4. 学習に使う</a></li>
+                <li><a href="#research">5. リサーチに使う</a></li>
+                <li><a href="#life">6. 生活・就活に使う</a></li>
+                <li><a href="#image">7. 画像を作る・直す</a></li>
+                <li><a href="#prompt">8. プロンプトのコツ</a></li>
+                <li><a href="#choose">9. 使い分けと料金</a></li>
+                <li><a href="#responsible">10. 責任ある使い方</a></li>
+                <li><a href="#quest">今日の3つのお題</a></li>
+                <li><a href="#links">参考リンク</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <!-- ヒーロー -->
+        <div class="hero">
+            <span class="badge badge-level">入門編</span>
+            <span class="badge badge-time">Training Hour</span>
+            <span class="badge badge-date">情報は 2026年10月5日時点</span>
+            <h1><span class="grad">Gemini 入門</span><br>学生生活で使う Google の AI アシスタント</h1>
+            <div class="callout callout-warn" style="margin-top: 12px; margin-bottom: 12px;">
+                ⚠️ <strong>ご注意:</strong> 本資料は Google 公式のドキュメントではなく、コミュニティおよび有志による非公式の解説資料です。料金・プラン・機能名は変わることがあるので、使う前に Google の公式ページで最新の情報を確認してください。
+            </div>
+            <p style="margin-top:8px;">Google の AI アシスタント <strong>Gemini（ジェミニ）</strong> の基本から、勉強・レポート・リサーチ・就活・日常生活での使い方までをまとめたページです。Training Hour「Gemini 入門」の投影資料をもとに、当日の説明をあとから読み返せる形にしました。</p>
+            <p style="margin-top:8px; font-size:0.9rem; color: var(--muted);">所要時間の目安: 約 45〜60 分（読むだけなら 20 分）／ 必要なもの: Google アカウント、ブラウザまたはスマホ</p>
+        </div>
+
+        <div class="page-toolbar">
+            <button type="button" class="pdf-download-btn" onclick="window.print()" title="印刷画面の送信先で「PDF に保存」を選んでください">📄 PDF でダウンロード</button>
+        </div>
+        <div class="progress-reaction-note">
+            🙋 みなさんの進捗状況を知りたいので、うまく進んでいる場合も、進んでいない場合も絵文字リアクションを積極的に返してください！進んでないよ、というときも遠慮なく！
+        </div>
+
+        <!-- はじめに -->
+        <section class="section" id="intro">
+            <h2>はじめに</h2>
+            <p>このページで扱うのは、「複雑な課題の解決」のような大きな話ではありません。「今日の夕飯どうしよう」「サークルの新歓どうしよう」「この長いレポートをどうまとめよう」といった、日常の小さな困りごとや面倒な作業に Gemini をどう使うか、です。</p>
+
+            <h3>アイスブレイク：「これも AI 化できない？」</h3>
+            <p>最近、身の回りで「これ、AI にやってもらえないかな」と思ったことを、チャットに1つ書いてください。</p>
+            <div class="bubble-grid">
+                <div class="bubble"><span class="cat">例</span>毎週のゼミの議事録をまとめるのが面倒</div>
+                <div class="bubble"><span class="cat">例</span>バイトのシフト表を見て、空いている日を探すのが大変</div>
+                <div class="bubble"><span class="cat">例</span>英語の論文を読むのに時間がかかる</div>
+            </div>
+            <p>このページを読み終えたあとに、書いたことをもう一度見返してみてください。どの機能で解決できそうかが分かるはずです。</p>
+
+            <h3>このページの流れ</h3>
+            <div class="step-grid">
+                <div class="step-card"><div class="step-num">1〜3</div><h4>知る</h4><p>AI の基本、Gemini の特徴、始め方とプラン</p></div>
+                <div class="step-card purple"><div class="step-num">4〜7</div><h4>使う</h4><p>学習・リサーチ・生活と就活・画像の4つの場面</p></div>
+                <div class="step-card pink"><div class="step-num">8〜10</div><h4>使いこなす</h4><p>プロンプトのコツ、使い分け、守るべきルール</p></div>
+                <div class="step-card green"><div class="step-num">お題</div><h4>試す</h4><p>初級・中級・上級の3つのお題に挑戦</p></div>
+            </div>
+        </section>
+
+        <!-- 1. AI の基本 -->
+        <section class="section" id="ai-basics">
+            <h2>1. AI・機械学習・生成AI</h2>
+            <p>Gemini は「生成AI」の一種です。まず、よく聞く3つの言葉の関係を整理します。</p>
+
+            <div class="nest nest-ai">
+                <div class="nest-title">AI（人工知能）</div>
+                <div class="nest-desc">学習・推論・問題解決など、人間の知能と結びついた働きをまねできるコンピュータプログラムのこと。</div>
+                <div class="nest nest-ml">
+                    <div class="nest-title">機械学習（Machine Learning）</div>
+                    <div class="nest-desc">AI の1分野。人がルールを1つずつ書くのではなく、コンピュータがデータから自分で学ぶ仕組み。</div>
+                    <div class="nest nest-gen">
+                        <div class="nest-title">生成AI（Generative AI）</div>
+                        <div class="nest-desc">データの中のパターンを学んで、文章・画像・音声・動画などの新しいコンテンツを作り出すもの。Gemini はここに入る。</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🍛 カレー作りに例えると</h3>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>言葉</th><th>カレー作りでいうと</th></tr>
+                    <tr><td>AI</td><td>料理を作る仕組み全般。人が書いたレシピどおりに作る仕組みも、ここに入る</td></tr>
+                    <tr><td>機械学習</td><td>たくさんのレシピと「おいしかった／いまいちだった」の記録から、おいしく作るコツを自分で覚える</td></tr>
+                    <tr><td>生成AI</td><td>覚えたコツをもとに、「冷蔵庫の残り物で作れるカレー」のような、まだ無いレシピを新しく考え出す</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 2. Gemini とは -->
+        <section class="section" id="meet-gemini">
+            <h2>2. Gemini アプリとは</h2>
+            <p><strong>Gemini（ジェミニ）</strong> は Google の AI アシスタントです。ブラウザなら <a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a> から使えます。</p>
+            <ul>
+                <li>テキストだけでなく、画像・動画・音声もまとめて扱える <strong>マルチモーダル</strong> なモデルです。</li>
+                <li>中身は <strong>大規模言語モデル（LLM, Large Language Model）</strong> です。LLM は、ユーザーの指示（プロンプト）とそれまでに出した文章をもとに、次に来そうな言葉を予測して文章を作る生成AIです。</li>
+            </ul>
+
+            <div class="callout callout-info">
+                💡 <strong>LLM の仕組みから分かること:</strong> LLM は「それらしい続き」を予測して文章を作ります。そのため、事実と違うことを本当のように書いてしまうことがあります（ハルシネーション。<a href="#responsible">10章</a>で説明します）。
+            </div>
+
+            <h3>Gemini の4つの特徴</h3>
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-num">特徴 1</div>
+                    <h4>新しい情報に強い</h4>
+                    <p>リアルタイムの情報を使った回答、これまでの会話をふまえた提案、Google 検索で回答を確かめる機能がある。</p>
+                </div>
+                <div class="step-card purple">
+                    <div class="step-num">特徴 2</div>
+                    <h4>いろいろな形の情報が分かる</h4>
+                    <p>動画・画像・音声・テキストなど、ユーザーにとって自然な形のまま情報を理解して扱える。</p>
+                </div>
+                <div class="step-card pink">
+                    <div class="step-num">特徴 3</div>
+                    <h4>Google のサービスとつながる</h4>
+                    <p>YouTube・Gmail・Google マップ・Google カレンダーなどと連携できる。</p>
+                </div>
+                <div class="step-card green">
+                    <div class="step-num">特徴 4</div>
+                    <h4>一度に読める量が多い</h4>
+                    <p>1回で扱える情報量が多い。例えば約2時間分の動画をまとめて読み込める。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 使い始める -->
+        <section class="section" id="start">
+            <h2>3. 使い始める</h2>
+            <p>Gemini はパソコン・スマホ・タブレットのどれからでも使えます。大学の Google Workspace アカウントと、個人の Gmail アカウントのどちらでも無料で使えます。</p>
+
+            <h3>開き方</h3>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>端末</th><th>開き方</th></tr>
+                    <tr><td>パソコン（ウェブ版）</td><td><a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a> を開く。Chrome なら、アドレスバーに <code>@gemini</code> と入力してすぐに呼び出せる</td></tr>
+                    <tr><td>パソコン（アプリ）</td><td>Windows・Mac 用のアプリもある</td></tr>
+                    <tr><td>iPhone・Android</td><td>Gemini アプリをダウンロードする。ホーム画面のウィジェットからも開ける</td></tr>
+                    <tr><td>Android</td><td>電源ボタンを長押しすると Gemini が起動する</td></tr>
+                </table>
+            </div>
+            <div class="callout callout-warn">
+                ⚠️ 大学の Google Workspace で Gemini が許可されていない場合は、大学の管理者による設定が必要です。また、次に説明する大学生向けの特典は、<strong>個人の Google アカウントでのみ</strong> 申し込めます。
+            </div>
+
+            <h3 id="models">画面の見方とモデルの選び方</h3>
+            <p>入力欄の近くにある「モデルの選択メニュー」から、使うモデルと考える深さを選べます。</p>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>モデル</th><th>特徴</th><th>向いている使い方</th></tr>
+                    <tr><td><strong>Flash-Lite</strong></td><td>いちばん速い。無料で使える</td><td>ちょっとした質問、アイデア出し</td></tr>
+                    <tr><td><strong>Flash</strong></td><td>速さと賢さの両方がほしいとき。Google AI Plus 以上</td><td>複数の資料の分析など</td></tr>
+                    <tr><td><strong>Pro</strong></td><td>いちばん深く考える。Google AI Pro 以上</td><td>卒論レベルの調査、大量の資料を一度に扱うとき</td></tr>
+                </table>
+            </div>
+            <p><strong>エフォート：</strong> どのモデルでも、考える深さを「低・中・高」から選べます。高くするほど時間をかけて考えます。</p>
+
+            <h4>プランごとに使えるモデル（個人の Google アカウントの場合）</h4>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>プラン</th><th class="center">Flash-Lite</th><th class="center">Flash</th><th class="center">Pro</th></tr>
+                    <tr><td>プランなし（無料）</td><td class="center">○</td><td class="center">—</td><td class="center">—</td></tr>
+                    <tr><td>Google AI Plus</td><td class="center">○</td><td class="center">○</td><td class="center">—</td></tr>
+                    <tr><td>Google AI Pro</td><td class="center">○</td><td class="center">○</td><td class="center">○</td></tr>
+                    <tr><td>Google AI Ultra</td><td class="center">○</td><td class="center">○</td><td class="center">○</td></tr>
+                </table>
+            </div>
+            <ul>
+                <li>2026年10月9日から、無料（プランなし）で使えるモデルは Flash-Lite になりました。</li>
+                <li>大学が発行したアカウントでどのモデルが使えるかは、公式ヘルプに書かれていません。</li>
+                <li>Google AI Plus を使っている人には、使えるモデルが切り替わる日がメールで届きます。</li>
+            </ul>
+
+            <h3 id="students">大学生は Google AI Plus を1年間無料で使える</h3>
+            <div class="card">
+                <ul style="margin-bottom:0;">
+                    <li><strong>申し込み期限:</strong> 2026年12月31日まで</li>
+                    <li><strong>申し込み先:</strong> <a href="https://gemini.google.com/students" target="_blank" rel="noopener">gemini.google.com/students</a>（学生であることの確認があります）</li>
+                    <li><strong>使えるもの:</strong> Flash モデル、Gemini Omni（動画を作るモデル）、使える量が無料の2倍、ストレージ 400GB</li>
+                    <li><strong>アカウント:</strong> 個人の Google アカウントで申し込みます。大学が発行したアカウントでは使えません</li>
+                    <li><strong>お金のこと:</strong> 申し込みのときに支払い方法の登録が必要です。1年たつと <strong>月725円が自動で請求</strong> されます。解約はいつでもできます</li>
+                    <li><strong>上位プラン:</strong> Google AI Pro も最大75%割引（最長4年間）で使えます。割引後の金額、割引が終わったあとの請求、Plus の1年無料との関係は、申し込みページで確かめてください</li>
+                </ul>
+            </div>
+            <div class="callout callout-tip">
+                📅 申し込んだ日に、<strong>1年後の日付を Google カレンダーへ入れておきましょう。</strong> 続けるか解約するかを、請求が始まる前に決められます。
+            </div>
+        </section>
+
+        <!-- 4. 学習 -->
+        <section class="section" id="study">
+            <h2>4. 学習に使う（自分専用の家庭教師にする）</h2>
+            <p>Gemini は学びの場面で、大きく3つの役に立ちます。</p>
+            <div class="step-grid">
+                <div class="step-card">
+                    <h4>調査・研究と批判的思考</h4>
+                    <ul><li>テーマの調査</li><li>新しい視点の提示</li><li>アイデアの壁打ち</li><li>資料の要約</li><li>事実の確認（ファクトチェック）</li></ul>
+                </div>
+                <div class="step-card purple">
+                    <h4>レポートなど文章を書く</h4>
+                    <ul><li>構成案の作成</li><li>書けなくなったときの打開</li><li>文章の推敲</li></ul>
+                </div>
+                <div class="step-card pink">
+                    <h4>一人ひとりに合わせた学習</h4>
+                    <ul><li>分かりやすく説明</li><li>例え話で解説</li><li>学習用ツールの作成</li><li>理解度のテスト</li></ul>
+                </div>
+            </div>
+
+            <h3>学生ハブ：学習の道具がまとまっている場所</h3>
+            <p><a href="https://gemini.google.com/students" target="_blank" rel="noopener">gemini.google.com/students</a> から開きます。学習ノートブックや単語帳を作る、クイズを受ける、がここからできます。学習向けの新しい道具は、今後ここに追加されます。</p>
+
+            <h3>学習ノートブック：授業資料から学習プランを作る</h3>
+            <ol>
+                <li>講義ノートやシラバスをアップロードすると、Gemini がテーマを小さく分けた学習プランを作ります。</li>
+                <li>診断クイズを受けると苦手な部分が分かり、それに合わせた短いレッスンとクイズが作られます。</li>
+                <li>進み具合はダッシュボードで見られます。スマホでも使えます。</li>
+            </ol>
+            <p>Google AI Plus・Pro では、使える資料の数と作れるノートブックの数が増えます。</p>
+            <div class="callout callout-info">
+                ℹ️ <strong>名前が似ているので注意:</strong> 「学習ノートブック」は Gemini アプリの中の機能です。<a href="#research">5章</a>で紹介する「Gemini Notebook」は別のサイト（notebook.google）にある、別のサービスです。
+            </div>
+
+            <h3>ガイド付き学習：答えではなく「解き方」を聞く</h3>
+            <p>「ガイド付き学習」は、答えをすぐに出すのではなく、家庭教師のように段階的なヒント・解説・問いかけを出して、自分で理解できるところまで付き合ってくれる学習モードです。丸暗記ではなく、仕組みから理解したいときに使います。</p>
+            <p>入力欄のメニューから「ガイド付き学習」を選んでから質問します。選んだうえで、次のように自分の進め方を伝えると、さらに思いどおりに進みます。</p>
+            <span class="code-label">ガイド付き学習を選んだあとのプロンプト例</span>
+            <pre><code>この二次関数の問題、答えは言わずに、最初の一歩だけヒントをください。
+私が考えた途中式を送るので、間違っていたらどこが違うか教えてください。</code></pre>
+
+            <h3>画像を入力する</h3>
+            <p>写真やスマホ・パソコンのスクリーンショットを、そのまま Gemini に送れます。複数枚まとめて送ることもできます。画像が状況を伝えてくれるので、長いプロンプトを書かなくても話が通じます。</p>
+            <ul>
+                <li>手書きのメモ（複数枚でも）を写真に撮って、まとめてもらう</li>
+                <li>分からない問題を撮って、解き方のヒントをもらう</li>
+            </ul>
+
+            <h3>Canvas：Gemini と一緒に文章やアプリを作る</h3>
+            <p>Canvas は、チャットの横に開く作業スペースです。Gemini と一緒に文書を書き直したり、プログラミングの知識がなくても言葉で伝えるだけでウェブサイトや簡単なミニゲームを作ったりできます。</p>
+            <h4>レポートを作る・直す</h4>
+            <ol>
+                <li>レポートの構成を Gemini に相談し、Canvas に初稿を出してもらう。</li>
+                <li>直したい段落をハイライトして、「この段落をもっと学術的な表現にして」「文字数を増やして」と、その部分だけ直してもらう。</li>
+                <li>「長さを変更」「トーンを変更」「編集を提案」のボタンでも調整できる。</li>
+            </ol>
+            <h4>ウェブページやアプリを作る</h4>
+            <ul>
+                <li>言葉で指示するだけでウェブサイトを作れる。色合いや構成も追加で指示できる。</li>
+                <li>講義資料から演習問題を作る、科学の原理を動きで再現する（自由研究など）。</li>
+                <li>手書きのメモの写真から、アプリを作ることもできる。</li>
+            </ul>
+        </section>
+
+        <!-- 5. リサーチ -->
+        <section class="section" id="research">
+            <h2>5. リサーチに使う（情報を集める・整理する）</h2>
+
+            <h3>Gemini Notebook：自分の資料だけを使う AI アシスタント</h3>
+            <p><a href="https://notebook.google" target="_blank" rel="noopener">notebook.google</a> で使えます。アップロードした自分の資料をもとに、情報の整理や分析をしてくれる、リサーチや執筆のアシスタントです。</p>
+            <div class="callout callout-info">
+                ℹ️ NotebookLM は、2026年7月に「Gemini Notebook」へ名前が変わりました。ユーザーの個人データが Gemini Notebook の学習に使われることはありません。
+            </div>
+            <ul>
+                <li>PDF・YouTube 動画・Google ドキュメントやスライドの要約</li>
+                <li>アップロードした資料についての質問への回答</li>
+                <li>複数の資料をまたいだ検索</li>
+                <li>AI との会話をメモとして保存</li>
+                <li>マインドマップの作成（複雑な内容を図で見られる）</li>
+                <li>Podcast 形式の音声解説（音声概要）</li>
+                <li>インフォグラフィックやスライド資料の作成</li>
+            </ul>
+            <p>画面右側の「Studio」パネルに、音声概要・マインドマップなどを作るボタンが並んでいます。作ったノートブックはリンクで共有することもできます。</p>
+            <div class="callout callout-tip">
+                💡 <strong>使いどころ:</strong> 卒論や修論のテーマ決め、先行研究の整理。長い資料を音声解説にして、通学中に聞く。
+            </div>
+
+            <h3>Deep Research：調べ物を数分でレポートにする</h3>
+            <p>事例調査や新しいトレンドの調査など、込み入ったテーマについて、多数のウェブサイトを読んで調査レポートを作る機能です。使える回数はプランによって変わります。</p>
+            <ol>
+                <li><strong>リサーチ計画を提案:</strong> 調べたい内容を伝えると、Gemini がまずリサーチ計画を出します。必要なら直してから始めます。</li>
+                <li><strong>情報を集めて読む:</strong> 計画に沿って、100件から数百件のウェブサイトの情報をその場で読み込みます。</li>
+                <li><strong>レポートにまとめる:</strong> 数分で、出典つきの調査レポートができあがります。</li>
+                <li><strong>図にする:</strong> できたレポートの「作成」から、インフォグラフィックを自動で作り、長い文章を図で見られるようにできます。</li>
+            </ol>
+            <div class="callout callout-warn">
+                ⚠️ Deep Research のレポートも、AI が作ったものです。レポートや論文に使う前に、出典のリンクを開いて内容が合っているか確かめてください。
+            </div>
+        </section>
+
+        <!-- 6. 生活・就活 -->
+        <section class="section" id="life">
+            <h2>6. 生活・就活に使う（Gemini Live とアプリ連携）</h2>
+
+            <h3>Gemini Live：カメラや画面を見せながら話す</h3>
+            <p>カメラの映像やスマホの画面を共有して、目の前のものについて Gemini と会話できます。音声と文字は、チャットの中で切り替えられます。</p>
+            <div class="step-grid">
+                <div class="step-card"><h4>アートや歴史の解説</h4><p>旅先の建物やアート作品にカメラを向けて、見どころを解説してもらう。</p></div>
+                <div class="step-card purple"><h4>コーディネートの相談</h4><p>服・花束・インテリアを見せて、組み合わせを相談する。</p></div>
+                <div class="step-card pink"><h4>操作や設定の相談</h4><p>ショッピングサイトやスマホの設定画面を共有して、選び方や設定方法を聞く。</p></div>
+                <div class="step-card green"><h4>勉強でつまずいたとき</h4><p>つまずいた問題を映して、解説や解き方のヒントをもらう。</p></div>
+            </div>
+
+            <h3>アプリ連携：Google サービスをまたいで作業する</h3>
+            <p>Gemini アプリは、ふだん使っている Google サービスと連携できます。アプリやタブを行き来しなくても、Gemini の中で情報を調べたり作業を頼んだりできます。</p>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>連携先</th><th>できること</th></tr>
+                    <tr><td>YouTube</td><td>動画の見どころの提案、情報の抜き出し、関連動画の提案</td></tr>
+                    <tr><td>Google マップ</td><td>レストランや観光地の提案、口コミの要約、経路沿いの検索。旅行の計画や場所探しに</td></tr>
+                    <tr><td>Gmail</td><td>フライト情報・旅行の日程・予約番号などをメールから探す</td></tr>
+                    <tr><td>Google カレンダー</td><td>ポスターやプリントの写真から予定を登録する。前後に別の予定があるかも確かめられる</td></tr>
+                </table>
+            </div>
+
+            <h3>Google Workspace のサイドパネル</h3>
+            <p>Gmail やスライドの画面の横に Gemini を開いて使えます。<strong>無料プランでは使えません。</strong> 大学のアカウントで使えるかは、大学の契約と管理者の設定によります。</p>
+            <ul>
+                <li><strong>Gmail:</strong> メールの下書き作成、文面の印象（トーン）の確認、長いやり取りの要約、受信トレイの整理</li>
+                <li><strong>スライド:</strong> 素材用の画像の生成、表紙の作成、文章やメッセージの改善</li>
+            </ul>
+        </section>
+
+        <!-- 7. 画像 -->
+        <section class="section" id="image">
+            <h2>7. 画像を作る・直す（Nano Banana）</h2>
+            <p>Gemini で画像を作るモデルの名前は <strong>Nano Banana 🍌</strong> です。文章から画像を作るだけでなく、手持ちの写真を大きく作り変えることもできます。</p>
+            <ul>
+                <li>物の見分けや、同じ人物の見た目を保つ力が強くなっています。</li>
+                <li>最大 4K の高解像度に対応し、布の質感・動物の毛並み・ガラスの反射のような細部まで描けます。</li>
+                <li>元の画像の画風を変える、部屋の家具を入れ替える、といった編集もできます。</li>
+                <li>Gemini で作った画像には、右下に Gemini のマークが入ります。</li>
+                <li>動画は <strong>Gemini Omni</strong> で作ります（Google AI Plus 以上）。</li>
+            </ul>
+            <div class="callout callout-tip">
+                🍌 Nano Banana の詳しいハンズオンは <a href="nanobanana.html">Nano Banana ハンズオンガイド</a> にあります。
+            </div>
+
+            <h3>試してみるプロンプト</h3>
+            <h4>写真の人物の見た目を変える</h4>
+            <p>写真をアップロードして、次のように指示します。顔立ちを保ったまま、服や髪型だけを変えられます。</p>
+            <span class="code-label">プロンプト例</span>
+            <pre><code>髪型を金髪にして
+スポーティーなスタイルにして
+80年代のプレッピースタイルにして
+90年代のグランジファッション風にして</code></pre>
+
+            <h4>3D フィギュアにする（ペットの写真でも）</h4>
+            <span class="code-label">写真をアップロード ＋ プロンプト</span>
+            <pre><code>写真のキャラクターを、リアルなスタイルと環境で1/7スケールの商品化フィギュアの画像を作成してください。フィギュアは、テキストなしの円形透明アクリルベースを使用して、机の上に置いて。そのフィギュアの横に、元の作品が印刷されたおもちゃのパッケージボックスを置いて、ボックスの下の方には「Made with Gemini」とだけ書かれている。背景にはお洒落なリビングが見える。</code></pre>
+
+            <h4>写真に手書き風のコメントを入れる</h4>
+            <p>「ここに写真内のアイテムを記入」の行は、写真に写っているもの（例: カフェラテ、チーズケーキ、木のテーブル）に書き換えてから送ります。</p>
+            <span class="code-label">写真をアップロード ＋ プロンプト</span>
+            <pre><code>写真に写っている要素を観察し、それぞれに対して意味のある手描き注釈を追加してください。
+【写ってるもの】
+ここに写真内のアイテムを記入
+【描写ルール】
+・白ペンで描いたような細めの手描き線
+・一筆書き風でラフ、少し不均一
+・オブジェクトの外周をなぞるようにアウトラインを追加
+・矢印や点線で視線誘導をつくる
+【テキストルール】
+・日本語の手書き文字（ひらがな7割、やさしい漢字3割）
+・短く、独り言のようなコメントにする
+・トーンは「日記・ひとこと・感情寄り」
+【コメント生成ルール】
+・飲み物→味・温度・気分（例：すっきり、やさしい甘さ）
+・食べ物→食感・おいしさ（例：しっとり、最高）
+・空間→雰囲気（例：落ち着く、いい時間）
+・全体→一言まとめ（例：しあわせすぎる～）
+【装飾】
+・湯気、キラキラ、ハート、小さな顔文字などを控えめに追加
+・やりすぎず「余白」を残す
+【仕上がり】
+・インスタのストーリー風、雑誌のラフメモ風
+・おしゃれで力の抜けた雰囲気</code></pre>
+            <div class="callout callout-warn">
+                ⚠️ 他の人が写った写真を使うときは、本人の許可を取ってください。作った画像を SNS に載せるときも同じです。アニメやゲームのキャラクター、芸能人の写真、他の人のイラストなど、権利を持つ人がいる画像も勝手に使わないでください。
+            </div>
+        </section>
+
+        <!-- 8. プロンプト -->
+        <section class="section" id="prompt">
+            <h2>8. よりよい回答を得るためのプロンプトのコツ</h2>
+            <p>プロンプト（Gemini への指示文）に次の6つを入れると、ほしい答えに近づきやすくなります。全部を毎回入れる必要はありません。</p>
+            <div class="step-grid">
+                <div class="step-card"><div class="step-num">1</div><h4>ペルソナ（役割）を指定する</h4><p>「あなたはコピーライターです」「製品管理の専門家です」のように、立場を決める。</p></div>
+                <div class="step-card"><div class="step-num">2</div><h4>文脈や背景を伝える</h4><p>どんな状況なのかを説明する。PDF などの資料を一緒に渡すのも有効。</p></div>
+                <div class="step-card purple"><div class="step-num">3</div><h4>タスクを具体的に書く</h4><p>手順のリスト化のような簡単なものから、意見の整理のような複雑なものまで、何をしてほしいかを詳しく書く。</p></div>
+                <div class="step-card purple"><div class="step-num">4</div><h4>形式を指定する</h4><p>表、箇条書き、エレベーターピッチ（短い紹介文）、文字数などを決める。</p></div>
+                <div class="step-card pink"><div class="step-num">5</div><h4>出力の例を見せる</h4><p>ほしいものの例を示す。「小学生向け」「上司向け」など、読む相手も必要に応じて伝える。</p></div>
+                <div class="step-card pink"><div class="step-num">6</div><h4>追加で指示を出す</h4><p>1回で完璧を目指さず、会話を続けて深掘りや形式の変更をしながら近づけていく。</p></div>
+            </div>
+
+            <span class="code-label">6つを入れた例（【 】の中は自分の内容に書き換える）</span>
+            <pre><code>あなたは IT 企業の採用面接官です。
+私は来週、【会社名】のインターン面接を受ける大学3年生です。募集要項は次のとおりです。
+【ここに募集要項を貼る】
+この面接で聞かれそうな質問を5つ考えてください。
+「質問」「聞く理由」「答えるときのポイント」の3列の表にしてください。
+1行目の例: 質問「この職種を選んだ理由は？」｜聞く理由「仕事への理解を見るため」｜答えるときのポイント「募集要項の業務内容に結びつける」</code></pre>
+            <ul>
+                <li>1行目 → <strong>1 ペルソナ</strong>（面接官の役）</li>
+                <li>2〜3行目 → <strong>2 文脈</strong>（自分の立場と、募集要項という資料）</li>
+                <li>4行目 → <strong>3 タスク</strong>（質問を5つ考える）</li>
+                <li>5行目 → <strong>4 形式</strong>（3列の表）</li>
+                <li>6行目 → <strong>5 出力の例</strong>（表の1行目の見本）</li>
+            </ul>
+            <p>表が出たら、「3番目の質問について、私の答えを添削して」のように続けます（<strong>6 追加の指示</strong>）。</p>
+
+            <h3>こんな相談もできる</h3>
+            <div class="bubble-grid">
+                <div class="bubble"><span class="cat">要約・外国語の勉強</span>この長い英語のニュース記事を、日本語で要約して分かりやすく教えて</div>
+                <div class="bubble"><span class="cat">メールの下書き</span>海外の大学院の教授に英語でメールを書かないといけない。下書きを英語で書いて</div>
+                <div class="bubble"><span class="cat">情報収集</span>来週【会社名】のインターン面接がある。この会社の事業の概要など、面接に必要な情報を調べて表にまとめて</div>
+                <div class="bubble"><span class="cat">アイデア出し</span>サークルの新歓の幹事になった。初対面でも楽しめるゲームのアイデアを考えて</div>
+                <div class="bubble"><span class="cat">計画</span>夏までに腹筋を割りたい。1か月のトレーニングメニューを作って Google カレンダーに入れて</div>
+                <div class="bubble"><span class="cat">旅行</span>帰りの飛行機が1日遅れることになった。1日で楽しめるロサンゼルスの旅行プランを考えて</div>
+                <div class="bubble"><span class="cat">料理</span>冷蔵庫にもやしと卵と納豆しかない。一人暮らしでも10分で作れるレシピを考えて</div>
+                <div class="bubble"><span class="cat">創作</span>カブトムシと宇宙が好きな甥っ子が喜ぶ物語を作って、話して聞かせて</div>
+                <div class="bubble"><span class="cat">コーディネート</span>初めてのデートで焼肉屋に行くときの服装を考えて</div>
+                <div class="bubble"><span class="cat">面接練習</span>面接の練習に付き合って。第一印象をよくするにはどうしたらいい？</div>
+                <div class="bubble"><span class="cat">目標</span>海外で働いてみたい。何から始めたらいい？</div>
+                <div class="bubble"><span class="cat">話し相手</span>つらいことがあった。ちょっと話を聞いてもらっていいかな</div>
+            </div>
+        </section>
+
+        <!-- 9. 使い分け -->
+        <section class="section" id="choose">
+            <h2>9. Gemini と Gemini Notebook の使い分け、料金</h2>
+            <p>ネット上の広い情報を使うなら <strong>Gemini</strong>、自分が持ち込んだ資料だけをもとにするなら <strong>Gemini Notebook</strong> を使います。</p>
+            <div class="compare">
+                <div class="compare-box">
+                    <div class="tag">外の世界を調べる</div>
+                    <h4>Gemini</h4>
+                    <p>最新のニュースやネット上の情報を使って、広くアイデアを出したり、ファイルを作ったりするときに使います。</p>
+                </div>
+                <div class="compare-box notebook">
+                    <div class="tag">自分の部屋（鍵のかかった書斎）で調べる</div>
+                    <h4>Gemini Notebook</h4>
+                    <p>授業で配られた PDF など、自分が持ち込んだ資料だけをもとに、要約や図解を作ってほしいときに使います。</p>
+                </div>
+            </div>
+
+            <h3>料金プラン（2026年10月5日時点）</h3>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>プラン</th><th>月額</th><th>ストレージ</th><th>主な内容</th></tr>
+                    <tr><td>無料</td><td>0円</td><td>—</td><td>個人の Gmail アカウントなら誰でも。Gemini アプリ（Flash-Lite モデル）と Gemini Notebook</td></tr>
+                    <tr><td>Google AI Plus</td><td>725円</td><td>400GB</td><td>Flash モデル、Gemini Omni など。大学生は1年間無料（<a href="#students">3章</a>）</td></tr>
+                    <tr><td>Google AI Pro</td><td>2,900円</td><td>5TB</td><td>Pro モデル、Flow・Whisk の拡張アクセスなど。大学生は最大75%割引あり（<a href="#students">3章</a>）</td></tr>
+                    <tr><td>Google AI Ultra</td><td>14,500円〜</td><td>20TB〜</td><td>最上位のプラン</td></tr>
+                    <tr><td>Google Workspace Standard（法人向け）</td><td>1,600円</td><td>200GB</td><td>会社・団体が契約するプラン。個人で申し込むものではない（比較のために載せている）</td></tr>
+                </table>
+            </div>
+            <ul>
+                <li><strong>Gmail・ドキュメント・スライド・Vids・フォーム・スプレッドシート・Meet などの中で使う Gemini</strong>（<a href="#life">6章</a>のサイドパネル）は、有料プランで使えます。無料プランでは使えません。一部の機能は英語のみです。どのプランでどこまで使えるかは、公式ページで確かめてください。</li>
+                <li>大学の Google Workspace アカウントで何が使えるかは、大学の契約と管理者の設定で決まります。</li>
+            </ul>
+            <p>コミュニティには、無料プランでも有料プランでも参加できます。最新のプランの比較は <a href="https://one.google.com/intl/ja_jp/about/google-ai-plans/" target="_blank" rel="noopener">Google One の公式ページ</a> で確認してください。</p>
+        </section>
+
+        <!-- 10. 責任ある使い方 -->
+        <section class="section" id="responsible">
+            <h2>10. 学びの中で責任を持って使う</h2>
+            <p>日本の大学生の <strong>68%</strong> が、学習に生成AIツールを続けて使っています。主な使い道は、文章の文法や内容の校正、試験勉強（予想問題の作成など）、面接練習や自己PRなどの強みの整理です。一方で、生成AIを使っている学生の <strong>75%</strong> が、生成AIに不安を持っています。主な不安は次の3つです。</p>
+            <ul>
+                <li>正しい使い方が分からない</li>
+                <li>ハルシネーション（AI のもっともらしい嘘）や誤情報</li>
+                <li>自分のスキルや将来への不安</li>
+            </ul>
+            <p style="font-size:0.85rem; color: var(--muted);">出典: 2025年5月 GenAI 定点調査（全国18〜54歳の5,000人が対象。68%・75%はそのうち大学生の回答。元スライドの記載による）</p>
+
+            <div class="callout callout-info">
+                💡 <strong>ハルシネーションとは:</strong> AI が、事実と違うことを本当のことのように答えてしまう現象です（もっともらしい嘘・知ったかぶり）。
+            </div>
+
+            <h3>守ること6つ</h3>
+            <ol>
+                <li><strong>学内や科目ごとのルールを確認する。</strong> 分からないときは担当の先生に聞く。</li>
+                <li><strong>個人情報や機密情報を入力しない。</strong> 個人のアカウントでは、設定によって入力した内容がサービスの改善に使われることがあります。</li>
+                <li><strong>プロンプトは明確かつ具体的に。</strong> できれば自分で用意した情報源も渡す。</li>
+                <li><strong>出力を必ず確かめる。</strong> 正確か、偏り（バイアス）がないか、抜けている視点がないかを見る。</li>
+                <li><strong>AI を使ったことを書く。</strong> 科目のガイダンスに従って、使った事実をはっきり書く。</li>
+                <li><strong>最後の成果物には自分の考えを入れる。</strong> AI は考える代わりではなく、学ぶための補助として使う。</li>
+            </ol>
+        </section>
+
+        <!-- 今日のお題 -->
+        <section class="section" id="quest">
+            <h2>今日の3つのお題</h2>
+            <p>レベル別に3つ用意しました。1つできれば十分です。余裕があれば次のレベルへ進んでください。</p>
+
+            <div class="quest easy">
+                <span class="lv">初級</span>
+                <h4>Gemini で画像を作ってみる</h4>
+                <p>Gemini を開いて、「スポーツ大会で熱狂している自分のアバター画像を作って」のように指示してみましょう。文字で伝えるだけで画像ができあがるまでの速さを確かめます。</p>
+            </div>
+
+            <div class="quest mid">
+                <span class="lv">中級</span>
+                <h4>Gemini Notebook で難しい資料を「深夜ラジオ」にする</h4>
+                <p>いちばん難しくて長い授業の配布資料（PDF）を Gemini Notebook に読み込ませます。Studio パネルから「音声概要（Audio Overview）」を作り、通学中に Podcast のように聞いてみましょう。</p>
+            </div>
+
+            <div class="quest hard">
+                <span class="lv">上級</span>
+                <h4>Canvas で提出用のレポートや履歴書を仕上げる</h4>
+                <p>Gemini に「〇〇についてのレポートを作って」または「就活用の履歴書（自己PR）の初稿を作って」と指示し、Canvas に表示させます。文章の一部をハイライトして、その部分だけを直してもらう作業を試しましょう。</p>
+            </div>
+
+            <p>終わったら、講師が案内するアンケートへの協力をお願いします。</p>
+        </section>
+
+        <!-- 参考リンク -->
+        <section class="section" id="links">
+            <h2>参考リンク</h2>
+            <ul>
+                <li><a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini（gemini.google.com）</a></li>
+                <li><a href="https://gemini.google.com/students" target="_blank" rel="noopener">Gemini 学生向けページ（gemini.google.com/students）</a></li>
+                <li><a href="https://notebook.google" target="_blank" rel="noopener">Gemini Notebook（notebook.google）</a></li>
+                <li><a href="https://one.google.com/intl/ja_jp/about/google-ai-plans/" target="_blank" rel="noopener">Google AI プランの比較（Google One）</a></li>
+                <li><a href="nanobanana.html">Nano Banana ハンズオンガイド（このサイト内）</a></li>
+            </ul>
+
+            <div class="nav-btns">
+                <a href="index.html" class="btn">← ポータルに戻る</a>
+                <a href="#intro" class="btn">ページの先頭へ ↑</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // スマホでメニューのリンクを押したら、サイドバーを閉じる
+        document.querySelectorAll('.sidebar a').forEach(function (a) {
+            a.addEventListener('click', function () {
+                document.getElementById('sidebar').classList.remove('open');
+            });
+        });
+    </script>
+</body>
+
+</html>

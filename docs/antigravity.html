@@ -496,7 +496,7 @@
         <!-- Hero -->
         <div class="hero">
             <h1>🚀 Google Antigravity ハンズオンガイド</h1>
-            <p style="margin-top:8px; font-size:0.9rem;">最終更新 2026年9月27日 ／ 本編の対象：<strong style="color: var(--primary);">Antigravity IDE</strong>。2026年9月27日時点の公式配布版は IDE 2.5.5／デスクトップ 2.17.0／CLI 1.2.9</p>
+            <p style="margin-top:8px; font-size:0.9rem;">最終更新 2026年11月22日 ／ 本編の対象：<strong style="color: var(--primary);">Antigravity IDE</strong>。2026年11月22日時点の公式配布版は IDE 2.8.0／Antigravity App 2.34.0／CLI 1.5.14</p>
         </div>
 
         <!-- Intro -->
@@ -591,7 +591,7 @@
                 style="margin: 24px 0; border: 1px solid var(--primary); border-radius: 12px; padding: 20px 24px; background: linear-gradient(135deg, rgba(78, 204, 163, 0.12), rgba(155, 130, 181, 0.10));">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                     <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.6rem;">rocket_launch</span>
-                    <h3 style="margin: 0; color: var(--primary);">🆕 Antigravity 2.0（2026-05-19）と、その後の更新（〜2.15.1、2026-09-19）</h3>
+                    <h3 style="margin: 0; color: var(--primary);">🆕 Antigravity 2.0（2026-05-19）と、その後の更新（〜App 2.34.0、2026-11-20）</h3>
                 </div>
                 <p style="font-size: 0.93rem; line-height: 1.7; margin: 8px 0 12px;">
                     <strong>Antigravity 2.0</strong> は2026年5月19日に発表・公開されました（公式発表の日付）。
@@ -600,12 +600,14 @@
                 <ul style="font-size: 0.9rem; line-height: 1.75; margin: 0 0 12px 22px; padding: 0;">
                     <li><strong>Antigravity CLI</strong> — ターミナルから Agent を呼び出す公式 CLI。<strong>旧 Gemini CLI からの移行先</strong>として案内されています。</li>
                     <li><strong>Antigravity SDK</strong> と <strong>Managed Agents (Gemini API)</strong> — IDE の外でも同じエージェントハーネスを呼び出してアプリに組み込めるようになりました。</li>
-                    <li><strong>Scheduled Background Tasks</strong> — エージェントタスクを cron 的に予約してバックグラウンド実行できます（チャットの <code>/schedule</code> からも可）。</li>
+                    <li><strong>Scheduled Background Tasks</strong>（App では 2026年10月7日から <strong>Automations</strong> という名前）— エージェントタスクを決まった時刻や間隔で（cron のように）予約してバックグラウンド実行できます（チャットの <code>/schedule</code> からも可）。</li>
                     <li><strong>Dynamic Subagent Workflows</strong> — メイン Agent が動的に <strong>Subagent</strong> を増やし、複数タスクを並列に処理します（Step 6 で深掘り）。</li>
                     <li><strong>AgentKit 2.0 統合 / A2A プロトコル</strong> — LangChain・AutoGen など外部フレームワークのエージェントと相互運用できます。</li>
                     <li><strong>Native Voice Commands</strong> — 音声でエージェントに指示を出せるようになりました。</li>
                     <li><strong>Google AI Ultra プラン（$100/月）</strong> — Antigravity の利用枠が Pro の <strong>約5倍</strong>。長時間のオーバーナイト実行向け。</li>
                     <li><strong>Gemini 3.5 Flash → 3.6 → 3.7 → 3.8 Flash</strong> — 2.0 と同時に出た 3.5 Flash のあと、Flash 系が短い間隔で更新され、<strong>2026年9月1日に Gemini 3.8 Flash</strong> が Antigravity に入りました（6週間で3つ目の Flash）。Google は 3.8 Flash を「長時間のコーディングと自律エージェント向けの主力モデル」と位置づけています。3.7 Flash も計算効率を優先したい場面向けに残っています。</li>
+                    <li><strong>Gemini 4 系（Neon／Argon／Hydrogen／Carbon）</strong> — 2026年10月13日の Argon を皮切りに、11月に Carbon（11/10）・Hydrogen（11/12）・Neon（11/18）が登場。<strong>新しい会話の既定モデルは Gemini 4 Neon</strong>（思考レベルは Medium）になりました。計画役と実装役を組み合わせる <strong>Orchestrator</strong>（既定は Neon で計画し、Hydrogen で実装）も入っています。</li>
+                    <li><strong>Claude 5.5 系</strong> — Claude Sonnet 5.5 と Opus 5.5 が選べます（有料プラン向け）。一方、<strong>Claude 4.6 系と GPT-OSS 120B は 2026年11月30日に提供終了</strong>です。</li>
                 </ul>
                 <details class="expand">
                     <summary>2.0 のあと（2026年6月〜9月）に増えた主なもの <span class="hint">クリックで開く ／ 2.1.4〜2.15.1・CLI 1.2.8・Antigravity Agent 09-2026</span></summary>
@@ -632,6 +634,37 @@
                 </p>
                     </div>
                 </details>
+                <details class="expand">
+                    <summary>2.15 のあと（2026年9月下旬〜11月）に増えた主なもの <span class="hint">クリックで開く ／ App 2.18.1〜2.34.0・CLI 1.5.14・Gemini 4 系</span></summary>
+                    <div class="expand-body">
+                <p style="font-size: 0.88rem; color: var(--muted); margin: 8px 0 6px;">公式 Changelog より（2026-11-22 確認）。バージョンと日付は Antigravity App のもの。IDE（スタンドアロン版）は別の番号で進んでおり、2026-11-22 時点の配布版は 2.8.0 です。IDE の変更は下の「IDE の変更」にまとめました。Dynamic Workflows・<code>/swarm</code> など、公式が App や CLI の機能として書いているものは、IDE で同じ名前・同じ操作で使えるかは公式に記載がありません。</p>
+                <ul style="font-size: 0.9rem; line-height: 1.75; margin: 0 0 12px 22px; padding: 0;">
+                    <li><strong>2.18.1（9/28）</strong> — Customizations タブでプラグインの検索・導入・管理</li>
+                    <li><strong>2.19.1（9/30）</strong> — サブエージェントへ直接メッセージ、Markdown の PDF 書き出し、会話だけを巻き戻す操作</li>
+                    <li><strong>2.21.1（10/7）</strong> — 会話を内容で検索、<strong>Scheduled Tasks が Automations に改名</strong></li>
+                    <li><strong>2.23.0（10/12）</strong> — <strong>権限プリセット</strong>（Request Review／Default／Auto／Turbo）を選べる、.zip 添付</li>
+                    <li><strong>2.24.0（10/15）</strong> — サイドパネルを刷新（Overview）、<code>/compact</code></li>
+                    <li><strong>2.28.0（10/27）</strong> — 内蔵ブラウザ・内蔵 PDF ビューア、任意形式のファイル添付（20MB まで）</li>
+                    <li><strong>2.29.0（11/3）</strong> — 音声モードとリモートエージェントの提供開始（リモートエージェントは有料の Pro・Ultra 向け）、既定テーマが Onyx に</li>
+                    <li><strong>2.30.0（11/9）</strong> — Knowledge Work レイアウト（業務種別を選んで使う画面）</li>
+                    <li><strong>2.31.0（11/9）</strong> — <code>/swarm</code>（複数のエージェントに分担させる）</li>
+                    <li><strong>2.32.0（11/13）</strong> — <strong>Dynamic Workflows</strong>（Python スクリプトで並列サブエージェントを組み立てて実行）</li>
+                    <li><strong>2.33.0（11/17）</strong> — SSH 接続、GitHub PR ステータスの表示、管理者向けの端末ポリシー</li>
+                    <li><strong>2.34.0（11/20）</strong> — <strong>MCP Apps</strong>（MCP ツールの結果をチャットやサイドパネルに画面付きで表示）、Gemini 4 Neon の対象を有料の個人プラン・Gemini API キーへ拡大</li>
+                </ul>
+                <p style="font-size: 0.9rem; line-height: 1.7; margin: 0 0 6px;"><strong>IDE の変更（公式 Changelog の「Antigravity IDE」欄）</strong></p>
+                <ul style="font-size: 0.9rem; line-height: 1.75; margin: 0 0 12px 22px; padding: 0;">
+                    <li><strong>2.6.0（10/26）</strong> — <strong>Gemini 4 Argon</strong> を IDE で選べるように、エージェント画面と内部の仕組みを刷新（内蔵の Antigravity 拡張が動かす形になり、起動が速くなり、更新は自動に）、インラインの差分を Alt/Option+Enter で受け入れ・Alt/Option+Shift+Enter で却下、エディタ上のコメント（Ctrl/Cmd+Alt+M）、Agent パネルへのファイル・スクリーンショットのドラッグ＆ドロップ</li>
+                    <li><strong>2.7.0（11/12）</strong> — ターミナルの選択範囲をチャットへ送る（Ctrl/Cmd+L）、ステータスバー・右クリック・Agent パネルのクイックメニュー、差分レビューのコマンド名を「Focused Change／Current File／All Files」に変更、複数ウィンドウ間のサインイン同期</li>
+                    <li><strong>2.8.0（11/19）</strong> — バックグラウンドでの更新確認と即時起動、リモート環境でのサインイン用ポート転送、会話内検索のショートカット、独自の証明書・プロキシ設定でのサインイン</li>
+                </ul>
+                <p style="font-size: 0.9rem; line-height: 1.7; margin: 0 0 12px;">
+                    <strong>CLI（<code>agy</code>）</strong>は 2026年11月22日時点で <strong>1.5.14</strong>。1.5.7（11/12）で<strong>既定の実行モードが Auto</strong> に変わり、1.5.9（11/14）で <code>run_workflow</code>（Dynamic Workflows）、1.5.10（11/17）で<strong>ターミナルのサンドボックスが既定で <code>~/.config</code> の読み取りを遮断</strong>するようになりました。
+                    Gemini 4 系は <code>--model gemini-4-neon-high</code> のように指定できます（使える名前は <code>agy models</code> で確認）。
+                    <strong>Gemini API キーで接続した場合は、Remote Control・<code>--remote-agent</code>・音声入力は使えません。</strong>
+                </p>
+                    </div>
+                </details>
                 <div style="font-size: 0.85rem; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
                     <span>↳ 詳細は</span>
                     <a href="#step3-cli" style="color: var(--blue); text-decoration: none;">Step 3-1（CLI / SDK / Managed Agents）</a>
@@ -651,7 +684,7 @@
                 <p style="margin-top: 12px; font-size: 0.95rem; line-height: 1.6;">
                     Google は現在、よく似た名前の <strong>2 つの別アプリ</strong>を配布しています。インストールも別、バンドル ID も別、起動アイコンも別物です。
                     本ハンズオンで対象にするのは <strong style="color: var(--blue);">Antigravity IDE</strong>（VS Code ベースの統合開発環境）の方です。
-                    既にメインの <strong>Antigravity</strong>（Agent Manager 単体アプリ）だけを入れている方は、追加で <strong>Antigravity IDE</strong> をインストールしてから本ハンズオンを進めてください。
+                    既にメインの <strong>Antigravity</strong>（Agent Manager 単体アプリ。公式の現在の呼び名は <strong>Antigravity App</strong>）だけを入れている方は、追加で <strong>Antigravity IDE</strong> をインストールしてから本ハンズオンを進めてください。
                 </p>
 
                 <div
@@ -716,7 +749,7 @@
                     </div>
                     <p style="font-size: 0.88rem; color: var(--muted); margin: 0; line-height: 1.6;">
                         どちらのアプリも、内部で実際にコードを書いたりコマンドを実行したりする<strong>自律的 AI の実行主体</strong>を <strong style="color: var(--primary);">Agent</strong>（並列実行されるとき <strong style="color: var(--primary);">Subagent</strong>）と呼びます。
-                        中身のエンジンは Gemini 3.1 Pro / Gemini 3 Flash などで、本ハンズオンの Step 1-1 でモデルを切り替えながら触っていきます。
+                        中身のエンジンは Gemini 4 Neon / Gemini 3.8 Flash などで、本ハンズオンの Step 1-1 でモデルを切り替えながら触っていきます。
                         本文中で単に「エージェント」と書かれている場合は、この <strong>Agent / Subagent</strong> のことを指します。
                     </p>
                 </div>
@@ -789,7 +822,7 @@
                 <tbody>
                     <tr>
                         <td>macOS</td>
-                        <td>バージョン 12 (Monterey) 以上 ※ Apple Silicon／Intel に対応。公式ダウンロードページの Antigravity IDE 欄から、自分のMacに合う版を選んでください</td>
+                        <td>バージョン 12 (Monterey) 以上 ※ Apple Silicon／Intel に対応。公式ダウンロードページの Antigravity IDE 欄から、自分のMacに合う版を選んでください（別アプリの Antigravity App は macOS 13 以降）</td>
                     </tr>
                     <tr>
                         <td>Windows</td>
@@ -959,11 +992,12 @@
 
             <h4>6. モデル選択</h4>
             <p>会話入力欄の下にあるモデル選択プルダウンから、タスクに応じて最適なモデルを切り替えられます。<br>
-                <strong>基本は <code>Gemini 3.1 Pro (High)</code> を選んでおけば間違いありません。</strong>Rate Limit に達した場合は、利用状況画面で回復時刻を確認してください。Geminiモデル同士は利用枠を共有するため、切り替えても使い切った枠は回復しません。
+                <strong>迷ったら、有料プラン（Google AI Pro 以上）は既定の <code>Gemini 4 Neon</code>、無料・Plus は <code>Gemini 3.8 Flash</code> を選んでください。</strong>Rate Limit に達した場合は、利用状況画面で回復時刻を確認してください。Geminiモデル同士は利用枠を共有するため、切り替えても使い切った枠は回復しません。
             </p>
             <!-- 【画像挿入箇所】 モデル選択のプルダウンメニューが開いているスクショ -->
             <img class="screenshot" src="img/fig2.png"
-                alt="利用可能なAIモデル（Gemini 3.8 Flash, Gemini 3.1 Pro, Claude Sonnet 4.6 など）を選択するプルダウンメニューのスクリーンショット（画像は 2.0 当時のもの。現在は 3.8 Flash が先頭に並ぶ）">
+                alt="利用可能なAIモデルを選択するプルダウンメニューのスクリーンショット（画像は 2.0 当時のもの。現在は Gemini 4 Neon などが並び、並び方・名前はプランとバージョンで変わる）">
+            <p style="font-size: 0.82rem; color: var(--muted); margin-top: 4px;">※ 上の画像は Antigravity 2.0 当時のモデル一覧です。2026年11月22日時点の顔ぶれは、下の表を見てください。</p>
             <table>
                 <thead>
                     <tr>
@@ -974,34 +1008,39 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Gemini 3.1 Pro (High)</strong></td>
-                        <td>Google の高性能モデル。コード生成・ロジック推論・複雑なタスク分解に最も優れる。ターミナル操作との連携精度も高い。</td>
-                        <td>メイン開発、複雑なロジック、要件定義・設計の壁打ち</td>
+                        <td><strong>Gemini 4 Neon (Low / Medium / High / XHigh)</strong></td>
+                        <td><strong>新しい会話の既定モデル</strong>（思考レベルは Medium）。2026年11月18日に登場。Google AI Pro（有料契約、または対象デバイスの試用）・Ultra・Enterprise で使える（無料・Plus は対象外）。</td>
+                        <td>日常の実装から複雑な設計まで、まず試すモデル</td>
                     </tr>
                     <tr>
-                        <td>Gemini 3.1 Pro (Low)</td>
-                        <td>High と同じモデルだが計算リソースを抑えた設定。応答速度が若干速くなる場合がある。High と利用枠を共有するため、Rate Limit に達してから切り替えても枠は回復しません。</td>
-                        <td>比較的シンプルなコード修正、High の代替</td>
+                        <td>Gemini 4 Argon / Hydrogen / Carbon</td>
+                        <td>Gemini 4 系の仲間。Argon（10/13〜）は Pro（有料契約または対象デバイスの試用）・Ultra・Enterprise、Hydrogen（11/12〜）は有料契約の Pro・Ultra・Enterprise、Carbon（11/10〜）は Ultra・Enterprise が対象。</td>
+                        <td>Neon で足りないときの切り替え先</td>
+                    </tr>
+                    <tr>
+                        <td>Orchestrator</td>
+                        <td>計画役と実装役のモデルを組み合わせて動かす選択肢。既定は <strong>Neon が計画し、Hydrogen が実装</strong>。計画役は Neon・Carbon・Argon・Claude Opus 5.5、実装役は Hydrogen・Claude Sonnet 5.5 から選べる（自分で組み合わせを選べるのは Pro と Ultra だけ）。Pro（有料契約または対象デバイスの試用）・Ultra・Enterprise が対象で、Enterprise は Carbon（High）で計画し Hydrogen（High）で実装する固定構成。</td>
+                        <td>大きめの機能追加、長い自律タスク</td>
                     </tr>
                     <tr>
                         <td><strong>Gemini 3.8 Flash (High / Medium / Low)</strong></td>
-                        <td>2026年9月1日に Antigravity へ入った、Flash 系の最新モデル。Google は「長時間のコーディングと自律エージェント向けの、日常の主力モデル」と説明している。思考の深さ（High / Medium / Low）をタスクごとに切り替えられる。<strong>Gemini 3.7 Flash・3.6 Flash</strong> も選べる（3.7 は計算量を抑えたい場面向け）。</td>
-                        <td>日常の実装、素早いフィードバック、<strong>Dynamic Subagent の並列実行</strong>、長い自律タスク</td>
+                        <td>2026年9月1日に Antigravity へ入った Flash 系モデル。Google は「長時間のコーディングと自律エージェント向けの、日常の主力モデル」と説明している。<strong>無料プランを含む全プランで使える</strong>。思考の深さ（High / Medium / Low）をタスクごとに切り替えられる。</td>
+                        <td>無料・Plus の日常の実装、素早いフィードバック、<strong>Dynamic Subagent の並列実行</strong></td>
                     </tr>
                     <tr>
-                        <td>Claude Sonnet 4.6 (Thinking)</td>
-                        <td>Anthropic 製。文脈理解と自然な文章生成に強み。高度な Reasoning を行う「Thinking モード」がデフォルトで有効であり、思考の過程を可視化できる。</td>
-                        <td>ドキュメント作成、要件定義書・READMEの執筆、アルゴリズムの思考</td>
+                        <td>Claude Sonnet 5.5 / Opus 5.5 (Thinking)</td>
+                        <td>Anthropic 製。文脈理解と文章生成に強い Sonnet、非常に深い推論をする Opus。Google AI Pro（有料契約のみ）以上と Enterprise で使える。</td>
+                        <td>要件定義書・READMEの執筆（Sonnet）、難しいバグ解析・設計の検討（Opus）</td>
                     </tr>
                     <tr>
-                        <td>Claude Opus 4.6 (Thinking)</td>
-                        <td>Antigravityで利用できるAnthropic製の推論モデル。非常に深い推論を行う。</td>
-                        <td>難易度の高いバグ解析、複雑なアーキテクチャ設計の検討</td>
+                        <td>Claude Sonnet 4.6 / Opus 4.6 (Thinking)、GPT-OSS 120B (Medium)</td>
+                        <td><strong>2026年11月30日に提供終了</strong>。Claude 4.6 系は無料・Plus・Pro、GPT-OSS 120B（オープンソースの大規模モデル）は Ultra でも使える。</td>
+                        <td>終了前に使い慣れておく必要はなし。Gemini 3.8 Flash か Claude 5.5 系へ</td>
                     </tr>
                     <tr>
-                        <td>GPT-OSS 120B (Medium)</td>
-                        <td>大規模オープンソースモデルを最適化したモデル。特定のプログラミングパターンや異なるアプローチでのアセット生成に役立つ。</td>
-                        <td>特定言語のコーディング、多角的なアイデア出しや代替案の作成</td>
+                        <td>Gemini 3.1 Pro、3.7 Flash、3.6 Flash</td>
+                        <td>2026年11月22日時点の公式表では <strong>Enterprise だけが対象</strong>。個人プランの選択肢には出ません。</td>
+                        <td>—</td>
                     </tr>
                     <tr>
                         <td>Nano Banana 2</td>
@@ -1010,13 +1049,13 @@
                     </tr>
                 </tbody>
             </table>
-            <p>利用できるモデルは契約プランによって異なります。Claude 4.6系とGPT-OSS 120Bは2026年11月2日に提供終了予定です。</p>
+            <p>利用できるモデルは契約プランによって異なります（<a href="https://antigravity.google/docs/models" target="_blank" style="color: var(--blue);">公式のモデル一覧</a>・2026年11月22日確認）。Claude 4.6系とGPT-OSS 120Bは<strong>2026年11月30日</strong>に提供終了予定です。</p>
             <div class="card">
                 <strong>💡 Rate Limit に達したときの対処法</strong>
                 <ul style="margin-top: 8px;">
                     <li>無料・Plusの利用枠は週ごと、Pro・Ultraは5時間ごとに回復しますが、週ごとの上限もあります。</li>
                     <li>Geminiモデル同士は利用枠を共有するため、切り替えても使い切った枠は回復しません。利用状況画面で回復時刻を確認してください。</li>
-                    <li>簡単な作業は <strong>Gemini 3.8 Flash</strong>（または 3.7 Flash）で素早く処理する</li>
+                    <li>簡単な作業は <strong>Gemini 3.8 Flash</strong> で素早く処理する</li>
                 </ul>
             </div>
 
@@ -1031,11 +1070,12 @@
                     <li><strong>AI クレジットの管理 (Model Credits):</strong> 現在使用可能な AI クレジット（Available AI
                         Credits）や、クレジットの追加、使用履歴（See Activity）を確認できます。</li>
                     <li><strong>クレジット超過の自動補填 (Enable AI Credit Overages):</strong>
-                        この設定を有効（ON）にしておくと、各モデルに割り当てられた月間/週間のクォータを使い切った後でも、保有している AI クレジットから自動的に補填されてモデルへのリクエストを継続できます。
+                        この設定を有効にしておくと、各モデルに割り当てられた利用枠（Pro・Ultra は5時間ごと、無料・Plus は週ごとに回復）を使い切った後でも、保有している AI クレジットから自動的に補填されてモデルへのリクエストを継続できます。
+                        公式の設定名は <strong>AI Credit Overages</strong> で、<code>Never</code>（自動では使わず枠の回復を待つ）と <code>Always</code>（枠を使い切ったらクレジットを自動で使う）から選びます。
                         AIクレジットによる超過利用はGoogle AI Pro・Ultraが対象です。無料・Plusでは利用枠の回復を待ってください。
                     </li>
                     <li><strong>モデルクォータの確認 (Model Quota):</strong> <code>Gemini 3.8 Flash</code> や
-                        <code>Claude Sonnet 4.6</code> など、登録されている各モデルの残りクォータ状況と、それがリセット（定期更新）されるまでの残り時間がリアルタイムに表示されます。
+                        <code>Claude Sonnet 5.5</code> など、登録されている各モデルの残りクォータ状況と、それがリセット（定期更新）されるまでの残り時間がリアルタイムに表示されます。
                     </li>
                 </ul>
             </div>
@@ -1077,6 +1117,7 @@
                     <li><strong>Agent Non-Workspace File Access:</strong>
                         現在のワークスペース外のファイルに Agent がアクセスすることを許可するかどうかを設定します。安全のため、必要なときだけ有効にしましょう。</li>
                 </ul>
+                <p style="font-size: 0.88rem; color: var(--muted); margin-top: 8px;">※ <strong>IDE 2.8.0（2026年11月19日）の本体で確認した内容です。</strong>権限の画面は<strong>2種類</strong>入っています。上の「Agent security mode」（Full access／Sandboxed／Strict。アカウントによって Strict が出ない場合は2択）と、新しい「<strong>Permission Preset</strong>」（<code>Request Review</code>／<code>Default</code>／<code>Auto</code>／<code>Turbo</code>の4つ。Default は信頼フォルダの中だけで自動実行する設定）です。どちらが出るかは、アカウントと段階的な提供で変わります。手元の画面が違っても慌てず、「承認なしで動かす範囲」を選ぶ設定だと考えて読み替えてください。「Terminal Command Auto Execution」の選択肢は、この画面では <code>Require Review</code> と表示され、設定の一覧では <code>Request Review</code> と表示されます（同じ意味）。</p>
             </div>
             <table>
                 <thead>
@@ -1091,6 +1132,16 @@
                         <td><strong>Request Review</strong><br><span style="color: var(--primary); font-size: 0.8rem;">実習で使用</span></td>
                         <td>許可リスト（Allowlist）の例外を除き、実行前に確認します。</td>
                         <td>実習や、コマンドの内容と対象フォルダを確認してから進めるとき</td>
+                    </tr>
+                    <tr>
+                        <td>Proceed in Sandbox</td>
+                        <td>サンドボックス（隔離された安全な箱）の中のコマンドは確認なしで実行し、外に出るコマンドだけ確認します。サンドボックスが使えない環境では出ません。</td>
+                        <td>慣れてきて、確認の回数を減らしたいとき</td>
+                    </tr>
+                    <tr>
+                        <td>Auto</td>
+                        <td>サンドボックス内は自動で実行。外に出るコマンドは、エージェントが「元に戻せる」と判断したものだけ進み、それ以外は確認します。個人アカウントのみで、法人アカウントでは使えません。</td>
+                        <td>長めの作業を任せつつ、危ない操作だけ止めたいとき</td>
                     </tr>
                     <tr>
                         <td><strong>Always Proceed</strong><br><span style="color: var(--purple); font-size: 0.8rem;">自動実行・要注意</span></td>
@@ -1235,26 +1286,22 @@
                 <tbody>
                     <tr>
                         <td>グローバル</td>
-                        <td><code>~/.gemini/GEMINI.md</code></td>
+                        <td><code>~/.gemini/GEMINI.md</code>（<code>~/.gemini/config/GEMINI.md</code> や <code>AGENTS.md</code> も同じく読まれる）</td>
                         <td>すべてのプロジェクトに適用</td>
                     </tr>
                     <tr>
                         <td>ワークスペース</td>
-                        <td><code>.agent/rules/</code> フォルダ内</td>
+                        <td><code>.agents/rules/</code> フォルダ内（旧形式の <code>.agent/rules/</code> も読み込まれる）</td>
                         <td>そのワークスペースのみ</td>
                     </tr>
                     <tr>
                         <td>プロジェクトルート</td>
-                        <td><code>GEMINI.md</code></td>
-                        <td>そのプロジェクト全体</td>
-                    </tr>
-                    <tr>
-                        <td>サブディレクトリ</td>
-                        <td>各フォルダ内の <code>GEMINI.md</code></td>
-                        <td>そのフォルダ以下のみ</td>
+                        <td><code>GEMINI.md</code>（<code>AGENTS.md</code> も同じ扱い）</td>
+                        <td>そのプロジェクト全体。ワークスペースを開いたフォルダから、リポジトリの一番上のフォルダまでさかのぼって各階層のファイルが読まれる</td>
                     </tr>
                 </tbody>
             </table>
+            <p style="font-size: 0.88rem; color: var(--muted);">※ 2026年11月22日時点の公式ドキュメントでは、ワークスペースの<strong>下にあるサブフォルダ</strong>のルールは、そのフォルダのファイルを扱っていても読み込まれません。見つかったルールは置き換えではなく<strong>すべて足し合わされ</strong>、常に有効なルールの合計は <strong>20,000トークン</strong>までです（超えると、大きいルールから順にパスと説明だけの短い一覧に置き換わります）。</p>
 
             <h3>Activation Mode（発動条件）</h3>
             <table>
@@ -1340,7 +1387,7 @@
                 alt="AIによって生成されたHTMLファイルのコード。GEMINI.md で指定した通り、日本語のコメントが含まれ、変数名にキャメルケースが適用されていることが確認できるスクリーンショット">
 
             <h3>応用: Workflows を体験しよう（任意）</h3>
-            <p>現在のWorkflowsは2026年10月19日に利用停止予定です。既存のWorkflowsは、公式の移行ガイドまたは <code>/migrate-workflows</code> でSkillsへ移行できます。</p>
+            <p>Workflowsは<strong>非推奨</strong>です（2026年11月22日時点の公式ドキュメント）。今ある Workflows は当面そのまま動きますが、公式は新しいWorkflowsの仕組みを準備中で、定型の手順は<strong>Skillsへ移す</strong>ことを案内しています。<strong>Antigravity App 2.12.0 以降</strong>では <code>/migrate-workflows</code> で自動移行できます（公式ドキュメントでは App のみの機能で、CLI では使えません。IDE 2.8.0 の画面にも「Workflows は非推奨なので <code>/migrate-workflows</code> で Skills へ移す」という案内文が入っていますが、IDE で動くかは未確認です。動かないときは公式の手順で手動で移します）。同じ名前のスキルとワークフローがあるときは、スキルが優先されます。なお、App 2.32.0 で入った <strong>Dynamic Workflows</strong>（Python スクリプトで複数のサブエージェントを動かす仕組み）は、従来の Workflows とは別物です。</p>
             <p><code>.agent/workflows/</code> フォルダに <code>.md</code> ファイルを作成し、チャットで <code>/ワークフロー名</code> と入力して実行できます。
             </p>
             <pre><code># .agent/workflows/hello.md
@@ -1629,7 +1676,7 @@ description: 挨拶のテスト用ワークフロー
                 を例に、設定ファイルでの追加方法を学びます。</p>
 
             <h4>設定ファイルの場所</h4>
-            <p>Antigravity IDE の <strong>View raw config</strong> で開いた設定ファイルを編集してください。現在の公式保存先は共通設定が <code>~/.gemini/config/mcp_config.json</code>、プロジェクト専用設定が <code>.agents/mcp_config.json</code> です。以下は作者の実機確認例です：</p>
+            <p>Antigravity IDE の <strong>View raw config</strong> で開いた設定ファイルを編集してください。2026年11月22日時点の公式保存先は、共通設定が <code>~/.gemini/config/mcp_config.json</code>、プロジェクト専用設定が <code>.agents/mcp_config.json</code> です。以下は作者の実機確認例です：</p>
             <ul style="font-size: 0.9rem;">
                 <li><strong>macOS / Linux:</strong> <code>~/.gemini/antigravity-ide/mcp_config.json</code></li>
                 <li><strong>Windows:</strong> <code>%USERPROFILE%\.gemini\antigravity-ide\mcp_config.json</code></li>
@@ -1731,7 +1778,7 @@ description: 挨拶のテスト用ワークフロー
             <!-- IDE の外でも Antigravity を使う：CLI / SDK / Managed Agents（Antigravity 2.0 で追加） -->
             <h3 id="step3-cli">🛠️ IDE の外でも Antigravity を使う：CLI / SDK / Managed Agents</h3>
             <p>
-                Antigravity 2.0 から、IDE 以外にも 3 つの「同じエージェントハーネスを呼び出す経路」が公式に提供されています（2026年9月22日時点の内容に更新済み）。<br>
+                Antigravity 2.0 から、IDE 以外にも 3 つの「同じエージェントハーネスを呼び出す経路」が公式に提供されています（2026年11月22日時点の内容に更新済み）。<br>
                 <strong>ハンズオン本編は IDE だけで完結します</strong>が、業務で Antigravity を継続利用していくなら早めに概要だけ押さえておきましょう。
             </p>
 
@@ -1749,7 +1796,7 @@ $ agy
 
 # 1回だけ実行して結果を出す（ヘッドレス）。CI やスクリプトから使う形
 $ agy -p "このリポジトリの README を要約して"
-$ agy --mode plan --model gemini-3.8-flash-high --output-format json -p "…"
+$ agy --mode plan --model gemini-4-neon-high --output-format json -p "…"
 
 # 使えるモデルの一覧・変更履歴
 $ agy models
@@ -1759,7 +1806,7 @@ $ agy changelog
 $ agy --remote-control            # このセッションの間だけ
 $ agy remote-control start        # 常駐サービスとして登録（再起動後も有効）</code></pre>
                 <p style="font-size: 0.85rem; color: var(--muted); margin-top: 6px;">
-                    2026年9月22日時点の最新は <strong>1.2.8</strong>。<code>-p</code> の既定タイムアウトは無制限になり（1.2.6〜）、エージェントやモデルAPIの障害時は、標準エラー出力に <code>AGY_ERROR: {…}</code> が出て終了コード3になります。引数の誤りなどでは別の終了コードになります。<code>--mode</code> は <code>plan</code>（計画立案。変更前に計画を提示しますが、ファイル変更を禁止する設定ではありません）と <code>accept-edits</code>（編集を自動承認）の2つ。<code>--sandbox</code> でターミナル操作を隔離して動かせます。<br>
+                    2026年11月22日時点の最新は <strong>1.5.14</strong>。<code>-p</code> の既定タイムアウトは無制限になり（1.2.6〜）、エージェントやモデルAPIの障害時は、標準エラー出力に <code>AGY_ERROR: {…}</code> が出て終了コード3になります。引数の誤りなどでは別の終了コードになります。<code>--mode</code> は <code>plan</code>（公式の説明は「コードを書く前に手順を整理する指示を先頭に付ける」モード。変更前に計画を提示しますが、ファイル変更を禁止する設定ではありません）・<code>auto</code>（<strong>1.5.7 からの既定</strong>。安全なコマンドは自動で進め、危険なものだけ確認。個人アカウントでサンドボックスが使える場合のみで、法人アカウントでは使えない）・<code>accept-edits</code>（編集を自動承認）の3つ（従来の確認重視の動きに戻すには、<code>/config</code> で Default を選びます）。Gemini API キーで接続した場合、Remote Control と <code>--remote-agent</code> は使えません。<code>--sandbox</code> でターミナル操作を隔離して動かせます。<br>
                     📖 公式: <a href="https://antigravity.google/docs/cli/install" target="_blank" style="color: var(--blue);">Installation &amp; Auth</a> ／ <a href="https://antigravity.google/docs/cli/reference" target="_blank" style="color: var(--blue);">CLI Reference</a> ／ <a href="https://antigravity.google/docs/remote-control" target="_blank" style="color: var(--blue);">Remote Control</a><br>
                     💡 旧 <code>gemini</code> CLI を使っていた方は、最新版でメッセージ「Transitioning Gemini CLI to Antigravity CLI」が表示されます。<br>
                     👉 公式案内: <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" style="color: var(--blue);">Transitioning Gemini CLI to Antigravity CLI (Google Developers Blog)</a>
@@ -1832,7 +1879,7 @@ $ agy remote-control start        # 常駐サービスとして登録（再起�
                     </tr>
                     <tr>
                         <td>Workflows</td>
-                        <td>定型タスクを自動化する。現在のWorkflowsは2026年10月19日に利用停止予定です。既存のWorkflowsは、公式の移行ガイドまたは <code>/migrate-workflows</code> でSkillsへ移行できます。</td>
+                        <td>定型タスクを自動化する。<strong>非推奨</strong>で、今ある Workflows は当面動く。新しい仕組みが準備中で、Skillsへの移行が案内されている（<code>/migrate-workflows</code> は公式ドキュメント上は App 2.12.0 以降のみ。IDE は案内文は出るが動作未確認）。</td>
                         <td><code>/ワークフロー名</code></td>
                     </tr>
                     <tr>
@@ -1844,8 +1891,9 @@ $ agy remote-control start        # 常駐サービスとして登録（再起�
             </table>
 
             <h3>Skills の構造</h3>
-            <pre><code>.agent/skills/&lt;skill-name&gt;/
+            <pre><code>.agents/skills/&lt;skill-name&gt;/      # 公式の現在の置き場所（旧 .agent/skills/ も読み込まれる）
 └── SKILL.md          # スキルの定義（必須）</code></pre>
+            <p style="font-size: 0.88rem; color: var(--muted);">※ このハンズオンのリポジトリは旧形式の <code>.agent/skills/</code> を使っています。旧形式も引き続き読み込まれるので、そのまま進めて大丈夫です。全プロジェクト共通のスキルは <code>~/.gemini/config/skills/&lt;skill-name&gt;/</code> に置きます。呼び出しは、AI が説明文を見て自動で選ぶほか、スキル名を挙げて指定できます（App・CLI では <code>/スキル名</code>。CLI は実行中にスキルを足したら <code>/skills reload</code>）。</p>
 
             <h3>SKILL.md のフォーマット</h3>
             <pre><code>---
@@ -2594,7 +2642,7 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
                                 <strong>Scheduled Background Tasks</strong>
                             </div>
                         </td>
-                        <td>エージェントタスクを <code>/schedule</code> 等で cron 的に予約し、バックグラウンドで自律実行・監視させられる。</td>
+                        <td>エージェントタスクを <code>/schedule</code> 等で cron 的に予約し、バックグラウンドで自律実行・監視させられる。App では 2026年10月7日から「Automations」という名前になった。</td>
                         <td>「毎朝デプロイ状況をチェックして報告」「30分後にビルドが通ったか確認」など定期 / 時間差タスク。</td>
                     </tr>
                     <tr>
@@ -2644,7 +2692,7 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
                                 <strong>Gemini 3.5 Flash → 3.8 Flash（2026-09-01〜）</strong>
                             </div>
                         </td>
-                        <td>2.0 と同時に出た 3.5 Flash は Antigravity と共同開発された軽量高速モデル（「他のフロンティアモデルの 4 倍速」）。その後 3.6 → 3.7 → 3.8 と更新され、現在の主力は <strong>Gemini 3.8 Flash</strong>（「長時間のコーディングと自律エージェント向け」）。</td>
+                        <td>2.0 と同時に出た 3.5 Flash は Antigravity と共同開発された軽量高速モデル（「他のフロンティアモデルの 4 倍速」）。その後 3.6 → 3.7 → 3.8 と更新された。<strong>2026年10〜11月には Gemini 4 系（Argon・Carbon・Hydrogen・Neon）が加わり、新しい会話の既定は Gemini 4 Neon</strong>。Gemini 3.8 Flash は無料プランでも使える。</td>
                         <td>イテレーションが多い実装フェーズ・チャットの即応・大量のサブエージェント並列実行。</td>
                     </tr>
                     <tr>
@@ -2672,7 +2720,7 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
 
             <h3 id="step6-post2">🆕 2.0 のあとに増えた機能（2026年6月〜9月・v2.1〜v2.15）</h3>
             <details class="expand">
-                <summary>機能一覧を開く <span class="hint">9項目 ＋ 出典（2026-09-22 確認）</span></summary>
+                <summary>機能一覧を開く <span class="hint">9項目 ＋ 出典（2026-09-22 確認）。9月下旬〜11月分は冒頭の「2.15 のあと」</span></summary>
                 <div class="expand-body">
             <p style="font-size: 0.93rem;">
                 上の表は 2.0 の時点のもの。その後 4 か月で入った主な機能を、ハンズオンで使う順に並べました（バージョンと日付は公式 Changelog）。
@@ -2734,13 +2782,13 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
                 </tbody>
             </table>
             <div class="card" style="background: var(--bg-light); border-left: 4px solid var(--muted);">
-                <strong>📚 出典 / 一次情報（2026-09-22 確認）</strong>
+                <strong>📚 出典 / 一次情報（2026-09-22 確認。9月下旬〜11月分は上の「2.15 のあと」を参照）</strong>
                 <ul style="margin-top: 6px; font-size: 0.88rem; padding-left: 20px;">
                     <li><a href="https://antigravity.google/changelog/" target="_blank" style="color: var(--blue);">Antigravity 公式 Changelog</a>（v2.1.4〜v2.15.1）</li>
                     <li><a href="https://antigravity.google/blog/gemini-3-8-flash-in-google-antigravity" target="_blank" style="color: var(--blue);">Gemini 3.8 Flash in Google Antigravity</a>（公式ブログ、2026-09-01）</li>
                     <li><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" style="color: var(--blue);">Gemini API Release notes</a>（Antigravity Agent 09-2026、2026-09-17）</li>
                     <li><a href="https://antigravity.google/docs/boost/" target="_blank" style="color: var(--blue);">Boost deep reasoning (/boost)</a> ／ <a href="https://antigravity.google/docs/remote-control" target="_blank" style="color: var(--blue);">Remote Control</a> ／ <a href="https://antigravity.google/docs/slash-commands/" target="_blank" style="color: var(--blue);">Slash commands overview</a></li>
-                    <li>CLI は <code>agy changelog</code>（1.2.8、2026-09-22）で確認</li>
+                    <li>CLI は <code>agy changelog</code>（2026-09-22 時点は 1.2.8。2026-11-22 時点の最新は 1.5.14）で確認</li>
                 </ul>
             </div>
                 </div>
@@ -2767,7 +2815,7 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
                     <tr>
                         <td>モードは基本「Planning」一択</td>
                         <td>Planning Mode ではAIがまず計画を立て、宣言してから作業する。Fast Mode は計画なしで即作業するためミスりやすい。複雑なタスクは急がば回れで Planning
-                            を選ぶほうが精度が上がる。モデルは <code>Gemini 3.1 Pro（High）</code> が安定。</td>
+                            を選ぶほうが精度が上がる。モデルは、有料プランなら既定の <code>Gemini 4 Neon</code>、無料・Plus なら <code>Gemini 3.8 Flash</code> が目安。</td>
                     </tr>
                     <tr>
                         <td>Global Rules に「日本語指示」を書く</td>
@@ -2806,9 +2854,8 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
                     </tr>
                     <tr>
                         <td>Artifact Review で実行前にモデル切り替え</td>
-                        <td>Artifact Review Policy を「Request
-                            Review」に設定すると、AIが実装計画を提示した段階でレビューできる。ここで<strong>実行前にモデルを切り替えられる</strong>のが最大のメリット。設計フェーズは
-                            Gemini 3.1 Pro（High）、実装フェーズは Low に切り替えると、素早いトライアンドエラーが可能になる。</td>
+                        <td>設定の「Review Policy」（権限の画面では「Plan Review Policy」）を「Always Ask」にすると（選択肢は Always Ask と Always Proceed の2つ。IDE 2.8.0 で確認）、AIが実装計画を提示した段階でレビューできる。ここで<strong>実行前にモデルを切り替えられる</strong>のが最大のメリット。設計フェーズは
+                            Gemini 4 Neon の High など思考の深いモデル、実装フェーズは Medium や Low（または Gemini 3.8 Flash）に切り替えると、素早いトライアンドエラーが可能になる。</td>
                         <td rowspan="8"><a href="https://dev.classmethod.jp/articles/google-antigravity-five-tips/"
                                 target="_blank" style="color: var(--blue); word-break: break-all;">DevelopersIO
                                 /<br>G-gen Blog /<br>Zenn</a></td>
@@ -2851,8 +2898,8 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
                     <tr>
                         <td>「推論は Claude、実装は Gemini」で使い分ける</td>
                         <td>1つのプロジェクト内でもフェーズごとに最適なモデルは異なる。要件整理・設計の壁打ちなど深い推論が要る場面は <code>Claude
-                                Opus 4.6</code> や <code>Gemini 3.1 Pro (High)</code>、コードを量産する実装フェーズは <code>Gemini 3.1 Pro
-                                (Low)</code> や <code>GPT-OSS</code> に切り替えると、精度とスピードのバランスが取れる。</td>
+                                Opus 5.5</code> や <code>Gemini 4 Neon (High)</code>、コードを量産する実装フェーズは <code>Gemini 3.8 Flash</code> や
+                                <code>Gemini 4 Neon (Low)</code> に切り替えると、精度とスピードのバランスが取れる。</td>
                         <td rowspan="3"><a href="https://dev.classmethod.jp/articles/google-antigravity-five-tips/"
                                 target="_blank" style="color: var(--blue); word-break: break-all;">DevelopersIO
                                 /<br>公式ドキュメント /<br>各種ブログ（2026年最新）</a></td>
@@ -3074,7 +3121,7 @@ Firebase Hosting にデプロイする準備をして。</code></pre>
                 <div class="yt-card">
                     <span class="yt-tag">Antigravity 2.0</span>
                     <h4>Google Antigravity 2.0 デスクトップアプリ＆CLI</h4>
-                    <p>2026/5/20 リリースの Antigravity 2.0 デスクトップアプリ＋CLI を、概要・インストール・使い方・活用事例の 4 章で解説。複数エージェントの指令塔、サブエージェント自動起動、Scheduled Tasks、Google AI Studio / Android / Firebase とのシームレス連携が特徴です。CLI は <code>agy</code> コマンドで初期設定、Gemini 3.5 Flash（動画公開時点。現在は 3.8 Flash）／Claude Sonnet 4.6／GPT-OS 120B が選択可能。Stitch MCP と組み合わせた LP 生成の事例も収録。</p>
+                    <p>2026/5/20 リリースの Antigravity 2.0 デスクトップアプリ＋CLI を、概要・インストール・使い方・活用事例の 4 章で解説。複数エージェントの指令塔、サブエージェント自動起動、Scheduled Tasks、Google AI Studio / Android / Firebase とのシームレス連携が特徴です。CLI は <code>agy</code> コマンドで初期設定、Gemini 3.5 Flash／Claude Sonnet 4.6／GPT-OSS 120B が選択可能（動画公開時点。現在の既定は Gemini 4 Neon で、Claude 4.6 と GPT-OSS は2026年11月30日に提供終了）。Stitch MCP と組み合わせた LP 生成の事例も収録。</p>
                     <a class="yt-link" href="https://www.youtube.com/watch?v=-AcT2C1trCw" target="_blank" rel="noopener">出典: https://www.youtube.com/watch?v=-AcT2C1trCw</a>
                 </div>
             </div>
